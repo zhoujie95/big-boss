@@ -12,6 +12,11 @@ import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 
+import examRouter from './modules/examManage'
+import userRouter from './modules/userManage'
+import testRouter from './modules/testManage'
+import classRouter from './modules/classManage'
+import readRouter from './modules/readManage'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -36,9 +41,15 @@ import nestedRouter from './modules/nested'
 /**
  * constantRoutes
  * a base page that does not have permission requirements
+ * 不授权限控制的页面
  * all roles can be accessed
  */
 export const constantRoutes = [
+  examRouter,
+  userRouter,
+  testRouter,
+  classRouter,
+  readRouter,
   {
     path: '/redirect',
     component: Layout,
@@ -120,6 +131,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/permission/index',
     alwaysShow: true, // will always show the root menu
+    
     meta: {
       title: 'permission',
       icon: 'lock',

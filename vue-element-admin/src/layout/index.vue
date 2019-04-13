@@ -7,7 +7,11 @@
         <navbar />
         <tags-view v-if="needTagsView" />
       </div>
+      
+      <!-- 二级路由区域 -->
       <app-main />
+
+      <!-- 悬浮设置菜单 -->
       <right-panel v-if="showSettings">
         <settings />
       </right-panel>
