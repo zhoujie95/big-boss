@@ -10,7 +10,7 @@ const readRouter={
   },
   children:[   {
     path: 'dynamic-table',
-    component: () => import('@/views/table/dynamicTable/index'),
+    component: () => import('@/views/read/read.vue'),
     name: 'DynamicTable',
     meta: { title: 'readReady' }
   },
