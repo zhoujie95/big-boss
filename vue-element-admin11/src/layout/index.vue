@@ -70,10 +70,24 @@ export default {
     position: relative;
     height: 100%;
     width: 100%;
+    .sidebar-container{
+      .el-scrollbar{
+          display: flex;
+          flex-direction: column;
+        .menu-wrapper{
+          width:100%;
+          height:70px !important;
+        }
+      }
+  
+    }
 
     &.mobile.openSidebar {
       position: fixed;
       top: 0;
+    }
+    .navbar{
+      width:100% !important;
     }
   }
 
@@ -103,4 +117,5 @@ export default {
   .mobile .fixed-header {
     width: 100%;
   }
+
 </style>
