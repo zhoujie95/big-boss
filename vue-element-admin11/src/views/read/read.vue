@@ -1,20 +1,17 @@
 <template>
-    <div class="read">
-        <el-button>原地爆炸</el-button>
-    </div>
+  <div>
+      dev
+  </div>
 </template>
 <script>
 export default {
-    data(){
-        return {
-            
-        }
+  data(){
+    return {
+
     }
+  }
 }
 </script>
-
-<style>
-
-    
+<style scoped>
 
 </style>
