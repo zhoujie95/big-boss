@@ -11,13 +11,13 @@ const userRouter={
   children: [
     {
       path: 'adduser',
-      component: () => import('@/views/userManage/adduser'),
+      component: () => import('@/views/user/adduser'),
       name: 'adduser',
       meta: { title: 'userAdd' }
     },
     {
       path: 'userView',
-      component: () => import('@/views/userManage/userView'),
+      component: () => import('@/views/user/userView'),
       name: 'userView',
       meta: { title: 'userView' }
     }
