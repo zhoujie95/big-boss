@@ -1,6 +1,7 @@
 // Just a mock data
 
 export const constantRoutes = [
+
   {
     path: '/redirect',
     component: 'layout/Layout',
@@ -12,6 +13,7 @@ export const constantRoutes = [
       }
     ]
   },
+  
   {
     path: '/login',
     component: 'views/login/index',
