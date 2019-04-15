@@ -1,5 +1,6 @@
 <template>
     <div class="box">
+      <!-- 用户展示 -->
        <p class="head">用户展示</p>
        <div class="wrap">
            <ul class="list">
