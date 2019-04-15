@@ -22,8 +22,8 @@ const examRouter={
       meta: { title: 'examType' }
     },
     {
-      path: 'inline-edit-table',
-      component: () => import('@/views/table/inlineEditTable'),
+      path: '/examMange/examView',
+      component: () => import('@/views/examMange/examView'),
       name: 'InlineEditTable',
       meta: { title: 'examView' }
     }

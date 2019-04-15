@@ -10,15 +10,15 @@ const userRouter={
   },
   children: [
     {
-      path: 'dynamic-table',
-      component: () => import('@/views/table/dynamicTable/index'),
-      name: 'DynamicTable',
+      path: 'adduser',
+      component: () => import('@/views/userManage/adduser'),
+      name: 'adduser',
       meta: { title: 'userAdd' }
     },
     {
-      path: 'drag-table',
-      component: () => import('@/views/table/dragTable'),
-      name: 'DragTable',
+      path: 'userView',
+      component: () => import('@/views/userManage/userView'),
+      name: 'userView',
       meta: { title: 'userView' }
     }
   ]
