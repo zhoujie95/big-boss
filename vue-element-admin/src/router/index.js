@@ -39,6 +39,53 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  // 配置路由
+  // {
+  //   path: '/maneger',
+  //   component: Layout,
+  //   alwaysShow:true,
+  //   meta: { title: '试题管理', icon: 'icon'},
+  //   children: [
+  //     {
+  //       path: 'addtest',
+  //       name:"addtest",
+  //       meta: { title: '添加试题' },
+  //       component: () => import('@/views/mytest/addtest')
+  //     },
+  //     {
+  //       path: 'checktest',
+  //       name:"checktest",
+  //       meta: { title: '查看试题' },
+  //       component: () => import('@/views/mytest/checktest')
+  //     },
+  //     {
+  //       path: 'itemtest',
+  //       name:"itemtest",
+  //       meta: { title: '试题分类' },
+  //       component: () => import('@/views/mytest/itemtest')
+  //     }
+  //   ]
+  // },
+  {
+    path: '/testmaneger',
+    component: Layout,
+    alwayshow: true,
+    meta: { title: '考试管理', icon: 'icon' },
+    children: [
+      {
+        path: '/addtest',
+        name: 'addtest',
+        meta: { title: '添加考试' },
+        component: () => import('@/views/testmanager/addtest')
+      },
+      {
+        path: '/testlist',
+        name: 'testlist',
+        meta: { title: '试卷列表' },
+        component: () => import('@/views/testmanager/testlist')
+      }
+    ]
+  },
   {
     path: '/redirect',
     component: Layout,
