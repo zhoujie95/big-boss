@@ -1,27 +1,18 @@
 <template>
   <div class='box'>
-     <h2>试题分类</h2>
-     <div class="box-content">
-        <el-button type="primary"  @click="addtype">+ 添加类型</el-button>
+    <h2>教室管理</h2>
+    <div class="box-content">
+        <el-button type="primary" @click="openroom">+ 添加教室</el-button>
         <el-table
           :data="tableData"
           stripe
           style="width: 100%">
-          <el-table-column
-            prop="date"
-            label="日期"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="name"
-            label="姓名"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="address"
-            label="地址">
-          </el-table-column>
-          <el-table-column label="操作">
+            <el-table-column
+              prop="date"
+              label="教室号"
+              width="180">
+            </el-table-column>
+            <el-table-column label="操作">
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
@@ -33,26 +24,26 @@
                 </template>
           </el-table-column>
         </el-table>
-     </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
-  methods: {
-      addtype() {
-        this.$prompt('创建新类型', {
+  methods:{
+     openroom(){
+        this.$prompt('教室号', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          inputValue:'请输入类型'
+          inputValue:'教室名'
         })
-      }
-    },
-  props: {
+     }
+  },
+  props:{
 
   },
-  data() {
+  data(){
     return {
-        tableData: [{
+         tableData: [{
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
@@ -74,5 +65,24 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  @import '../examType.scss'
+   .box{
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 84px);
+    background: #EDEFF2;
+    overflow: hidden;
+      &>h2{
+        padding:20px 0 10px 20px;
+      }
+    .box-content{
+        margin:20px auto;
+        width:95%;
+        height:90%;
+        border-radius: 10px;
+        background: #fff;
+         &>.el-button{
+          margin:20px;
+        }
+      }
+   }
 </style>

@@ -1,0 +1,102 @@
+
+.box{
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 84px);
+  background: #EDEFF2;
+  height: 100%;
+  padding:10px !important;
+  .box-content{
+    width:100%;
+    height:100%;
+    background: #fff;
+    margin:0 auto;
+    border:1px solid lightgray;
+    border-radius:10px;
+    h2{
+      padding:0 30px !important;
+      margin-top: 10px;
+      line-height:25px;
+    }
+    .examAdd-content{
+      width:1200px;
+      margin-left:30px;
+      height:100%;
+      padding:24px;
+      .examAdd-title{
+        width:1150px;
+        height:326px;
+        display: flex;
+        flex-direction: column;
+        border:1px solid lightgray;
+        border-radius: 8px;
+        margin: 10px 0;
+        .title-header{
+          height:44px;
+          border-bottom:1px solid lightgray;
+          &>ul{
+            height:100%;
+            display: flex;
+            position: relative;
+            li{
+              display: flex;
+              align-items: center;
+              padding: 4px 6px;
+              margin: 8px 4px;
+            }
+            ol{
+              display: flex;
+              position:absolute;
+              right:0;
+              top:0;
+            }
+          }
+        }
+        .title-content{
+          flex:1;
+          display: flex;
+          ul{
+            width:30px;
+            height:100%;
+            display: flex;
+            background: lightgray;
+          }
+          .right-content{
+            flex:1;
+            textarea{
+              margin:10px 0;
+              width:100%;
+              padding:5px;
+              resize:none;
+              border:0;
+              outline:0;
+              line-height: 20px;
+            }
+          }
+        }
+      } 
+      .el-input{
+        width:500px;
+        .el-scrollbar__view{
+          height:270px;
+        }
+      }
+      p{
+        margin:10px 0;
+      }
+    }
+    .el-button--medium{
+      width:120px;
+      height:40px;
+      margin-left:50px;
+      margin-bottom:20px;
+      line-height: 40px;
+      &>span{
+        display: inline-block;
+        width:100%;
+        height:100%;
+        line-height: 40px;
+      }
+    }
+  }
+}
