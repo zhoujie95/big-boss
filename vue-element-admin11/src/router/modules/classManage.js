@@ -10,21 +10,21 @@ const classRouter={
   },
   children: [
     {
-      path: 'dynamic-table',
-      component: () => import('@/views/table/dynamicTable/index'),
-      name: 'DynamicTable',
+      path: 'classManage',
+      component: () => import('@/views/class/classManage/index'),
+      name: 'classManage',
       meta: { title: 'classManage' }
     },
     {
-      path: 'drag-table',
-      component: () => import('@/views/table/dragTable'),
-      name: 'DragTable',
+      path: 'classroomManage',
+      component: () => import('@/views/class/classroomManage/index'),
+      name: 'classroomManage',
       meta: { title: 'classroomManage' }
     },
     {
-      path: 'inline-edit-table',
-      component: () => import('@/views/table/inlineEditTable'),
-      name: 'InlineEditTable',
+      path: 'studentManage',
+      component: () => import('@/views/class/studentManage/index'),
+      name: 'studentManage',
       meta: { title: 'studentManage' }
     }
   ]

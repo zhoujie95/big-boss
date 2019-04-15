@@ -10,21 +10,21 @@ const examRouter={
   },
   children: [
     {
-      path: 'dynamic-table',
-      component: () => import('@/views/table/dynamicTable/index'),
-      name: 'DynamicTable',
+      path: 'examAdd',
+      component: () => import('@/views/exam/examAdd/index'),
+      name: 'examAdd',
       meta: { title: 'examAdd' }
     },
     {
-      path: 'drag-table',
-      component: () => import('@/views/table/dragTable'),
-      name: 'DragTable',
+      path: 'examType',
+      component: () => import('@/views/exam/examType/index'),
+      name: 'examType',
       meta: { title: 'examType' }
     },
     {
-      path: 'inline-edit-table',
-      component: () => import('@/views/table/inlineEditTable'),
-      name: 'InlineEditTable',
+      path: 'examView',
+      component: () => import('@/views/exam/examView/index'),
+      name: 'examView',
       meta: { title: 'examView' }
     }
   ]
