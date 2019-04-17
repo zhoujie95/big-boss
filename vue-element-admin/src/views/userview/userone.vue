@@ -5,8 +5,7 @@
       <div>
         <dl>
           <dt>
-            <span>添加用户</span>
-            <span id="active">更新用户</span>
+            <span v-for="(val,key) in title" :key="key" @click="titleclick(key)" :id="index==key?'active':'null'">{{val}}</span>
           </dt>
           <dd>
             <el-select v-model="value" placeholder="请选择身份id" class="sele">
@@ -19,7 +18,7 @@
             </el-select>
             <input type="text" placeholder="请添加用户名">
             <input type="text" placeholder="请输入密码">
-            <el-select v-model="value2" placeholder="请选择身份id" class="sele">
+            <el-select v-model="value2" placeholder="请选择身份id" class="sele" :style="index==0?'display:none':'display:block'">
               <el-option
                 v-for="item in identity"
                 :key="item.value"
@@ -391,15 +390,26 @@ export default {
       value4: "",
       value5: "",
       value6: "",
-      value7: ""
+      value7: "",
+      title:["添加用户","更新用户"],
+      index:0
     };
+  },
+  methods:{
+    titleclick(index){
+      this.index=index;
+    }
   }
 };
 </script>
 <style scoped>
+ *{margin:0;padding:0;}
 .box {
   padding-left: 20px;
   background: #f0f2f5;
+  margin-top:70px;
+  width: 100%;
+  cursor:pointer;
 }
 .head {
   font-size: 22px;
@@ -414,9 +424,11 @@ export default {
   width: 33.3%;
   /* height: 250px; */
   border-radius: 5px;
+  
 }
 .wrap div dl {
   margin-left: 10px;
+  margin-top: 20px;
 }
 .wrap div span {
   width: 160px;
@@ -435,11 +447,11 @@ export default {
   height: 32px;
   border: 1px solid #d9d9d9;
   font-size: 14px;
-  margin-left: -40px;
+ 
 }
 .wrap div dl .sele {
   display: block;
-  margin-left: -40px;
+
   margin-top: 20px;
 }
 .wrap div dl button:nth-child(1) {
@@ -449,7 +461,8 @@ export default {
   background: #295eff;
   border: none;
   border-radius: 5px;
-  margin-left: -40px;
+  margin-top: 20px;
+
 }
 .wrap div dl button:nth-child(2) {
   width: 60px;
@@ -457,6 +470,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-left: 10px;
+  margin-top: 20px;
 }
 #active {
   border: 1px solid #0139fd;
