@@ -23,7 +23,7 @@ import i18n from './lang' // Internationalization
 import './icons' // icon
 
 //引入导航守卫
-import './permission' // permission control
+// import './permission' // permission control
 
 import './utils/errorLog' // error log
 
@@ -31,11 +31,11 @@ import './utils/errorLog' // error log
 import * as filters from './filters' // global filters
 
 //挂载mock 拦截请求
-import { mockXHR } from '../mock' // simulation data
+// import { mockXHR } from '../mock' // simulation data
 import ElementUI from 'element-ui';
 
 // mock api in github pages site build
-if (process.env.NODE_ENV === 'production') { mockXHR() }
+// if (process.env.NODE_ENV === 'production') { mockXHR() }
 
 Vue.use(Element, {
   //修改文本的大小
