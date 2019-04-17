@@ -1,8 +1,7 @@
 .box{
   position: relative;
   width: 100%;
-  height:600px !important;
-  background: #EDEFF2;
+  height:900px;
   overflow: hidden;
   &>h2{
     padding:20px 0 10px 20px;
@@ -10,7 +9,7 @@
   .box-content{
     margin:20px auto;
     width:95%;
-    height:90%;
+    height:100%;
     border-radius: 10px;
     background: #fff;
     &>.el-button{

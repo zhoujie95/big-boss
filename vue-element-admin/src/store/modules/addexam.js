@@ -1,6 +1,7 @@
 
 import axios from 'axios'
 import { getToken} from '@/utils/auth'
+let num=7
 const state = {
    testType:[],
    classType:[],
@@ -35,14 +36,25 @@ const actions = {
           commit('GET_ALLCLASS',res.data)
       })
   },
-  //请求所有题目类型
+  //请求所有试题类型
   async getquestion({ commit }) {
     await axios.get('/api/exam/getQuestionsType',{
       headers:{'authorization':getToken()}
     }).then(res=>{
-        commit('GET_QUESTION',res.data)
+        commit('GET_QUESTION',res.data.data)
     })
   },
+  //添加试题类型
+  gettesttype({commit},type){
+    num++
+    axios.get('/api/exam/insertQuestionsType',{
+      params:{
+        text:type,
+        sort:num.toString()
+      },
+      headers:{'authorization':getToken()}
+    })
+  }
 }
 
 export default {
