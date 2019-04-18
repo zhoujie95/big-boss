@@ -1,4 +1,5 @@
 <template>
+
   <div class="addtest">
     <div class="addtest-wrap">
       <div class="addtest-title">添加考试</div>
@@ -15,10 +16,10 @@
           </p>
           <el-select v-model="value1" placeholder="">
             <el-option
-              v-for="item in options1"
-              :key="item.value"
-              :label="item.label"
-              :value="item.xxid"
+              v-for="item in testType"
+              :key="item.exam_id"
+              :label="item.exam_name"
+              :value="item.examid"
             ></el-option>
           </el-select>
         </div>
@@ -28,10 +29,10 @@
           </p>
           <el-select placeholder="" v-model="value2">
             <el-option
-              v-for="item in options2"
-              :key="item.value"
-              :label="item.label"
-              :value="item.lxid"
+              v-for="item in testClass"
+              :key="item.subject_id"
+              :label="item.subject_text"
+              :value="item.subject_id"
             ></el-option>
           </el-select>
         </div>
@@ -81,6 +82,7 @@
 
 <script>
 /* eslint-disable */
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -89,80 +91,51 @@ export default {
       starttime: "",
       endtime: "",
       value1: "",
-      value2: "",
-      options1: [
-        {
-          value: "选项1",
-          label: "周考1",
-          xxid: "xx1"
-        },
-        {
-          value: "选项2",
-          label: "周考2",
-          xxid: "xx2"
-        },
-        {
-          value: "选项3",
-          label: "周考3",
-          xxid: "xx3"
-        },
-        {
-          value: "选项4",
-          label: "月考",
-          xxid: "xx4"
-        }
-      ],
-
-      options2: [
-        {
-          value: "选项1",
-          label: "js上",
-          lxid: "lx1"
-        },
-        {
-          value: "选项2",
-          label: "js下",
-          lxid: "lx2"
-        },
-        {
-          value: "选项3",
-          label: "模块化开发",
-          lxid: "lx3"
-        },
-        {
-          value: "选项4",
-          label: "移动化开发",
-          lxid: "lx4"
-        },
-        {
-          value: "选项5",
-          label: "渐进式开发",
-          lxid: "lx5"
-        }
-      ]
+      value2: ""
     };
+  },
+  computed:{
+    ...mapState("testmanager",{
+      testType:state=>state.testType,
+      testClass:state=>state.testClass
+    })
   },
   methods: {
     handleChange(value) {
       console.log(value);
-      // console.log(this.endtime)
+      console.log(this.testType,this.testClass)
     },
     createtest(){
-     let { num8,
+      let {num8,
       testname,
       starttime,
       endtime,
       value1,
       value2} = this;
-      // console.log(starttime*1,"a")
-     num8 && testname && starttime && endtime && value1 && value2 && this.$router.push({name:"edittest",params:{num8,
+      console.log(num8,
       testname,
       starttime,
       endtime,
       value1,
-      value2}})
-   
-   }
+      value2)
+    //  num8 && testname && starttime && endtime && value1 && value2 && this.$router.push({name:"edittest",params:{num8,
+    //   testname,
+    //   starttime,
+    //   endtime,
+    //   value1,
+    //   value2}})
+    },
+    //获取考试类型,所有课程
+    gettestType(){
+      this.$store.dispatch("testmanager/gettestType")
+    },
+    gettestClass(){
+      this.$store.dispatch("testmanager/gettestClass")
+    }
+  },
+  mounted(){
+    this.gettestType();
+    this.gettestClass();
   }
 };
 </script>

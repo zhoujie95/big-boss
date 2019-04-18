@@ -33,9 +33,7 @@
         <div class="listtitle">
           <p>试卷列表</p>
           <div class="listitem-btn">
-            <p class="listitem-btn-active">全部</p>
-            <p class="testlist-doing">进行中</p>
-            <p>已结束</p>
+          <p v-for="(item,index) in qh" :key="item.id" @click="lightblue(item.id)" :class="{'listitem-btn-active':light===item.id,'testlist-doing':index===1}">{{item.content}}</p>
           </div>
         </div>
         
@@ -61,7 +59,7 @@
 </template>
 <script>
 /* eslint-disable */
-import {mapState,mapGetters,mapMutations,mapActions} from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -107,24 +105,43 @@ export default {
         }
       ],
       value2: "",
+      light: 0,
+      qh: [
+        {
+          content: "全部",
+          id: 0
+        },
+        {
+          content: "进行中",
+          id: 1
+        },
+        {
+          content: "已结束",
+          id: 2
+        }
+      ]
     };
   },
-  methods:{
-     aa(){
-       this.$store.dispatch("testmanager/gettestlist");
-      },
-      //点击查看详情
-      handleEdit(index, row) {
-        console.log(index, row.exam_exam_id);
-      },
+  methods: {
+    aa() {
+      this.$store.dispatch("testmanager/gettestlist");
+    },
+    //点击查看详情
+    handleEdit(index, row) {
+      console.log(index, row.exam_exam_id);
+    },
+    //点击切换高亮
+    lightblue(e) {
+      this.light = e;
+    }
   },
-  computed:{
-    ...mapState("testmanager",{
-      testlistdata:state=>state.testlistdata
+  computed: {
+    ...mapState("testmanager", {
+      testlistdata: state => state.testlistdata
     })
   },
-  mounted(){
-    this.aa()
+  mounted() {
+    this.aa();
   }
 };
 </script>
