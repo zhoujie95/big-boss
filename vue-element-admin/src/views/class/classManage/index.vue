@@ -15,7 +15,7 @@
         </el-table-column>
       </el-table>
        <div class="dialog" v-if='dialogshow'>
-          <p>添加班级 <span>X</span></p>
+          <p>添加班级 <span @click='closedialog'>X</span></p>
           <p> <b>*</b> 班级名:</p>
           <el-input placeholder="班级名" v-model='classname'></el-input>
           <p> <b>*</b> 教室名:</p>
@@ -37,8 +37,8 @@
             ></el-option>
           </el-select>
           <div class='btn'>
-             <el-button>取消</el-button>
-             <el-button type='primary'>确定</el-button>
+             <el-button @click='closedialog'>取消</el-button>
+             <el-button type='primary' @click='closedialog'>确定</el-button>
           </div>
        </div>
     </div>
@@ -50,6 +50,9 @@ export default {
   methods: {
      showdialog(){
         this.dialogshow=true
+     },
+     closedialog(){
+        this.dialogshow=false
      }
   },
   data() {

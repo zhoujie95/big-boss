@@ -14,9 +14,6 @@
 </template>
 <script>
 import {mapState,mapActions} from 'vuex'
-import axios from 'axios'
-import { getToken} from '@/utils/auth'
-/* eslint-disable */
 export default {
   computed:{
     ...mapState({
@@ -26,16 +23,20 @@ export default {
   methods: {
     ...mapActions({
         getquestion:'addexam/getquestion',
-        gettesttype:'addexam/gettesttype'
+        addQuesType:'addexam/addQuesType'
     }),
-    addtype() {
+   async addtype() {
+      let num=await this.getquestion()
       this.$prompt("创建新类型", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValue: "请输入类型"
       }).then( async ({value})=>{
          this.type=value
-         await this.gettesttype(this.type)
+         await this.addQuesType({
+           text:this.type,
+           sort:num
+           })
          await this.getquestion()
       })
     }

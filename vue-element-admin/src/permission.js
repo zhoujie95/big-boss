@@ -1,10 +1,12 @@
 import router from './router'
 import store from './store'
+//引入ele提示组件
 import { Message } from 'element-ui'
+//页面加载进度条
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
-
+//配置进度条是否需要Spinner
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist

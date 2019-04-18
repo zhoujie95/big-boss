@@ -51,7 +51,7 @@
         <template>
           <el-select v-model="exam"  placeholder="请选择">
             <el-option
-              v-for="item in examtype"
+              v-for="item in testType"
               :key="item.exam_id"
               :label="item.exam_name"
               :value="item.exam_id"
@@ -62,7 +62,7 @@
         <template>
           <el-select v-model="classes" placeholder="请选择">
             <el-option
-              v-for="item in classtype"
+              v-for="item in classType"
               :key="item.subject_id"
               :label="item.subject_text"
               :value="item.subject_id"
@@ -73,7 +73,7 @@
         <template>
           <el-select v-model="question" placeholder="请选择">
             <el-option
-              v-for="item in  questiontype"
+              v-for="item in questionType"
               :key="item.questions_type_id"
               :label="item.questions_type_text"
               :value="item.questions_type_id"
@@ -120,15 +120,13 @@
           </div>
         </div>
       </div>
-      <el-button type="primary" @click='submitquestion'>提交</el-button>
+      <el-button type="primary" @click='addquest'>提交</el-button>
     </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import {mapActions,mapState} from 'vuex'
-import { getToken} from '@/utils/auth'
-import axios from 'axios'
 export default {
   computed:{
     ...mapState({
@@ -142,33 +140,27 @@ export default {
         gettype:'addexam/gettype',
         getclass:'addexam/getclass',
         getquestion:'addexam/getquestion',
-        submitquestion:'addexam/submitquestion'
+        addquestion:'addexam/addquestion'
      }),
-     submitquestion(){
+     addquest(){
          if(this.title&&this.content&&this.content2&&this.exam&&this.classes&&this.question){
-             axios.post('/api/exam/questions',{
-               //试题类型id
-                questions_type_id:this.question.toString(),
-                title:this.title,
-                questions_stem:this.content,
-                questions_answer:this.content2,
-                //课程id
-                subject_id:this.classes,
-                //用户id
-                user_id:'w6l6n-cbvl6s',
-                //考试类型id
-                exam_id:this.exam
-             },{
-               headers:{'authorization':getToken()}
-             })
+              this.addquestion({
+                    questions_type_id:this.question.toString(),
+                    title:this.title,
+                    questions_stem:this.content,
+                    questions_answer:this.content2,
+                    //课程id
+                    subject_id:this.classes,
+                    //用户id
+                    user_id:'w6l6n-cbvl6s',
+                    //考试类型id
+                    exam_id:this.exam
+              })
+           }
          }
-     }
-  },
+     },
   data() {
     return {
-      examtype: [],
-      classtype: [],
-      questiontype: [],
       title:'',
       content:'',
       content2:'',
@@ -177,16 +169,13 @@ export default {
       question:''
     };
   },
-  mounted(){
-    this.gettype()
-    this.getclass()
-    this.getquestion()
-    this.examtype=this.testType.data
-    this.classtype=this.classType.data
-    this.questiontype=this.questionType.data
+ async mounted(){
+   await this.gettype()
+   await this.getclass()
+   await this.getquestion()
   }
-};
+}
 </script>
 <style scoped lang="scss">
-@import "../examAdd.scss";
+  @import "../examAdd.scss";
 </style>
