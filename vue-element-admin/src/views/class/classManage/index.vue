@@ -14,79 +14,62 @@
           </template>
         </el-table-column>
       </el-table>
-       <div class="dialog" v-if='dialogshow'>
-          <p>添加班级 <span @click='closedialog'>X</span></p>
-          <p> <b>*</b> 班级名:</p>
-          <el-input placeholder="班级名" v-model='classname'></el-input>
-          <p> <b>*</b> 教室名:</p>
-          <el-select v-model="roomnum" placeholder="请选择教室号">
-            <el-option
-              v-for="item in classroom"
-              :key="item.subject_id"
-              :label="item.subject_text"
-              :value="item.subject_id"
-            ></el-option>
-          </el-select>
-          <p> <b>*</b> 课程名:</p>
-          <el-select v-model="lesson" placeholder="请选择课程名">
-            <el-option
-              v-for="item in classroom"
-              :key="item.subject_id"
-              :label="item.subject_text"
-              :value="item.subject_id"
-            ></el-option>
-          </el-select>
-          <div class='btn'>
-             <el-button @click='closedialog'>取消</el-button>
-             <el-button type='primary' @click='btnaddbanji'>确定</el-button>
-          </div>
-           
-        </div>
-       
+       <bj-dialog v-if="dialogshow" v-on:showdislog="showdislog" :type="type" :name="name"/>
     </div>
     <div class="mask" v-if='dialogshow'></div>
   </div>
 </template>
 <script>
 import {mapState,mapActions} from 'vuex'
+import BjDialog from '@/components/banjitk/bjdialog.vue'
 export default {
    data(){
      return{
-       dialogshow:false,
-        lesson:'',
-      classname:'',
-      roomnum:'',
-      classroom:[],
+      dialogshow:false,
+      type:'',
+      name:''
      }
+   },
+   components:{
+     BjDialog
    },
   computed: {
     ...mapState({
-        bandata:state=>state.addbanji.bandata,
-        
+        bandata:state=>state.addbanji.bandata
     })
   },
   mounted() {
     this.getbandata()
+    this.getjiaoshi()
+    this.getkecheng()
   },
   methods: {
+    
     ...mapActions({
-        getbandata:'addbanji/getbandata'
+        getbandata:'addbanji/getbandata',
+        getjiaoshi:'addbanji/getjiaoshi',
+        getkecheng:'addbanji/getkecheng',
+        addbanji:'addbanji/addbanji',
+        delbanji:'addbanji/delbanji'
     }),
-    btnaddbanji(){
-      console.log(this.classname)
-      this.dialogshow = false
-    },
     addclass() {
       this.dialogshow = true
+      this.type = 'add'
     },
-    closedialog(){
+    showdislog(){
+      this.getbandata()
       this.dialogshow = false
     },
     handleEdit(ind,rew){
-      console.log(ind,rew)
+      //console.log(ind,rew)
+      this.dialogshow = true
+      this.type = 'xiu'
+      this.name = rew.grade_name
     },
-    handleDelete(ind,rew){
-      console.log(ind,rew)
+    async handleDelete(ind,rew){
+      //console.log(rew.grade_id)
+      await this.delbanji({grade_id:rew.grade_id})
+      await this.getbandata()
     }
   }
  
@@ -95,7 +78,7 @@ export default {
 <style scoped lang="scss">
 .box {
   width: 100%;
-  height: calc(100vh - 84px);
+  //height: calc(100vh - 84px);
   overflow: hidden;
   &>.mask{
        width:1519.2px;
@@ -118,39 +101,6 @@ export default {
     & > .el-button {
       margin: 20px;
     }
-      &>.dialog{
-        position: absolute;
-        width:500px;
-        height:400px;
-        background: #fff;
-        border-radius: 10px;
-        top:30%;
-        left:50%;
-        margin-left:-250px;
-        margin-top:-200px;
-        z-index:70;
-        padding:20px;
-        .el-select{
-          width:100%;
-        }
-        .btn{
-          text-align: center;
-          padding:20px;
-        }
-        p{
-          height:30px;
-          padding:0 10px;
-          line-height: 30px;
-          margin:10px 0;
-          b{
-            color:red;
-          }
-          &:nth-of-type(1){
-            display: flex;
-            justify-content: space-between;
-          }
-        }
-      }
   }
 
 }
