@@ -19,6 +19,12 @@ export let getquestion=(params)=>{
 export let addquestion=(params)=>{
     return request.post('/exam/questions',params)
 }
+
+//更改试题的接口
+export let updateques=(params)=>{
+  console.log(params)
+    return request.put('/exam/questions/update',params)
+}
 //添加试题类型
 export let addQuesType=(params)=>{
   
@@ -31,3 +37,18 @@ export let addQuesType=(params)=>{
       }
     })
 } 
+
+//获取所有试题
+export let getAllQues=(params)=>{
+    return request.get('/exam/questions/new',params)
+}
+//按条件查询试题
+export let selectQues=(params)=>{
+     return request.get('/exam/questions/condition',{
+       params:{
+        subject_id:params.subject_id,
+        exam_id:params.exam_id,
+        questions_type_id:params.questions_type_id
+       }
+     })
+}

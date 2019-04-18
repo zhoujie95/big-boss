@@ -6,7 +6,12 @@
         <div class="top-top">
           <label>课程类型:</label>
           <ul class="nav">
-            <li v-for="item in classType" :key="item.subject_id">{{item.subject_text}}</li>
+            <li>all</li>
+            <li v-for="(item,i) in classType"
+            :key="item.subject_id"
+             @click='changeState(i)'
+             :class="{'current':i===defaultIndex}"
+            >{{item.subject_text}}</li>
           </ul>
         </div>
         <div class="top-bot">
@@ -20,7 +25,7 @@
             ></el-option>
           </el-select>
           <label>题目类型:</label>
-          <el-select v-model="question" placeholder="请选择">
+          <el-select v-model="ques" placeholder="请选择">
             <el-option
               v-for="item in questionType"
               :key="item.questions_type_id"
@@ -28,13 +33,13 @@
               :value="item.questions_type_id"
             ></el-option>
           </el-select>
-          <el-button type="primary">查询</el-button>
+          <el-button type="primary" @click='selects'>查询</el-button>
         </div>
       </div>
       <div class="content-bot">
         <div
           class="bots"
-          v-for="(item,i) in questions.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+          v-for="(item,i) in allquestions.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           :key="i"
         >
           <div class="left">
@@ -47,7 +52,7 @@
             <p>{{item.user_name}}发布</p>
           </div>
           <div class="right">
-            <span>编辑</span>
+            <span @click='editQuest(item.json_path)'>编辑</span>
           </div>
         </div>
         <div class="block">
@@ -65,7 +70,6 @@
   </div>
 </template>
 <script>
-/* eslint-disable */
 import { mapActions, mapState } from "vuex";
 export default {
   computed: {
@@ -73,7 +77,7 @@ export default {
       testType: state => state.addexam.testType,
       classType: state => state.addexam.classType,
       questionType: state => state.addexam.questionType,
-      questions: state => state.addexam.questions
+      allquestions:state=>state.addexam.allquestions
     })
   },
   methods: {
@@ -81,27 +85,48 @@ export default {
       gettype: "addexam/gettype",
       getclass: "addexam/getclass",
       getquestion: "addexam/getquestion",
-      getQuestions: "addexam/getQuestions"
+      getQuestions: "addexam/getQuestions",
+      getAllQues:"addexam/getAllQues",
+      selectQues:"addexam/selectQues"
     }),
     handleSizeChange: function(size) {
       this.pagesize = size; //每页下拉显示数据
     },
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;//点击第几页
+    },
+    changeState(ind){
+       this.defaultIndex=ind
+    },
+    async selects(){
+     await this.selectQues({
+         subject_id:this.classType[this.defaultIndex].subject_id,
+         exam_id:this.exam,
+         questions_type_id:this.ques
+      })
+    },
+    editQuest(exam_id){
+      this.$router.push({
+        path:`/edit/Questions`,
+        query:{
+          id:exam_id.split('.')[0]
+        }
+      })
     }
   },
   async mounted() {
     await this.getclass();
     await this.gettype();
     await this.getquestion();
-    await this.getQuestions();
+    await this.getAllQues();
   },
   data() {
     return {
       exam: "",
-      question: "",
+      ques: "",
       currentPage: 1, //初始页
-      pagesize: 5
+      pagesize: 5,
+      defaultIndex:null
     };
   }
 };
@@ -133,7 +158,7 @@ export default {
       border-radius: 10px;
       .top-bot {
         flex: 1;
-        padding: 0 0 0 30px;
+        padding: 0 0 0 20px;
         .el-select {
           margin-left: 10px;
         }
@@ -149,16 +174,23 @@ export default {
         display: flex;
         height: 90px;
         line-height: 80px;
-        padding: 0 0 0 30px;
+        padding: 0 0 0 20px;
         label {
-          width: 100px;
+          width: 80px;
         }
         .nav {
           flex: 1;
           display: flex;
-          li {
-            flex: 1;
+          &>li {
+            padding:5px 10px;
+            text-align: center;
             font-size: 14px;
+            &:nth-of-type(1){
+              width:50px;
+            }
+            &.current{
+              color: #2f54eb;
+            }
           }
         }
       }
@@ -170,7 +202,7 @@ export default {
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 0 30px;
+      padding: 0 20px;
       .bots {
         height: 100px;
         border-bottom: 1px solid lightgray;

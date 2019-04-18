@@ -1,13 +1,14 @@
 
-import axios from 'axios'
-import { getToken} from '@/utils/auth'
-import {gettype,getclass,getquestion,addquestion,addQuesType} from '@/api/exam.js'
+import {gettype,getclass,getquestion,
+        addquestion,addQuesType,getAllQues,
+        selectQues,
+        updateques} from '@/api/exam.js'
 
 const state = {
    testType:[],
    classType:[],
    questionType:[],
-   questions:[]
+   allquestions:[]
 }
 const mutations = {
   //获取考试类型
@@ -22,9 +23,9 @@ const mutations = {
   getquestion(state,payload){
     state.questionType=payload
   },
-
-  GET_QUESTIONS:(state,allquestion)=>{
-      state.questions=allquestion
+  //获取所有的试题列表
+  getAllQues(state,payload){
+    state.allquestions=payload
   }
 }
 
@@ -60,13 +61,20 @@ const actions = {
    },
 
   //获取所有试题
-  getQuestions({commit}){
-     axios.get('/api/exam/questions/new',{
-      headers:{'authorization':getToken()}
-     }).then(res=>{
-       commit('GET_QUESTIONS',res.data.data)
-     })
-  }
+   async getAllQues({commit},payload){
+       let result=await getAllQues(payload)
+      //  console.log('quest....',result.data)
+       commit('getAllQues',result.data)
+   },
+   //按条件查询试题
+   async selectQues({commit},payload){
+      let result=await selectQues(payload)
+      commit('getAllQues',result.data)
+   },
+   //更新试题
+   async updateques({commit},payload){
+       let result=await updateques(payload)
+   }
 }
 
 export default {

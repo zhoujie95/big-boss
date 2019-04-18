@@ -50,6 +50,11 @@ export const constantRoutes = [
   testRouter,
   classRouter,
   readRouter,
+  //编辑试题的路由
+  {
+     path:'/edit/Questions/:id',
+     component:()=>import('@/views/exam/examAdd/index')
+  },
   {
     path: '/redirect',
     component: Layout,

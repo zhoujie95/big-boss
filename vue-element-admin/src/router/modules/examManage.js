@@ -26,7 +26,13 @@ const examRouter={
       component: () => import('@/views/exam/examView/index'),
       name: 'examView',
       meta: { title: 'examView' }
-    }
+    },
+      //编辑试题的路由
+      {
+        path:'/edit/Questions',
+        component:()=>import('@/views/exam/examAdd/index'),
+        name:'editquestion'
+    },
   ]
 }
 
