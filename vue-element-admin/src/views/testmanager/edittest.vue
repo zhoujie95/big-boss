@@ -4,7 +4,7 @@
         <div class="createboard">
             <p class="addnewqs">添加新题</p>
             <div class="edittitle">
-                <p>试题题目</p>
+                <p>{{testname}}</p>
                 <div class="editboard">
                     <div class="eachqs">
                         <div class="eachtop">
@@ -12,11 +12,11 @@
                             <p>删除</p>
                         </div>
                         <div class="eachdescribe">
-                            <p>题目具体内容</p>
+                            <p>{{questions}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="editbtn" @click="aa">创建试卷</div>
+                <div class="editbtn" @click="updtatedtest">创建试卷</div>
             </div>
         </div>
     </div>
@@ -26,16 +26,18 @@
 import {mapState} from "vuex";
 
 export default {
-    
+
     computed:{
         ...mapState("testmanager",{
-            addflag:state=>state.addflag
+            addflag:state=>state.addflag,
+            questions:state=>state.questions,
+            question_ids:state=>state.question_ids,
+            testname:state=>state.testname
         })
     },
     methods:{
-         aa(){
-            let obj = this.$route.params;
-            this.$store.dispatch("testmanager/addtest",obj);
+         updtatedtest(){
+            this.$store.dispatch("testmanager/updatetest",question_ids);
             this.$router.push({path:"testlist"});
         }
     }

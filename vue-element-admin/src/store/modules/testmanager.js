@@ -4,7 +4,15 @@ const state={
     testlistdata:[],
     addflag:false,
     testType:[],
-    testClass:[]
+    testClass:[],
+    num8:"",
+    testname:"",
+    starttime:"",
+    endtime:"",
+    exam_id:"",
+    subject_id:"",
+    questions:[],
+    question_ids:""
 }
 const mutations = {
     //获取所有考试类型/exam/exam/Type get
@@ -13,7 +21,6 @@ const mutations = {
         if(data.code === 1){
             state.testType = data.data
         }
-        
     },
     //获取所有课程
     gettestClass(state,data){
@@ -29,14 +36,21 @@ const mutations = {
             console.log(data,"获取试卷列表");
         }
     },
-    //编辑并创建试卷
+    //创建试卷
     addtest(state,data){
-        if(data.code === 1){//创建编辑成功 跳转到试卷列表
+        if(data.code === 1){//创建试题成功 保存数据试题 和试题id
             state.addflag === true;
+            //获取试题id 
+            // question_ids
+            // questions
             console.log(data,"添加成功");
         }else{//创建失败
             state.addflag === false;
         }
+    },
+    //5.更新试卷
+    updatetest(state,data){
+        console.log(data)
     }
 }
 const actions = {
@@ -68,18 +82,19 @@ const actions = {
     //创建试卷
     addtest(context,payload){
         console.log(payload)
-        axios.post("/api/exam/exam",{
-            subject_id:payload.value1,
-            exam_id:payload.value2,
-            title:payload.testname,
-            number:payload.num8,
-            start_time:payload.starttime*1,
-            end_time:payload.endtime*1
-        },{ headers:{authorization:getToken()}}).then(res=>{
-            // console.log(res);
+        Object.assign(this.state,payload);
+        axios.post("/api/exam/exam",payload,{ headers:{authorization:getToken()}}).then(res=>{
+            console.log(res);
             context.commit("addtest",res.data);
         })
-        
+    },
+     //5.更新试卷
+     updatetest(context,payload){
+         ///exam/exam/w5tcy-g2dts  question_ids
+         axios.put('/api/exam/exam/w5tcy-g2dts',payload).then((res) =>{
+            context.commit("updatetest",res)
+        })
+            
     }
 }
 export default {

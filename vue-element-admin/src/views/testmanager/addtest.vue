@@ -14,12 +14,12 @@
           <p>
             <span>*</span>选择考试类型:
           </p>
-          <el-select v-model="value1" placeholder="">
+          <el-select v-model="exam_id" placeholder="">
             <el-option
               v-for="item in testType"
               :key="item.exam_id"
               :label="item.exam_name"
-              :value="item.examid"
+              :value="item.exam_id"
             ></el-option>
           </el-select>
         </div>
@@ -27,7 +27,7 @@
           <p>
             <span>*</span>选择课程:
           </p>
-          <el-select placeholder="" v-model="value2">
+          <el-select placeholder="" v-model="subject_id">
             <el-option
               v-for="item in testClass"
               :key="item.subject_id"
@@ -90,8 +90,8 @@ export default {
       testname: "",
       starttime: "",
       endtime: "",
-      value1: "",
-      value2: ""
+      exam_id: "",
+      subject_id: ""
     };
   },
   computed:{
@@ -110,25 +110,24 @@ export default {
       testname,
       starttime,
       endtime,
-      value1,
-      value2} = this;
-      console.log(num8,
-      testname,
-      starttime,
-      endtime,
-      value1,
-      value2)
-    //  num8 && testname && starttime && endtime && value1 && value2 && this.$router.push({name:"edittest",params:{num8,
-    //   testname,
-    //   starttime,
-    //   endtime,
-    //   value1,
-    //   value2}})
+      exam_id,
+      subject_id} = this;
+     
+      if(num8 && testname && starttime && endtime &&  exam_id && subject_id){
+        this.$store.dispatch("testmanager/addtest", {num8,
+          testname,
+          starttime:startime*1,
+          endtime:endtime*1,
+          exam_id,
+          subject_id})
+        this.$router.push({path:"edittest"})
+      }
     },
-    //获取考试类型,所有课程
+    //获取考试类型
     gettestType(){
       this.$store.dispatch("testmanager/gettestType")
     },
+    //获取所有课程
     gettestClass(){
       this.$store.dispatch("testmanager/gettestClass")
     }
