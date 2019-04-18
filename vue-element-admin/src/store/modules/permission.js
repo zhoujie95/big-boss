@@ -47,6 +47,7 @@ const mutations = {
 }
 
 const actions = {
+  //生成侧边路由
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
