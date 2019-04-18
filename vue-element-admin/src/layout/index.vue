@@ -5,12 +5,16 @@
     <div :class="{hasTagsView:needTagsView}" class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
-        <tags-view v-if="needTagsView" />
+        <!-- <tags-view v-if="needTagsView" /> -->
       </div>
+      
+      <!-- 二级路由区域 -->
       <app-main />
-      <right-panel v-if="showSettings">
+
+      <!-- 悬浮设置菜单 -->
+      <!-- <right-panel v-if="showSettings">
         <settings />
-      </right-panel>
+      </right-panel> -->
     </div>
   </div>
 </template>
@@ -66,10 +70,24 @@ export default {
     position: relative;
     height: 100%;
     width: 100%;
+    .sidebar-container{
+      .el-scrollbar{
+          display: flex;
+          flex-direction: column;
+        .menu-wrapper{
+          width:100%;
+          height:70px !important;
+        }
+      }
+  
+    }
 
     &.mobile.openSidebar {
       position: fixed;
       top: 0;
+    }
+    .navbar{
+      width:100% !important;
     }
   }
 
@@ -99,4 +117,5 @@ export default {
   .mobile .fixed-header {
     width: 100%;
   }
+
 </style>

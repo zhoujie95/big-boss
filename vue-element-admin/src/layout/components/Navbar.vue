@@ -1,10 +1,12 @@
 <template>
   <div class="navbar">
+    <img class="logos" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="">
+    <!-- 控制导航展开收起 -->
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <!-- <breadcrumb id="breadcrumb-container" class="breadcrumb-container" /> -->
 
-    <div class="right-menu">
+    <!-- <div class="right-menu">
       <template v-if="device!=='mobile'">
         <search id="header-search" class="right-menu-item" />
 
@@ -18,12 +20,12 @@
 
         <lang-select class="right-menu-item hover-effect" />
 
-      </template>
+      </template> -->
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
+         <!-- <i class="el-icon-caret-bottom" /> -->
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
@@ -41,7 +43,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -86,15 +88,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logos{
+  width: 120px;
+  height:28px;
+  position: fixed;
+  top: 20px;
+  left:50px;
+}
 .navbar {
-  height: 50px;
+  height: 64px;
   overflow: hidden;
-  position: relative;
+  z-index:80;
+  position:fixed;
+  top:0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
   .hamburger-container {
     line-height: 46px;
+    position: relative;
+    z-index:99;
+    top:30px;
+    left:-15px;
     height: 100%;
     float: left;
     cursor: pointer;

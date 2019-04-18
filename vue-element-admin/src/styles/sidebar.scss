@@ -7,16 +7,26 @@
     margin-left: $sideBarWidth;
     position: relative;
   }
-
+  .hover-effect{
+    position: fixed;
+    top: 0;
+    right: 80px;
+    img{
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      margin-top: 11px;
+    }
+  }
   // 侧边栏 Sidebar container
   .sidebar-container {
     transition: width 0.28s;
     width: $sideBarWidth !important;
     background-color: $menuBg;
-    height: 100%;
+    // height: 100%;
     position: fixed;
     font-size: 0px;
-    top: 0;
+    top: 64px;
     bottom: 0;
     left: 0;
     z-index: 1001;
