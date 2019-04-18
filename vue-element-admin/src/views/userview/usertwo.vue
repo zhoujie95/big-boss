@@ -8,84 +8,23 @@
     </div>
     <div class="content">
       <h2>用户数据</h2>
-        <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="user" label="用户名" width="280"></el-table-column>
-        <el-table-column prop="password" label="密码" width="1180"></el-table-column>
-        <el-table-column prop="identity" label="身份"></el-table-column>
+        <el-table :data="user" style="width: 100%">
+        <el-table-column prop="user_name" label="用户名" width="280"></el-table-column>
+        <el-table-column prop="user_pwd" label="密码" width="1180"></el-table-column>
+        <el-table-column prop="identity_text" label="身份"></el-table-column>
       </el-table>
-      <el-pagination border="" layout="prev, pager, next" :total="10" class="fen"></el-pagination>
+      <el-pagination border="" layout="prev, pager, next" :total="13" class="fen"></el-pagination>
     </div>
   </div>
 </template>
 <script>
 import { all } from 'q';
-/* eslint-disable */
+import $store from "../../store/modules/userManager";
+ import { mapState, mapMutations } from 'vuex';
 export default {
   data() {
     return {
-      tableData: [
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        },
-        {
-          user: " zhaoxiaoru ",
-          password:
-            " 10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718 ",
-          identity: " 出题者 "
-        }
-      ],
+  
       listdata:["用户数据","身份数据","api接口权限","身份和api接口关系","视图接口权限","身份和视图权限关系"],
       index:0
     };
@@ -93,10 +32,19 @@ export default {
   methods:{
     listclick(index){
      this.index=index;
-    //  console.log(this.index);
-    console.log(index,this.index);
+    },
+    users(){
+      this.$store.dispatch("userManager/user");   
     }
-  }
+  },
+    mounted(){
+    this.users();
+  },computed:{
+      user(){
+          return   $store.state.user;
+       }
+  },
+
 };
 </script>
 <style scoped>
@@ -124,7 +72,7 @@ export default {
 .list li {
   width: 140px;
   height: 30px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9; 
   text-align: center;
   font-size: 14px;
   display: inline-block;

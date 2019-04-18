@@ -10,20 +10,20 @@
           <dd>
             <el-select v-model="value" placeholder="请选择身份id" class="sele">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
             <input type="text" placeholder="请添加用户名">
             <input type="text" placeholder="请输入密码">
             <el-select v-model="value2" placeholder="请选择身份id" class="sele" :style="index==0?'display:none':'display:block'">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                 v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
             <p>
@@ -72,9 +72,9 @@
             <el-select v-model="value3" placeholder="请选择已有视图" class="sele">
               <el-option
                 v-for="item in view"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.view_authority_id"
+                :label="item.view_authority_text"
+                :value="item.view_authority_id"
               ></el-option>
             </el-select>
             <p>
@@ -92,18 +92,18 @@
           <dd>
             <el-select v-model="value4" placeholder="请选择身份id" class="sele">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                  v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
             <el-select v-model="value7" placeholder="请选择api接口权限" class="sele">
               <el-option
                 v-for="item in api"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.api_authority_id"
+                :label="item.api_authority_text"
+                :value="item.api_authority_id"
               ></el-option>
             </el-select>
             <p>
@@ -121,18 +121,18 @@
           <dd>
             <el-select v-model="value5" placeholder="请选择身份id" class="sele">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                 v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
             <el-select v-model="value6" placeholder="请选择视图权限id" class="sele">
               <el-option
                 v-for="item in view"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.view_authority_id"
+                :label="item.view_authority_text"
+                :value="item.view_authority_id"
               ></el-option>
             </el-select>
             <p>
@@ -147,243 +147,11 @@
 </template>
 <script>
 /* eslint-disable */
+import $store from "../../store/modules/userManager";
+import { all } from 'q';
 export default {
   data() {
     return {
-      identity: [
-        {
-          value: "选项1",
-          label: "管理者"
-        },
-        {
-          value: "选项2",
-          label: "浏览者"
-        },
-        {
-          value: "选项3",
-          label: "出题者"
-        }
-      ],
-      view: [
-        {
-          value: "选项1",
-          label: "登录"
-        },
-        {
-          value: "选项2",
-          label: "主界面"
-        },
-        {
-          value: "选项3",
-          label: "添加试题"
-        },
-        {
-          value: "选项4",
-          label: "试题界面"
-        },
-        {
-          value: "选项5",
-          label: "查看试题"
-        },
-        {
-          value: "选项6",
-          label: "编辑试题"
-        },
-        {
-          value: "选项7",
-          label: "试题详情"
-        },
-        {
-          value: "选项8",
-          label: "添加用户"
-        },
-        {
-          value: "选项9",
-          label: "角色管理"
-        },
-        {
-          value: "选项10",
-          label: "用户展示"
-        },
-        {
-          value: "选项11",
-          label: "添加考试"
-        },
-        {
-          value: "选项12",
-          label: "班级管理"
-        },
-        {
-          value: "选项13",
-          label: "教室管理"
-        },
-        {
-          value: "选项14",
-          label: "学生管理"
-        },
-        {
-          value: "选项15",
-          label: "判卷列表"
-        },
-        {
-          value: "选项16",
-          label: "创建试卷"
-        },
-        {
-          value: "选项17",
-          label: "试卷详情"
-        },
-        {
-          value: "选项18",
-          label: "特批班级"
-        },
-        {
-          value: "选项19",
-          label: "批卷详情"
-        },
-        {
-          value: "选项20",
-          label: "阅卷"
-        }
-      ],
-      api: [
-        {
-          value: "选项1",
-          label: "获取所有考试类型"
-        },
-        {
-          value: "选项2",
-          label: "获取所有课程"
-        },
-        {
-          value: "选项3",
-          label: "删除指定的试题类型"
-        },
-        {
-          value: "选项4",
-          label: "添加试题类型"
-        },
-        {
-          value: "选项5",
-          label: "获取所有的试题类型"
-        },
-        {
-          value: "选项6",
-          label: "添加试题接口"
-        },
-        {
-          value: "选项7",
-          label: "获取所有试题"
-        },
-        {
-          value: "选项8",
-          label: "展示用户数据"
-        },
-        {
-          value: "选项9",
-          label: "展示api接口权限数据"
-        },
-        {
-          value: "选项10",
-          label: "展示身份数据"
-        },
-        {
-          value: "选项11",
-          label: "展示身份和api权限关系"
-        },
-        {
-          value: "选项12",
-          label: "添加用户"
-        },
-        {
-          value: "选项13",
-          label: "添加视图权限"
-        },
-        {
-          value: "选项14",
-          label: "添加身份"
-        },
-        {
-          value: "选项15",
-          label: "添加api接口权限"
-        },
-        {
-          value: "选项16",
-          label: "给身份设定api接口权限"
-        },
-        {
-          value: "选项17",
-          label: "更新用户信息(用户名，用户密码，用户身份)"
-        },
-        {
-          value: "选项18",
-          label: "登录接口"
-        },
-        {
-          value: "选项19",
-          label: "获取当前用户信息"
-        },
-        {
-          value: "选项20",
-          label: "获取视图权限数据"
-        },
-        {
-          value: "选项21",
-          label: "给身份设定视图权限"
-        },
-        {
-          value: "选项22",
-          label: "展示身份和视图权限关系"
-        },
-        {
-          value: "选项23",
-          label: "根据用户id,返回该用户的视图"
-        },
-        {
-          value: "选项24",
-          label: "按条件获取用户数据"
-        },
-        {
-          value: "选项25",
-          label: "更新试题"
-        },
-        {
-          value: "选项26",
-          label: "添加学生"
-        },
-        {
-          value: "选项27",
-          label: "查看所有学生"
-        },
-        {
-          value: "选项28",
-          label: "查看所有教室"
-        },
-        {
-          value: "选项29",
-          label: "添加教室"
-        },
-        {
-          value: "选项30",
-          label: "查看所有班级"
-        },
-        {
-          value: "选项31",
-          label: "添加班级"
-        },
-        {
-          value: "选项32",
-          label: "更新班级"
-        },
-        {
-          value: "选项33",
-          label: "更新教室"
-        },
-        {
-          value: "选项34",
-          label: "获取学生试卷列表"
-        }
-      ],
       value: "",
       value2: "",
       value3: "",
@@ -392,13 +160,40 @@ export default {
       value6: "",
       value7: "",
       title:["添加用户","更新用户"],
-      index:0
+      index:0,
+
+
     };
   },
   methods:{
     titleclick(index){
       this.index=index;
+    },
+    dd(){
+    this.$store.dispatch("userManager/identity");   
+     },
+    bb(){
+    this.$store.dispatch("userManager/views");   
+    },
+    nn(){
+      this.$store.dispatch("userManager/api");   
     }
+  },
+  computed:{
+      shenfen(){
+          return   $store.state.shenfen;
+       },
+       view(){
+         return  $store.state.view;
+       },
+       api(){
+          return  $store.state.apis;
+       }
+  },
+  mounted(){
+    this.dd();
+    this.bb();
+    this.nn()
   }
 };
 </script>

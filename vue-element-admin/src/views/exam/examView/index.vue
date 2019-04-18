@@ -259,7 +259,7 @@ export default {
 }
 .wrap ul li {
   padding-left: 30px;
-  line-height: 79px;
+  line-height: 92px;
 }
 .wrap ul li:nth-child(1) {
   padding-left: 0;
@@ -320,7 +320,7 @@ export default {
 .left div ul {
   display: flex;
   list-style: none;
-  margin-left: -50px;
+  /* margin-left: -50px; */
 }
 .left ul li {
   margin-left: 10px;
