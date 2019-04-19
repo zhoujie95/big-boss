@@ -5,7 +5,12 @@
       <div>
         <dl>
           <dt>
-            <span v-for="(val,key) in title" :key="key" @click="titleclick(key)" :id="index==key?'active':'null'">{{val}}</span>
+            <span
+              v-for="(val,key) in title"
+              :key="key"
+              @click="titleclick(key)"
+              :id="index==key?'active':'null'"
+            >{{val}}</span>
           </dt>
           <dd>
             <el-select v-model="value" placeholder="请选择身份id" class="sele">
@@ -18,9 +23,14 @@
             </el-select>
             <input type="text" placeholder="请添加用户名">
             <input type="text" placeholder="请输入密码">
-            <el-select v-model="value2" placeholder="请选择身份id" class="sele" :style="index==0?'display:none':'display:block'">
+            <el-select
+              v-model="value2"
+              placeholder="请选择身份id"
+              class="sele"
+              :style="index==0?'display:none':'display:block'"
+            >
               <el-option
-                 v-for="item in shenfen"
+                v-for="item in shenfen"
                 :key="item.identity_id"
                 :label="item.identity_text"
                 :value="item.identity_id"
@@ -92,7 +102,7 @@
           <dd>
             <el-select v-model="value4" placeholder="请选择身份id" class="sele">
               <el-option
-                  v-for="item in shenfen"
+                v-for="item in shenfen"
                 :key="item.identity_id"
                 :label="item.identity_text"
                 :value="item.identity_id"
@@ -121,7 +131,7 @@
           <dd>
             <el-select v-model="value5" placeholder="请选择身份id" class="sele">
               <el-option
-                 v-for="item in shenfen"
+                v-for="item in shenfen"
                 :key="item.identity_id"
                 :label="item.identity_text"
                 :value="item.identity_id"
@@ -148,7 +158,7 @@
 <script>
 /* eslint-disable */
 import $store from "../../store/modules/userManager";
-import { all } from 'q';
+import { all } from "q";
 export default {
   data() {
     return {
@@ -159,52 +169,53 @@ export default {
       value5: "",
       value6: "",
       value7: "",
-      title:["添加用户","更新用户"],
-      index:0,
-
-
+      title: ["添加用户", "更新用户"],
+      index: 0
     };
   },
-  methods:{
-    titleclick(index){
-      this.index=index;
+  methods: {
+    titleclick(index) {
+      this.index = index;
     },
-    dd(){
-    this.$store.dispatch("userManager/identity");   
-     },
-    bb(){
-    this.$store.dispatch("userManager/views");   
+    dd() {
+      this.$store.dispatch("userManager/identity");
     },
-    nn(){
-      this.$store.dispatch("userManager/api");   
+    bb() {
+      this.$store.dispatch("userManager/views");
+    },
+    nn() {
+      this.$store.dispatch("userManager/api");
     }
   },
-  computed:{
-      shenfen(){
-          return   $store.state.shenfen;
-       },
-       view(){
-         return  $store.state.view;
-       },
-       api(){
-          return  $store.state.apis;
-       }
+  computed: {
+    shenfen() {
+      return $store.state.shenfen;
+    },
+    view() {
+      return $store.state.view;
+    },
+    api() {
+      return $store.state.apis;
+    }
   },
-  mounted(){
+  mounted() {
     this.dd();
     this.bb();
-    this.nn()
+    this.nn();
   }
 };
 </script>
 <style scoped>
- *{margin:0;padding:0;}
+* {
+  margin: 0;
+  padding: 0;
+}
 .box {
   padding-left: 20px;
   background: #f0f2f5;
-  margin-top:70px;
+  margin-top: 70px;
   width: 100%;
-  cursor:pointer;
+  cursor: pointer;
 }
 .head {
   font-size: 22px;
@@ -219,7 +230,6 @@ export default {
   width: 33.3%;
   /* height: 250px; */
   border-radius: 5px;
-  
 }
 .wrap div dl {
   margin-left: 10px;
@@ -242,7 +252,6 @@ export default {
   height: 32px;
   border: 1px solid #d9d9d9;
   font-size: 14px;
- 
 }
 .wrap div dl .sele {
   display: block;
@@ -257,7 +266,6 @@ export default {
   border: none;
   border-radius: 5px;
   margin-top: 20px;
-
 }
 .wrap div dl button:nth-child(2) {
   width: 60px;
