@@ -3,16 +3,16 @@
         <h2 class="tit">待批班级</h2>
         <div class="main">
             <el-table
-                :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                :data="paperData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                 style="width: 100%;border-radius:'10px'"
                 class="table"
                 id="tabels"
             >
-                <el-table-column prop="date" label="班级名" width="134"></el-table-column>
-                <el-table-column prop="name" label="课程名称" width="257"></el-table-column>
-                <el-table-column prop="address" label="阅卷状态" width="160"></el-table-column>
-                <el-table-column prop="name_two" label="课程名称" width="257"></el-table-column>
-                <el-table-column prop="pass" label="成材率" width="135"></el-table-column>
+                <el-table-column prop="grade_name" label="班级名" width="134"></el-table-column>
+                <el-table-column prop="subject_text" label="课程名称" width="257"></el-table-column>
+                <el-table-column prop="address" label="阅卷状态" width="170"></el-table-column>
+                <el-table-column prop="subject_text" label="课程名称" width="257"></el-table-column>
+                <el-table-column prop="room_text" label="成材率" width="135"></el-table-column>
                 <el-table-column label="操作" width="110">
                     <template slot-scope="scope">
                         <el-button
@@ -33,7 +33,7 @@
                     :page-sizes="[5, 10, 15, 20]"
                     :page-size="5"
                     layout="prev, pager, next,sizes,jumper"
-                    :total="tableData.length"
+                    :total="paperData.length"
                 ></el-pagination>
             </div>
         </div>
@@ -41,76 +41,35 @@
 </template>
 
 <script>
-/* eslint-disable */
+import {mapState,mapActions} from 'vuex'
 export default {
+  computed:{
+    ...mapState({
+       paperData:state=>state.testpaper.paperData
+    })
+  },
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-04",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-01",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-03",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-03",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-031111",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-03",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        },
-        {
-          date: "2016-05-03",
-          name: "	渐进式开发(react)",
-          address: "",
-          name_two: "渐进式开发(react)",
-          pass: 34308
-        }
-      ],
       currentPage4: 1,
       currentPage: 1,
       pagesize: 5
     };
   },
+ async mounted(){
+     await this.getpaper()
+  },
   methods: {
+    ...mapActions({
+       getpaper:'testpaper/getpaper'
+    }),
     handleClick(row) {
-      console.log(row);
+      localStorage.setItem('grade_id',row.grade_id)
+      this.$router.push({
+        path:'/read/classmate',
+        query:{
+          grade_id:row.grade_id
+        }
+      })
     },
     handleSizeChange(val) {
       this.pagesize = val;

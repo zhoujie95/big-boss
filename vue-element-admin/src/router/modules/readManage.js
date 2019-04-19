@@ -8,17 +8,16 @@ const readRouter={
     title:'readManage',
     icon: 'edit'
   },
-  children:[   {
-    path: 'dynamic-table',
+  children:[{
+    path: 'read',
     component: () => import('@/views/read/read.vue'),
-    name: 'DynamicTable',
+    name: 'reads',
     meta: { title: 'readReady' }
   },
   {
-    path: 'drag-table',
-    component: () => import('@/views/table/dragTable'),
-    name: 'DragTable',
-    meta: { title: 'readReady' }
+    path: 'classmate',
+    component: () => import('@/views/read/classmate.vue'),
+    name: 'classmate',
   }]
 }
 
