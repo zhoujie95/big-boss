@@ -14,50 +14,54 @@
     <div class="content">
       <h2>{{h2}}</h2>
       <div :style="index==0?'display:block':'display:none'">
-        <el-table :data="user" style="width: 100%"  :header-cell-style="getRowClass"  >
+        <el-table
+          style="width: 100%"
+          :data="user.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+        >
           <el-table-column prop="user_name" label="用户名" width="280" class="table"></el-table-column>
           <el-table-column prop="user_pwd" label="密码" width="1180"></el-table-column>
           <el-table-column prop="identity_text" label="身份"></el-table-column>
         </el-table>
-        <el-pagination border layout="prev, pager, next" :total="13" class="fen"></el-pagination>
+        <el-pagination border layout="prev, pager, next" :total="user.length" class="fen" @current-change="current_change"></el-pagination>
       </div>
       <div :style="index==1?'display:block':'display:none'">
-        <el-table :data="shenfen" style="width: 100%">
+        <el-table  :data="shenfen.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
           <el-table-column prop="identity_text" label="身份名称" width="1680"></el-table-column>
         </el-table>
-        <el-pagination border layout="prev, pager, next" :total="3" class="fen"></el-pagination>
+        <el-pagination border layout="prev, pager, next" :total="shenfen.length" class="fen" @current-change="current_change"></el-pagination>
       </div>
       <div :style="index==2?'display:block':'display:none'">
-        <el-table :data="api" style="width: 100%">
+        <el-table  :data="api.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
           <el-table-column prop="api_authority_text" label="api权限名称" width="380"></el-table-column>
           <el-table-column prop="api_authority_url" label="api权限url" width="1080"></el-table-column>
           <el-table-column prop="api_authority_method" label="api权限方法"></el-table-column>
         </el-table>
-        <el-pagination border layout="prev, pager, next" :total="34" class="fen"></el-pagination>
+        <el-pagination border layout="prev, pager, next"  class="fen" @current-change="current_change"
+                     :total="api.length"></el-pagination>
       </div>
       <div :style="index==3?'display:block':'display:none'">
-        <el-table :data="identityapi" style="width: 100%">
+        <el-table :data="identityapi.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
           <el-table-column prop="identity_text" label="身份名称" width="380"></el-table-column>
           <el-table-column prop="api_authority_text" label="api权限名称" width="380"></el-table-column>
           <el-table-column prop="api_authority_url" label="api权限url" width="680"></el-table-column>
           <el-table-column prop="api_authority_method" label="api权限方法"></el-table-column>
         </el-table>
-        <el-pagination border layout="prev, pager, next" :total="3" class="fen"></el-pagination>
+        <el-pagination border layout="prev, pager, next" :total="identityapi.length" class="fen" @current-change="current_change"></el-pagination>
       </div>
       <div :style="index==4?'display:block':'display:none'">
-        <el-table :data="view" style="width: 100%">
+        <el-table  :data="view.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
           <el-table-column prop="view_authority_text" label="视图权限名称" width="280"></el-table-column>
           <el-table-column prop="view_id" label="视图id"></el-table-column>
         </el-table>
-        <el-pagination border layout="prev, pager, next" :total="3" class="fen"></el-pagination>
+        <el-pagination border layout="prev, pager, next"  class="fen" @current-change="current_change" :total="view.length"></el-pagination>
       </div>
       <div :style="index==5?'display:block':'display:none'">
-        <el-table :data="identityview" style="width: 100%">
+        <el-table   :data="identityview.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width:100%">
           <el-table-column prop="identity_text" label="身份" width="380"></el-table-column>
           <el-table-column prop="view_authority_text" label="视图名称" width="380"></el-table-column>
           <el-table-column prop="view_id" label="视图id" width="910"></el-table-column>
         </el-table>
-        <el-pagination border layout="prev, pager, next" :total="3" class="fen"></el-pagination>
+        <el-pagination border layout="prev, pager, next"  class="fen"  @current-change="current_change" :total="view.length"></el-pagination>
       </div>
     </div>
   </div>
@@ -78,13 +82,15 @@ export default {
         "身份和视图权限关系"
       ],
       index: 0,
-      h2:"用户数据"
+      h2: "用户数据",
+      pagesize: 10, //每页的数据条数
+      currentPage: 1 //默认开始页面
     };
   },
   methods: {
     listclick(index) {
       this.index = index;
-      this.h2=this.listdata[index]
+      this.h2 = this.listdata[index];
     },
     users() {
       this.$store.dispatch("userManager/user");
@@ -104,15 +110,18 @@ export default {
     shenfenview() {
       this.$store.dispatch("userManager/identityview");
     },
-    
-getRowClass({ row, column, rowIndex, columnIndex }) {
-	if (rowIndex == 0) {
-			return 'background:#fff';
-	} else {
-			return ''
-	}
 
-  }},
+    getRowClass({ row, column, rowIndex, columnIndex }) {
+      if (rowIndex == 0) {
+        return "background:#fff";
+      } else {
+        return "";
+      }
+    },
+      current_change:function(currentPage){
+        this.currentPage = currentPage;
+      }
+  },
   mounted() {
     this.users();
     this.dd();
@@ -141,7 +150,7 @@ getRowClass({ row, column, rowIndex, columnIndex }) {
       return $store.state.viewlist;
     }
   }
-}
+};
 </script>
 <style scoped>
 * {
