@@ -20,20 +20,17 @@ export let addquestion=(params)=>{
     return request.post('/exam/questions',params)
 }
 
-//更改试题的接口
+//更改试题
 export let updateques=(params)=>{
-  console.log(params)
     return request.put('/exam/questions/update',params)
 }
 //添加试题类型
 export let addQuesType=(params)=>{
-  
-    params.sort++
     return request.get('/exam/insertQuestionsType',{
       params:
       {
         text:decodeURI(params.text),
-        sort:params.sort.toString()
+        sort:params.sort
       }
     })
 } 

@@ -57,7 +57,14 @@ const actions = {
 
   //添加试题类型
    async addQuesType({commit},payload){
-       let result =await addQuesType(payload)
+       let {text,sort}=payload
+       let num=sort
+       num++
+       console.log(num.toString())
+       let result =await addQuesType({
+          text:text,
+          sort:num.toString()
+       })
    },
 
   //获取所有试题
