@@ -7,7 +7,6 @@ export let gettype=(params)=>{
 
 //获取课程类型
 export let getclass=(params)=>{
-  console.log(params)
     return request.get('/exam/subject',params)
 } 
 

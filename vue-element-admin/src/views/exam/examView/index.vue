@@ -7,10 +7,11 @@
           <label>课程类型:</label>
           <ul class="nav">
             <li>all</li>
-            <li v-for="(item,i) in classType"
-            :key="item.subject_id"
-             @click='changeState(i)'
-             :class="{'current':i===defaultIndex}"
+            <li
+              v-for="(item,i) in classType"
+              :key="item.subject_id"
+              @click="changeState(i)"
+              :class="{'current':i===defaultIndex}"
             >{{item.subject_text}}</li>
           </ul>
         </div>
@@ -33,7 +34,7 @@
               :value="item.questions_type_id"
             ></el-option>
           </el-select>
-          <el-button type="primary" @click='selects'>查询</el-button>
+          <el-button type="primary" @click="selects">查询</el-button>
         </div>
       </div>
       <div class="content-bot">
@@ -41,6 +42,7 @@
           class="bots"
           v-for="(item,i) in allquestions.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           :key="i"
+          @click="quesdetail(item)"
         >
           <div class="left">
             <p>{{item.title}}</p>
@@ -52,7 +54,7 @@
             <p>{{item.user_name}}发布</p>
           </div>
           <div class="right">
-            <span @click='editQuest(item.json_path)'>编辑</span>
+            <span @click="editQuest(item.json_path)">编辑</span>
           </div>
         </div>
         <div class="block">
@@ -77,7 +79,7 @@ export default {
       testType: state => state.addexam.testType,
       classType: state => state.addexam.classType,
       questionType: state => state.addexam.questionType,
-      allquestions:state=>state.addexam.allquestions
+      allquestions: state => state.addexam.allquestions
     })
   },
   methods: {
@@ -86,32 +88,40 @@ export default {
       getclass: "addexam/getclass",
       getquestion: "addexam/getquestion",
       getQuestions: "addexam/getQuestions",
-      getAllQues:"addexam/getAllQues",
-      selectQues:"addexam/selectQues"
+      getAllQues: "addexam/getAllQues",
+      selectQues: "addexam/selectQues"
     }),
     handleSizeChange: function(size) {
       this.pagesize = size; //每页下拉显示数据
     },
     handleCurrentChange: function(currentPage) {
-      this.currentPage = currentPage;//点击第几页
+      this.currentPage = currentPage; //点击第几页
     },
-    changeState(ind){
-       this.defaultIndex=ind
+    changeState(ind) {
+      this.defaultIndex = ind;
     },
-    async selects(){
-     await this.selectQues({
-         subject_id:this.classType[this.defaultIndex].subject_id,
-         exam_id:this.exam,
-         questions_type_id:this.ques
-      })
+    async selects() {
+      await this.selectQues({
+        subject_id: this.classType[this.defaultIndex].subject_id,
+        exam_id: this.exam,
+        questions_type_id: this.ques
+      });
     },
-    editQuest(exam_id){
+    editQuest(exam_id) {
       this.$router.push({
-        path:`/edit/Questions`,
-        query:{
-          id:exam_id.split('.')[0]
+        path: `/edit/Questions`,
+        query: {
+          id: exam_id.split(".")[0]
         }
-      })
+      });
+    },
+    quesdetail(item) {
+      this.$router.push({
+        path: `/detail/Questions`,
+        query: {
+          id:item.questions_id
+        }
+      });
     }
   },
   async mounted() {
@@ -126,7 +136,7 @@ export default {
       ques: "",
       currentPage: 1, //初始页
       pagesize: 5,
-      defaultIndex:null
+      defaultIndex: null
     };
   }
 };
@@ -137,7 +147,7 @@ export default {
   width: 100%;
   height: 900px;
   overflow: hidden;
-  top: 64px;
+  margin-top: 64px;
   background: #edeff2;
   h2 {
     padding: 10px 0 10px 20px;
@@ -181,14 +191,14 @@ export default {
         .nav {
           flex: 1;
           display: flex;
-          &>li {
-            padding:5px 10px;
+          & > li {
+            padding: 5px 10px;
             text-align: center;
             font-size: 14px;
-            &:nth-of-type(1){
-              width:50px;
+            &:nth-of-type(1) {
+              width: 50px;
             }
-            &.current{
+            &.current {
               color: #2f54eb;
             }
           }
@@ -253,10 +263,10 @@ export default {
           }
         }
       }
-      .block{
-        .el-pagination{
-          width:200px;
-          margin-top:10px;
+      .block {
+        .el-pagination {
+          width: 200px;
+          margin-top: 10px;
           float: right;
         }
       }
