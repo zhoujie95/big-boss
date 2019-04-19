@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo, getViewAuthority} from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -8,7 +8,8 @@ const state = {
   avatar: '',
   introduction: '',
   roles: [],
-  userInfo:{}
+  userInfo:{},
+  viewAuthority:[]
 }
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
   },
   SET_USERINFO:(state,userInfo)=>{
      state.userInfo=userInfo
+  },
+  SET_VIEWAUTHORITY:(state,viewAuthority)=>{
+     state.viewAuthority=viewAuthority
   }
 }
 
@@ -48,6 +52,19 @@ const actions = {
     //console.log('data....', data)
     commit('SET_USERINFO', data.data)
     return data.data
+  },
+  //获取视图权限
+  async getViewAuthority({commit},payload){
+   let userAuthority=await getViewAuthority()
+   //console.log('user....',userAuthority)
+   if(userAuthority.code==1){
+      commit('SET_VIEWAUTHORITY',userAuthority.data)
+      return userAuthority.data
+   }
+   return []
+  //  commit('SET_VIEWAUTHORITY',userAuthority.data)
+  //  return userAuthority.data
+  },
     // return new Promise((resolve, reject) => {
     //   getInfo(state.token).then(response => {
     //     const { data } = response
@@ -72,7 +89,7 @@ const actions = {
     //     reject(error)
     //   })
     // })
-  },
+
 
   // user logout
   logout({ commit, state }) {

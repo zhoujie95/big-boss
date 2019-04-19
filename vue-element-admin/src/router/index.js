@@ -48,7 +48,7 @@ export const constantRoutes = [
   examRouter,
   userRouter,
   testRouter,
-  classRouter,
+
   readRouter,
   //编辑试题的路由
   {
@@ -131,6 +131,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  classRouter,
   // {
   //   path: '/permission',
   //   component: Layout,

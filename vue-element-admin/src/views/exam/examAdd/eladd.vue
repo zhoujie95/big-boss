@@ -158,6 +158,7 @@ export default {
      }),
     addquest(){
       if(this.handeltype==='add'){
+        //是添加试题的页面
           this.$confirm('你确定要添加该试题吗?',{
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -179,6 +180,7 @@ export default {
            }
        })
       }else{
+        //是编辑页面
         this.$confirm('您确定修改吗?','确定修改这道题吗',{
               confirmButtonText: '确定',
               cancelButtonText: '取消',

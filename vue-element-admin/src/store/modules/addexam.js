@@ -60,7 +60,7 @@ const actions = {
        let {text,sort}=payload
        let num=sort
        num++
-       console.log(num.toString())
+      //  console.log(num.toString())
        let result =await addQuesType({
           text:text,
           sort:num.toString()
