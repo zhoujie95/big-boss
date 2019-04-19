@@ -26,6 +26,11 @@ const testRouter={
       component:()=>import("@/views/testmanager/edittest"),
       name:"edittest"   
     }
+    // {
+    //   path:"testdetail",
+    //   component:()=>import("@/views/testmanager/testdetail"),
+    //   name:"testdetail"
+    // }
   ]
 }
 

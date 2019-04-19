@@ -8,7 +8,7 @@
           <p>
             <span>*</span>试卷名称
           </p>
-          <el-input class="inpname" v-model="testname"></el-input>
+          <el-input class="inpname" v-model="title"></el-input>
         </div>
         <div class="eachboard">
           <p>
@@ -42,7 +42,7 @@
           </p>
           <el-input-number
             class=".inpsize"
-            v-model="num8"
+            v-model="number"
             value=""
             controls-position="right"
             @change="handleChange"
@@ -60,7 +60,7 @@
             placeholder="开始时间"
             suffix-icon="el-icon-date"
             default-time="12:00:00"
-            v-model="starttime"
+            v-model="start_time"
           ></el-date-picker>
           <span>-</span>
           <el-date-picker
@@ -69,7 +69,7 @@
             placeholder="结束时间"
             suffix-icon="el-icon-date"
             default-time="12:00:00"
-            v-model="endtime"
+            v-model="end_time"
           ></el-date-picker>
         </div>
         <div class="eachboard">
@@ -86,10 +86,10 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      num8: "",
-      testname: "",
-      starttime: "",
-      endtime: "",
+      number: "",
+      title: "",
+      start_time: "",
+      end_time: "",
       exam_id: "",
       subject_id: ""
     };
@@ -102,24 +102,29 @@ export default {
   },
   methods: {
     handleChange(value) {
-      console.log(value);
-      console.log(this.testType,this.testClass)
+      // console.log(value);
+      // console.log(this.testType,this.testClass)
     },
     createtest(){
-      let {num8,
-      testname,
-      starttime,
-      endtime,
+      let { number,
+      title,
+      start_time,
+      end_time,
       exam_id,
       subject_id} = this;
-     
-      if(num8 && testname && starttime && endtime &&  exam_id && subject_id){
-        this.$store.dispatch("testmanager/addtest", {num8,
-          testname,
-          starttime:startime*1,
-          endtime:endtime*1,
-          exam_id,
-          subject_id})
+     console.log (number,
+      title,
+      start_time,
+      end_time,
+      exam_id,
+      subject_id)
+      if(number && title && start_time && end_time &&  exam_id && subject_id){
+        this.$store.dispatch("testmanager/addtest", { number,
+      title,
+      start_time:start_time*1,
+      end_time:end_time*1,
+      exam_id,
+      subject_id})
         this.$router.push({path:"edittest"})
       }
     },

@@ -12,7 +12,7 @@
                             <p>删除</p>
                         </div>
                         <div class="eachdescribe">
-                            <p>{{questions}}</p>
+                            <p v-for="(item,index) in questions" :key="index">{{item}}</p>
                         </div>
                     </div>
                 </div>
@@ -31,16 +31,16 @@ export default {
         ...mapState("testmanager",{
             addflag:state=>state.addflag,
             questions:state=>state.questions,
-            question_ids:state=>state.question_ids,
             testname:state=>state.testname
         })
     },
     methods:{
          updtatedtest(){
-            this.$store.dispatch("testmanager/updatetest",question_ids);
+            this.$store.dispatch("testmanager/updatetest");
             this.$router.push({path:"testlist"});
         }
     }
+
 }
 </script>
 <style lang="scss">
