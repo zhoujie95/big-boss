@@ -30,12 +30,14 @@
         stripe
         style="width: 100%;padding:10px;height:auto;border:'1px solid lighgrey'"
       >
-        <el-table-column prop="questions_type_id" label="班级" width="180"/>
+        <el-table-column label="班级" width="180">
+           {{gradename}}
+        </el-table-column>
         <el-table-column prop="student_name" label="姓名" width="180"/>
-        <el-table-column prop="status" label="阅卷状态" width="180"/>
+        <el-table-column prop="state" label="阅卷状态" width="180"/>
         <el-table-column prop="start_time" label="开始时间" width="180"/>
         <el-table-column prop="end_time" label="结束时间" width="180"/>
-        <el-table-column prop="-" label="成材率" width="180"/>
+        <el-table-column  label="成材率" width="180">-</el-table-column>
         <el-table-column label="操作">批卷</el-table-column>
       </el-table>
       <div class="block">
@@ -57,8 +59,8 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   computed: {
+    ...mapGetters(['details']),
     ...mapState({
-      details: state => state.testpaper.details,
       allclass: state => state.testpaper.allclass
     })
   },
@@ -76,6 +78,8 @@ export default {
   },
   async mounted() {
     let grade = localStorage.getItem("grade_id");
+    let gradename=localStorage.getItem('grade')
+    this.gradename=gradename
     await this.getdetail({
       grade_id: grade
     });
@@ -88,7 +92,8 @@ export default {
       currentPage: 1,
       pagesize: 5,
       testType: [],
-      studentmes: []
+      studentmes: [],
+      gradename:''
     };
   }
 };

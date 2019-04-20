@@ -64,6 +64,7 @@ export default {
     }),
     handleClick(row) {
       localStorage.setItem('grade_id',row.grade_id)
+      localStorage.setItem('grade',row.grade_name)
       this.$router.push({
         path:'/read/classmate',
         query:{
