@@ -3,21 +3,24 @@
     <h2>试题详情</h2>
     <div class="box-content">
       <div class="left">
-        <p>出题人:{{data[0].user_name}}</p>
+        <p>出题人:{{data.user_name}}</p>
         <div class="left-top">
           <p>题目信息</p>
           <ul class="nav">
-            <li>{{data[0].questions_type_text}}</li>
-            <li>{{data[0].subject_text}}</li>
-            <li>{{data[0].exam_name}}</li>
+            <li>{{data.questions_type_text}}</li>
+            <li>{{data.subject_text}}</li>
+            <li>{{data.exam_name}}</li>
           </ul>
         </div>
-        <div class="top-content">{{data[0].questions_stem.split('示例')[0]}}</div>
-        <markdown-editor>
-            11111
-        </markdown-editor>
+        <div class="top-content">
+          <p>{{data.title}}</p>
+          <markdown-editor v-model='content' style='height:600px;marginTop:30px'/>
+        </div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <p>答案信息</p>
+        <markdown-editor v-model='answer' style='height:400px;marginTop:60px'/>
+      </div>
     </div>
   </div>
 </template>
@@ -25,35 +28,20 @@
 import MarkdownEditor from "@/components/MarkdownEditor";
 import { mapActions, mapState } from "vuex";
 export default {
-  props: {},
   components: {
     MarkdownEditor
   },
   data() {
     return {
       content: "",
-      data: []
+      data: [],
+      answer:''
     };
   },
-  computed: {
-    ...mapState({
-      allquestions: state => state.addexam.allquestions
-    })
-  },
-  methods: {
-    ...mapActions({
-      getAllQues: "addexam/getAllQues"
-    })
-  },
-  created() {},
-  async mounted() {
-    await this.getAllQues();
-    this.data =
-      this.$route.name === "examAdd"
-        ? this.data
-        : this.allquestions.filter(
-            item => item.questions_id === this.$route.query.id
-          );
+ async mounted() {
+    this.data=JSON.parse(localStorage.getItem('quesItem'))
+    this.content=this.data.questions_stem
+    this.answer=this.data.questions_answer
   }
 };
 </script>
@@ -77,31 +65,61 @@ export default {
     flex: 1;
     margin: 10px auto;
     display: flex;
+    font-size:14px;
+    line-height: 25px;
     .left {
       width: 700px;
       height: 100%;
       margin: 0 20px 0 30px;
       border-radius: 10px;
       background: #fff;
+      padding:15px;
       .left-top {
-        display: flex;
+        margin-top:10px;
         p {
           margin: 10px 0;
-          float: left;
+          font-size:14px;
         }
         .nav {
           display: flex;
+          height:30px;
+          padding-top:5px;
+          line-height:17px;
+          margin-bottom:15px;
           li {
-            margin: 0 10px;
-          }
+              border: 1px solid #000;
+              font-size: 13px;
+               padding: 5px 8px;
+              &:nth-of-type(1) {
+                border: 1px solid #9d9dff;
+                color: #9d9dff;
+                background: #e6f7ff;
+              }
+              &:nth-of-type(2) {
+                border: 1px solid #2f54eb;
+                color: #2f54eb;
+                background: #f0f5ff;
+                margin-left: 20px;
+              }
+              &:nth-of-type(3) {
+                color: #fa8c16;
+                background: #fff7e6;
+                border: 1px solid #ffd591;
+                margin-left: 20px;
+              }
+            }
         }
       }
     }
     .right {
-      width: 500px;
+      width: 600px;
       height: 100%;
       border-radius: 10px;
       background: #fff;
+      padding:10px;
+      p{
+        margin:30px 0 60px 0;
+      }
     }
   }
 }

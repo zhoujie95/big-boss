@@ -116,6 +116,7 @@ export default {
       });
     },
     quesdetail(item) {
+      localStorage.setItem('quesItem',JSON.stringify(item))
       this.$router.push({
         path: `/detail/Questions`,
         query: {
