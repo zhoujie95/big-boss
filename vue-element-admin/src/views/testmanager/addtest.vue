@@ -102,8 +102,6 @@ export default {
   },
   methods: {
     handleChange(value) {
-      // console.log(value);
-      // console.log(this.testType,this.testClass)
     },
     createtest(){
       let { number,
@@ -112,19 +110,13 @@ export default {
       end_time,
       exam_id,
       subject_id} = this;
-     console.log (number,
-      title,
-      start_time,
-      end_time,
-      exam_id,
-      subject_id)
       if(number && title && start_time && end_time &&  exam_id && subject_id){
         this.$store.dispatch("testmanager/addtest", { number,
-      title,
-      start_time:start_time*1,
-      end_time:end_time*1,
-      exam_id,
-      subject_id})
+        title,
+        start_time:start_time*1,
+        end_time:end_time*1,
+        exam_id,
+        subject_id})
         this.$router.push({path:"edittest"})
       }
     },
