@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getToken} from '@/utils/auth'
 const state={
-    testlistdata:[],
+    testlistdata:[],//获取列表
     addflag:false,
     testType:[],
     testClass:[],
