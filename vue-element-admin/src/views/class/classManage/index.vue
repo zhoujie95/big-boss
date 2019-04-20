@@ -14,7 +14,7 @@
           </template>
         </el-table-column>
       </el-table>
-       <bj-dialog v-if="dialogshow" v-on:showdislog="showdislog" :type="type" :name="name"/>
+       <bj-dialog v-if="dialogshow" v-on:showdislog="showdislog" :type="type" :name="name" :banjiid="banjiid"/>
     </div>
     <div class="mask" v-if='dialogshow'></div>
   </div>
@@ -65,6 +65,7 @@ export default {
       this.dialogshow = true
       this.type = 'xiu'
       this.name = rew.grade_name
+      this.banjiid = rew.grade_id
     },
     async handleDelete(ind,rew){
       //console.log(rew.grade_id)

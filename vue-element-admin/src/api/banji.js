@@ -28,3 +28,19 @@ export let addbanji = (params)=>{
 export let delbanjis = (params) =>{
     return request.delete('/manger/grade/delete',{data:params})
 }
+//编辑班级
+export let upbanji = (params)=>{
+    return request.put('/manger/grade/update',params)
+}
+//获取分配学生
+export let getxueshengone = ()=>{
+    return request.get('/manger/student')
+}
+//获取未分配
+export let getxueshengtwo = ()=>{
+    return request.get('/manger/student/new')
+}
+//删除学生
+export let delxuesheng = (params) =>{
+    return request.delete(`/manger/student/${params.student_id}`)
+}

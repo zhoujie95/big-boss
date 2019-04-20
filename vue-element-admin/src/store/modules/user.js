@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo,getViewAuthority } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -8,7 +8,8 @@ const state = {
   avatar: '',
   introduction: '',
   roles: [],
-  userInfo:{}
+  userInfo:{},   //登陆用户信息
+  viewAuthority: []   // 用户路由权限
 }
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
   },
   SET_USERINFO:(state,data)=>{
     state.userInfo = data
+  },
+  SET_VIEWLUYOUS:(state,viewAuthority)=>{
+    state.viewAuthority=viewAuthority
   }
 }
 
@@ -84,7 +88,15 @@ const actions = {
     //   })
     // })
   },
-
+  async getViewAuthority({commit}){
+    let viewluyous = await getViewAuthority()
+    //console.log(viewluyous)
+    if(viewluyous.code==1){
+      commit('SET_VIEWLUYOUS',viewluyous.data)
+      return viewluyous.data
+    }
+    return []
+  },
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {

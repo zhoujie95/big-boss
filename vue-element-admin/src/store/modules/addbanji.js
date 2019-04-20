@@ -1,9 +1,10 @@
-import {getbanji,getjiaoshis,getkechengs,addbanji,delbanjis} from '@/api/banji.js'
+import {getbanji,getjiaoshis,getkechengs,addbanji,delbanjis,upbanji} from '@/api/banji.js'
 
 const state = {
     bandata:[],
     jiaodata:[],
-    kedata:[]
+    kedata:[],
+    
 }
 const mutations = {
     upbandata(state,bandata){
@@ -41,6 +42,11 @@ const actions={
     async delbanji({commit},payload){
         let delbj = await delbanjis(payload)
         console.log(delbj)
+    },
+    //编辑班级
+    async upbanji({commit},payload){
+        let upbj = await upbanji(payload)
+        console.log(upbj)
     }
 }
 

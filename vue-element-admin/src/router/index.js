@@ -45,7 +45,7 @@ import readRouter from './modules/readManage'
  * all roles can be accessed
  */
 export const constantRoutes = [
-  examRouter,
+  
   userRouter,
   testRouter,
   classRouter,
@@ -126,6 +126,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  examRouter,
   // {
   //   path: '/permission',
   //   component: Layout,

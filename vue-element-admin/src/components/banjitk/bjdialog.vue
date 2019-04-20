@@ -2,7 +2,7 @@
     <div class="dialog">
           <p>添加班级 <span @click='closedialog'>X</span></p>
           <p> <b>*</b> 班级名:</p>
-          <el-input placeholder="班级名" v-model='classname'></el-input>
+          <el-input placeholder="班级名" v-model='classname' :disabled="disabled"></el-input>
           <p> <b>*</b> 教室名:</p>
           <el-select v-model="roomnum" placeholder="请选择教室号">
             <el-option
@@ -30,16 +30,23 @@
 <script>
 import {mapState,mapActions} from 'vuex'
 export default {
-    props:['type','name'],
+    props:['type','name','banjiid'],
     data(){
         return {
             lesson:'',
             classname:'',
-            roomnum:''
+            roomnum:'',
+            disabled:false,
+            banjiidw:''
         }
     },
     mounted() {
-        console.log(this.type,this.name)
+        //console.log(this.type,this.name,this.banjiid)
+        if(this.type=='xiu'){
+            this.classname = this.name
+            this.banjiidw = this.banjiid
+            this.disabled = true
+        }
     },
     computed: {
     ...mapState({
@@ -52,19 +59,32 @@ export default {
         getjiaoshi:'addbanji/getjiaoshi',
         getkecheng:'addbanji/getkecheng',
         addbanji:'addbanji/addbanji',
-        delbanji:'addbanji/delbanji'
+        delbanji:'addbanji/delbanji',
+        upbanji:'addbanji/upbanji'
     }),
       async btnaddbanji(){
-      let obj = {
-        grade_name:this.classname,
-        room_id:this.roomnum,
-        subject_id:this.lesson
-      }
-      await this.addbanji(obj)
-      this.dialogshow = false
+
+        if(this.type=='add'){
+        let obj = {
+            grade_name:this.classname,
+            room_id:this.roomnum,
+            subject_id:this.lesson
+          }
+          await this.addbanji(obj)
+        }else{
+          let objw = {
+            grade_id : this.banjiidw,
+            grade_name:this.classname,
+            room_id:this.roomnum,
+            subject_id:this.lesson
+          }
+          await this.upbanji(objw)
+        }
+      
       this.lesson='',
       this.classname='',
       this.roomnum=''
+      this.banjiidw=''
       this.$emit('showdislog',this.showdislog)
     },
     closedialog(){
