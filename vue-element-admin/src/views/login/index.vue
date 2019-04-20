@@ -29,14 +29,13 @@
             <svg-icon icon-class="password" />
           </span>
           <el-input
-            :key="passwordType"
             ref="password"
+            :key="passwordType"
             v-model="loginForm.password"
             :type="passwordType"
             :placeholder="$t('login.password')"
             name="password"
             auto-complete="on"
-            @keyup.native="checkCapslock"
             @blur="capsTooltip = false"
             @keyup.enter.native="handleLogin"
           />
@@ -88,16 +87,22 @@ export default {
   name: 'Login',
   components: { LangSelect, SocialSign },
   data() {
+    //用户名的自定义校验
     const validateUsername = (rule, value, callback) => {
+<<<<<<< HEAD
       if (!value) {
         callback(new Error('Please enter the correct user name哇哇哇'))
+=======
+      if (!validUsername(value)) {
+        callback(new Error('请输入正确的用户名'))
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能少于6位'))
       } else {
         callback()
       }
@@ -140,6 +145,7 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
+<<<<<<< HEAD
  
     ...mapActions({
       login:'user/login'
@@ -156,6 +162,12 @@ export default {
         this.capsTooltip = false
       }
     },
+=======
+    ...mapActions({
+      login:'user/login',
+      generateRoutes: 'permission/generateRoutes'
+    }),
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -171,6 +183,7 @@ export default {
         if (valid) {
           //console.log(this.loginForm)
           this.loading = true
+<<<<<<< HEAD
           let res = await this.login(this.loginForm)
           console.log('login res...',res)
           if (res.code == 1){
@@ -187,13 +200,25 @@ export default {
           //   .catch(() => {
           //     this.loading = false
           //   })
+=======
+          let res=await this.login(this.loginForm)
+          if (res.code == 1){
+            await this.generateRoutes([]);
+            this.$router.push({ path: this.redirect || '/' })
+          }
+          //this.loading = false
+      
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
         } else {
           console.log('error submit!!')
           return false
         }
       })
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
   }
 }
 </script>

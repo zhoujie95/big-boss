@@ -38,6 +38,7 @@ const mutations = {
 
 const actions = {
   // user login
+<<<<<<< HEAD
   async login({ commit }, userInfo) {
     //console.log('userInfo',userInfo)
     const { username, password } = userInfo
@@ -55,6 +56,14 @@ const actions = {
     //     reject(error)
     //   })
     // })
+=======
+
+  async login({ commit }, userInfo) {
+    const { username, password } = userInfo
+    let res = await login({user_name: username, user_pwd: password});
+    setToken(res.token);
+    return res;
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
   },
 
   // get user info

@@ -5,23 +5,24 @@
       <div class="testlist-find">
         <div class="itemoclass">
           <span>考试类型:</span>
-          <el-select v-model="value1" placeholder="">
+           <el-select v-model="exam_id" placeholder="">
             <el-option
-              v-for="item in options1"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in testType"
+              :key="item.exam_id"
+              :label="item.exam_name"
+              :value="item.exam_id"
             ></el-option>
           </el-select>
+          
         </div>
         <div class="itemoclass">
           <span>课程:</span>
-          <el-select v-model="value2" placeholder="">
+          <el-select placeholder="" v-model="subject_id">
             <el-option
-              v-for="item in options2"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in testClass"
+              :key="item.subject_id"
+              :label="item.subject_text"
+              :value="item.subject_id"
             ></el-option>
           </el-select>
         </div>
@@ -33,19 +34,23 @@
         <div class="listtitle">
           <p>试卷列表</p>
           <div class="listitem-btn">
-            <p class="listitem-btn-active">全部</p>
-            <p class="testlist-doing">进行中</p>
-            <p>已结束</p>
+          <p v-for="(item,index) in qh" :key="item.id" @click="lightblue(item.id)" :class="{'listitem-btn-active':light===item.id,'testlist-doing':index===1}">{{item.content}}</p>
           </div>
         </div>
         <div class="listdata">
-          <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="date" label="试卷信息"></el-table-column>
-            <el-table-column prop="name" label="班级"></el-table-column>
-            <el-table-column prop="address" label="创建人"></el-table-column>
-            <el-table-column prop="address" label="开始时间"></el-table-column>
-            <el-table-column prop="address" label="结束时间"></el-table-column>
-            <el-table-column prop="detail" label="操作"></el-table-column>
+          <el-table :data="testlistdata" style="width: 100%">
+            <el-table-column prop="title" label="试卷信息"></el-table-column>
+            <el-table-column prop="grade_name" label="班级"></el-table-column>
+            <el-table-column prop="user_name" label="创建人"></el-table-column>
+            <el-table-column prop="start_time" label="开始时间"></el-table-column>
+            <el-table-column prop="end_time" label="结束时间"></el-table-column>
+            <el-table-column  label="操作">
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+            </template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -54,82 +59,52 @@
 </template>
 <script>
 /* eslint-disable */
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
-      options1: [
+      subject_id:"",
+      exam_id:"",
+      light: 0,
+      qh: [
         {
-          value: "选项1",
-          label: "黄金糕"
+          content: "全部",
+          id: 0
         },
         {
-          value: "选项2",
-          label: "双皮奶"
+          content: "进行中",
+          id: 1
         },
         {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value1: "",
-      options2: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value2: "",
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          detail: "详情"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          detail: "详情"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          detail: "详情"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          detail: "详情"
+          content: "已结束",
+          id: 2
         }
       ]
     };
+  },
+  methods: {
+    aa() {
+      this.$store.dispatch("testmanager/gettestlist");
+    },
+    //点击查看详情
+    handleEdit(index, row) {
+      this.$store.dispatch("testmanager/getdetail",row.exam_exam_id);
+      this.$router.push({path:"testdetail"})
+    },
+    //点击切换高亮
+    lightblue(e) {
+      this.light = e;
+    }
+  },
+  computed: {
+    ...mapState("testmanager", {
+      testlistdata: state => state.testlistdata,
+      testType:state=>state.testType,
+      testClass:state=>state.testClass
+    })
+  },
+  mounted() {
+    this.aa();
   }
 };
 </script>

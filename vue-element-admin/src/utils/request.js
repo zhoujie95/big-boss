@@ -1,12 +1,15 @@
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
-import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
   baseURL: '/api', // api 的 base_url
+<<<<<<< HEAD
   withCredentials: true, // 跨域请求时发送 cookies
+=======
+  // withCredentials: true, // 跨域请求时发送 cookies
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
   timeout: 5000 // request timeout
 })
 
@@ -42,7 +45,11 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if(res.code==1){
+<<<<<<< HEAD
       return res
+=======
+       return res
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
     }
     // if (res.code !== 20000) {
     //   Message({
@@ -50,7 +57,11 @@ service.interceptors.response.use(
     //     type: 'error',
     //     duration: 5 * 1000
     //   })
+<<<<<<< HEAD
     //   // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
+=======
+      // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
     //   if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
     //     // 请自行在引入 MessageBox
     //     // import { Message, MessageBox } from 'element-ui'
