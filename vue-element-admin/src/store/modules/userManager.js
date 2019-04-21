@@ -12,26 +12,24 @@ const state = {
     view: [],
     apis: [],
     user: [],
-    list:[],
-    viewlist:[]
+    list: [],
+    viewlist: [],
+    msg:""
 }
 const mutations = {
     identity(state, data) {
         if (data.code == 1) {
             state.shenfen = data.data
-            // console.log(state.shenfen);
         }
     },
     views(state, data) {
         if (data.code == 1) {
             state.view = data.data
-            // console.log(state.view);
         }
     },
     api(state, data) {
         if (data.code == 1) {
             state.apis = data.data
-            // console.log(state.apis);
         }
     },
     user(state, data) {
@@ -43,7 +41,6 @@ const mutations = {
     identityapi(state, data) {
         if (data.code == 1) {
             state.list = data.data
-            // console.log(state.list);
         }
     },
     identityview(state, data) {
@@ -51,14 +48,34 @@ const mutations = {
             state.viewlist = data.data
         }
     },
-
+    adduser(state, data){
+            state.msg = data.msg
+    },
+    addshenfen(state,data){
+        state.msg = data.msg
+    },
+    addapi(state,data){
+        state.msg = data.msg
+    },
+    addview(state,data){
+        state.msg = data.msg
+    },
+    apishenfen(state,data){
+        state.msg = data.msg
+    },
+    shenfenview(state,data){
+        state.msg = data.msg
+    },
+    newuser(state,data){
+        state.msg = data.msg
+    }
 }
 const actions = {
     //身份权限
     identity(context) {
         axios.get('/api/user/identity', { headers: { authorization: state.token } }).then((res) => {
             context.commit('identity', res.data);
-            // console.log(res.data.data);
+
         })
     },
     //视图权限
@@ -83,16 +100,60 @@ const actions = {
     identityapi(context) {
         axios.get('/api/user/identity_api_authority_relation', { headers: { authorization: state.token } }).then((res) => {
             context.commit('identityapi', res.data);
-            // console.log(res)
         })
     },
     //身份和视图权限关系
     identityview(context) {
         axios.get('/api/user/identity_view_authority_relation', { headers: { authorization: state.token } }).then((res) => {
             context.commit('identityview', res.data);
-            // console.log(res)
         })
-    }
+    },
+    //添加用户
+    adduser(context,payload) {
+        axios.post("/api/user", payload, { headers: { authorization: getToken() } }).then(res => {
+          
+            context.commit('adduser',res.data);
+        })
+    },
+    //添加身份
+    addshenfen(context, payload) {
+        axios.post("/api/user/identity/edit", payload, { headers: { authorization: getToken() } }).then(res => {
+            context.commit('addshenfen',res.data);
+        })
+    },
+    //添加api
+    addapi(context, payload) {
+        // console.log(payload);
+        axios.get("/api/user/authorityApi/edit", payload, { headers: { authorization: getToken() } }).then(res => {
+            context.commit('addapi',res.data);
+        })
+    },
+    //添加视图借口
+    addview(context, payload) {
+        axios.get("/api/user/authorityView/edit", payload, { headers: { authorization: getToken() } }).then(res => {
+            context.commit('addview',res.data);
+        })
+    },
+    //设置api身份接口
+    apishenfen(context, payload) {
+        axios.post("/api/user/setIdentityApi", payload, { headers: { authorization: getToken() } }).then(res => {
+            context.commit('apishenfen',res.data);
+        })
+    },
+    //给身份设置视图
+    shenfenview(context, payload) {
+        axios.post("/api/user/setIdentityView", payload, { headers: { authorization: getToken() } }).then(res => {
+            context.commit('shenfenview',res.data);
+        })
+    },
+    //更新用户
+    newuser(context, payload) {
+        console.log(payload);
+        axios.put("/user/user", payload, { headers: { authorization: getToken() } }).then(res => {
+            context.commit('newuser',res.data);
+        })
+    },
+
 }
 export default {
     namespaced: true,

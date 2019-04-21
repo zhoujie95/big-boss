@@ -21,8 +21,8 @@
                 :value="item.identity_id"
               ></el-option>
             </el-select>
-            <input type="text" placeholder="请添加用户名">
-            <input type="text" placeholder="请输入密码">
+            <input type="text" placeholder="请添加用户名" v-model="name">
+            <input type="password" placeholder="请输入密码" v-model="password">
             <el-select
               v-model="value2"
               placeholder="请选择身份id"
@@ -30,14 +30,14 @@
               :style="index==0?'display:none':'display:block'"
             >
               <el-option
-                v-for="item in shenfen"
-                :key="item.identity_id"
-                :label="item.identity_text"
-                :value="item.identity_id"
+                v-for="item in user"
+                :key="item.user_id"
+                :label="item.user_id"
+                :value="item.user_id"
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
+              <button @click="adduser()">确定</button>
               <button>重置</button>
             </p>
           </dd>
@@ -49,9 +49,9 @@
             <span id="active">添加身份</span>
           </dt>
           <dd>
-            <input type="text" placeholder="请输入身份名称">
+            <input type="text" placeholder="请输入身份名称" v-model="shenfenname">
             <p>
-              <button>确定</button>
+              <button @click="addshenfen">确定</button>
               <button>重置</button>
             </p>
           </dd>
@@ -63,11 +63,11 @@
             <span id="active">添加api接口权限</span>
           </dt>
           <dd>
-            <input type="text" placeholder="请输入api接口权限名称">
-            <input type="text" placeholder="请输入api接口权限url">
-            <input type="text" placeholder="请输入api接口权限方法">
+            <input type="text" placeholder="请输入api接口权限名称" v-model="apiname">
+            <input type="text" placeholder="请输入api接口权限url" v-model="apiurl">
+            <input type="text" placeholder="请输入api接口权限方法" v-model="apitype">
             <p>
-              <button>确定</button>
+              <button @click="addapi">确定</button>
               <button>重置</button>
             </p>
           </dd>
@@ -84,11 +84,11 @@
                 v-for="item in view"
                 :key="item.view_authority_id"
                 :label="item.view_authority_text"
-                :value="item.view_authority_id"
+                :value="item.view_authority_text"
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
+              <button @click="addview">确定</button>
               <button>重置</button>
             </p>
           </dd>
@@ -117,7 +117,7 @@
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
+              <button @click="apishenfen">确定</button>
               <button>重置</button>
             </p>
           </dd>
@@ -146,7 +146,7 @@
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
+              <button @click="shenfenview">确定</button>
               <button>重置</button>
             </p>
           </dd>
@@ -170,7 +170,14 @@ export default {
       value6: "",
       value7: "",
       title: ["添加用户", "更新用户"],
-      index: 0
+      index: 0,
+      name: "",
+      password: "",
+      shenfenname: "",
+      apiname: "",
+      apiurl: "",
+      apitype: "",
+      viewid: ""
     };
   },
   methods: {
@@ -185,6 +192,76 @@ export default {
     },
     nn() {
       this.$store.dispatch("userManager/api");
+    },
+     users() {
+      this.$store.dispatch("userManager/user");
+    },
+    adduser() {
+      this.name = this.name;
+      this.password = this.password;
+      this.value = this.value;
+      this.$store.dispatch("userManager/adduser", {
+        user_name: this.name,
+        user_pwd: this.password,
+        identity_id: this.value
+      });
+      this.$message($store.state.msg);
+    },
+     newuser() {
+      this.name = this.name;
+      this.password = this.password;
+      this.value = this.value;
+      this.value2= this.value2;
+      this.$store.dispatch("userManager/newuser", {
+        user_id: this.value2,
+        user_name: this.name,
+        user_pwd:this.password,
+        identity_id:this.value
+      });
+      this.$message($store.state.msg);
+    },
+    addshenfen() {
+      this.shenfenname = this.shenfenname;
+      this.$store.dispatch("userManager/addshenfen", {
+        identity_text: this.shenfenname
+      });
+      this.$message($store.state.msg);
+    },
+    addapi() {
+      this.apiname = this.apiname;
+      this.apiurl = this.apiurl;
+      this.apitype = this.apitype;
+      this.$store.dispatch("userManager/addapi", {
+        api_authority_text: this.apiname,
+        api_authority_url: this.apiurl,
+        api_authority_mehtod: this.apitype
+      });
+      this.$message($store.state.msg);
+    },
+    addview() {
+      this.value3 = this.value3;
+      this.$store.dispatch("userManager/addview", {
+        view_authority_text: this.value3
+      });
+      this.$message($store.state.msg);
+    },
+    apishenfen() {
+      this.value4 = this.value4;
+      this.value5 = this.value5;
+      this.$store.dispatch("userManager/apishenfen", {
+        identity_id: this.value4,
+        api_authority_id: this.value5
+      });
+      this.$message($store.state.msg);
+    },
+    shenfenview() {
+      this.value6 = this.value6;
+      this.value7 = this.value7;
+      this.$store.dispatch("userManager/shenfenview", {
+        identity_id: this.value6,
+        view_authority_id: this.value7
+      });
+      this.$message($store.state.msg);
     }
   },
   computed: {
@@ -196,14 +273,18 @@ export default {
     },
     api() {
       return $store.state.apis;
-    }
+    },
+    user() {
+      return $store.state.user;
+    },
   },
   mounted() {
     this.dd();
     this.bb();
     this.nn();
+     this.users();
   }
-};
+}
 </script>
 <style scoped>
 * {
