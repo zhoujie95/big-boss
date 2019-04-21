@@ -42,7 +42,7 @@
           class="bots"
           v-for="(item,i) in allquestions.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           :key="i"
-          @click="quesdetail(item)"
+          @click="quesdetail(item,$event)"
         >
           <div class="left">
             <p>{{item.title}}</p>
@@ -54,7 +54,7 @@
             <p>{{item.user_name}}发布</p>
           </div>
           <div class="right">
-            <span @click="editQuest(item.json_path)">编辑</span>
+            <span @click="editQuest(item.json_path,$event)">编辑</span>
           </div>
         </div>
         <div class="block">
@@ -107,22 +107,27 @@ export default {
         questions_type_id: this.ques
       });
     },
-    editQuest(exam_id) {
-      this.$router.push({
-        path: `/edit/Questions`,
-        query: {
-          id: exam_id.split(".")[0]
-        }
-      });
+    editQuest(exam_id, e) {
+      // console.log(e.target.tagName)
+      if (e.target.tagName === "SPAN") {
+        this.$router.push({
+          path: `/edit/Questions`,
+          query: {
+            id: exam_id.split(".")[0]
+          }
+        });
+      }
     },
-    quesdetail(item) {
-      localStorage.setItem('quesItem',JSON.stringify(item))
-      this.$router.push({
-        path: `/detail/Questions`,
-        query: {
-          id:item.questions_id
-        }
-      });
+    quesdetail(item, e) {
+      localStorage.setItem("quesItem", JSON.stringify(item));
+      if (e.target.tagName === "DIV") {
+        this.$router.push({
+          path: `/detail/Questions`,
+          query: {
+            id: item.questions_id
+          }
+        });
+      }
     }
   },
   async mounted() {

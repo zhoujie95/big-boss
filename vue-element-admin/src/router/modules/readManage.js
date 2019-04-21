@@ -18,6 +18,10 @@ const readRouter={
     path: 'classmate',
     component: () => import('@/views/read/classmate.vue'),
     name: 'classmate',
+  },  {
+    path: 'details',
+    component: () => import('@/views/read/detail.vue'),
+    name: 'details',
   }]
 }
 

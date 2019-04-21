@@ -25,10 +25,12 @@
     <div class="content-bot">
       <p>试卷列表</p>
       <el-table
+         ref="Table"
         :data="details.slice((currentPage-1)*pagesize,currentPage*pagesize)
           "
         stripe
         style="width: 100%;padding:10px;height:auto;border:'1px solid lighgrey'"
+        @cell-click='godetail'
       >
         <el-table-column label="班级" width="180">
            {{gradename}}
@@ -74,6 +76,14 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+    },
+    godetail(row){
+      this.$router.push({
+        path:'/read/details',
+         query:{
+             exam_student_id:row.exam_student_id
+         }
+      })
     }
   },
   async mounted() {
