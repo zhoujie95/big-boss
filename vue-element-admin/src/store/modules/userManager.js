@@ -130,6 +130,7 @@ const actions = {
     },
     //添加视图借口
     addview(context, payload) {
+        console.log(payload)
         axios.get("/api/user/authorityView/edit", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addview',res.data);
         })

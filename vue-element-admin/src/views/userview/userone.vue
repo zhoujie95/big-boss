@@ -22,7 +22,7 @@
               ></el-option>
             </el-select>
             <input type="text" placeholder="请添加用户名" v-model="name">
-            <input type="password" placeholder="请输入密码" v-model="password">
+            <input type="text" placeholder="请输入密码" v-model="password">
             <el-select
               v-model="value2"
               placeholder="请选择身份id"
@@ -38,7 +38,7 @@
             </el-select>
             <p>
               <button @click="adduser()">确定</button>
-              <button>重置</button>
+              <button @click="reset()">重置</button>
             </p>
           </dd>
         </dl>
@@ -51,8 +51,8 @@
           <dd>
             <input type="text" placeholder="请输入身份名称" v-model="shenfenname">
             <p>
-              <button @click="addshenfen">确定</button>
-              <button>重置</button>
+              <button @click="addshenfen()">确定</button>
+              <button @click="reset1()">重置</button>
             </p>
           </dd>
         </dl>
@@ -68,7 +68,7 @@
             <input type="text" placeholder="请输入api接口权限方法" v-model="apitype">
             <p>
               <button @click="addapi">确定</button>
-              <button>重置</button>
+              <button @click="reset2()">重置</button>
             </p>
           </dd>
         </dl>
@@ -79,7 +79,7 @@
             <span id="active">添加视图接口权限</span>
           </dt>
           <dd>
-            <el-select v-model="value3" placeholder="请选择已有视图" class="sele">
+            <el-select v-model="value3"  placeholder="请选择已有视图" class="sele">
               <el-option
                 v-for="item in view"
                 :key="item.view_authority_id"
@@ -89,7 +89,7 @@
             </el-select>
             <p>
               <button @click="addview">确定</button>
-              <button>重置</button>
+              <button @click="reset3()">重置</button>
             </p>
           </dd>
         </dl>
@@ -118,7 +118,7 @@
             </el-select>
             <p>
               <button @click="apishenfen">确定</button>
-              <button>重置</button>
+              <button @click="reset4()">重置</button>
             </p>
           </dd>
         </dl>
@@ -147,7 +147,7 @@
             </el-select>
             <p>
               <button @click="shenfenview">确定</button>
-              <button>重置</button>
+              <button @click="reset5()">重置</button>
             </p>
           </dd>
         </dl>
@@ -262,6 +262,29 @@ export default {
         view_authority_id: this.value7
       });
       this.$message($store.state.msg);
+    },
+    reset(){
+      this.value="";
+      this.name="";
+      this.password="";
+      this.value2="";
+    },
+     reset1(){
+      this.shenfenname="";
+    },
+     reset2(){
+      this.apiname="";
+      this.apiurl="";
+      this.apitype="";
+    },
+     reset3(){
+      this.value3="";
+    },reset4(){
+      this.value4="";
+       this.value5="";
+    }, reset5(){
+      this.value6="";
+       this.value7="";
     }
   },
   computed: {
