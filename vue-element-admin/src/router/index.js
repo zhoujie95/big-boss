@@ -17,6 +17,7 @@ import userRouter from './modules/userManage'
 import testRouter from './modules/testManage'
 import classRouter from './modules/classManage'
 import readRouter from './modules/readManage'
+import imgupload from './modules/imgupload'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -46,7 +47,7 @@ import readRouter from './modules/readManage'
  */
 //静态路由
 export const constantRoutes = [
-  
+  imgupload,
   {
     path: '/redirect',
     component: Layout,
