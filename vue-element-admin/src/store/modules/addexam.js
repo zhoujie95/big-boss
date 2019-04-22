@@ -17,10 +17,6 @@ const mutations = {
       state.questionType=questionlist
   }
 }
-
-async function get(){
-
-}
 const actions = {
   //请求所有考试类型的数据
   async gettype({ commit }) {
@@ -39,9 +35,6 @@ const actions = {
           commit('GET_ALLCLASS',res.data)
       })
   },
-  // getquestion:async function(){
-
-  // },
   //请求所有题目类型
   async getquestion({ commit }) {
     await axios.get('/api/exam/getQuestionsType',{

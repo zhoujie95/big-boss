@@ -61,7 +61,6 @@ const mutations = {
     deletetest:(state,payload)=>{
         if(payload.data.code ===1){
             state.questions.splice(payload.index,1);
-            console.log("删除成功")
         }
     },
     //6.获取详情
@@ -94,7 +93,6 @@ const actions = {
     },
      //5.更新试卷
      async  updatetest({commit}){
-         console.log(commit,"gx")
         let result = await updatetest(state.exam_exam_id,{question_ids:state.question_ids});
         commit("updatetest",result)
     },
