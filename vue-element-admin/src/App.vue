@@ -16,9 +16,11 @@ export default {
   list-style: none;
   box-sizing: border-box;
 } 
+
 #app{
      width:100%;
      height:900px;
+     position: relative;
      .main-container{
        display: flex;
        flex-direction: column;

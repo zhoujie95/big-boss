@@ -141,18 +141,21 @@ export default {
         this.$router.push({ path: "edittest" });
       }
     },
-    //获取考试类型
+    
     gettestType() {
+      
       this.$store.dispatch("testmanager/gettestType");
     },
-    //获取所有课程
+    
     gettestClass() {
       this.$store.dispatch("testmanager/gettestClass");
     }
   },
   mounted() {
-    this.gettestType();
-    this.gettestClass();
+    //获取考试类型
+   this.gettestType();
+   //获取所有课程
+   this.gettestClass();
   }
 };
 </script>

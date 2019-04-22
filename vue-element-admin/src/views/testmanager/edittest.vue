@@ -1,16 +1,16 @@
 <template>
     <div class="edittest">
-        <div class="delmask" v-if="flag">
-            <div class="deldialog">
-                <p>确认提示</p>
-                <p>是否删除该题目?</p>
-                <p>
-                <p>  
-                    <span @click="flag===false" class="delcancel">取消</span>
-                    <span @click="confirmdel" class="confirmbtn">确认</span>
-                </p>
-            </div>
-        </div>
+     
+      <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible"
+        width="30%">
+        <span>确认删除吗?</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false,confirmdel()">确 定</el-button>
+        </span>
+      </el-dialog>
         <p class="createedit">创建试卷</p>
         <div class="createboard">
             <p class="addnewqs">添加新题</p>
@@ -20,7 +20,7 @@
                     <div class="eachqs" v-for="(item,index) in questions" :key="index">
                         <div class="eachtop">
                             <p>{{index+1}}.&nbsp;&nbsp;&nbsp;{{item.title}}</p>
-                            <p class="edit-delete" @click="edit_del_btn(index)">删除</p>
+                            <el-button type="text" @click="dialogVisible = true,edit_del_btn(index)">删除</el-button>
                         </div>
                         <div class="eachdescribe">
                             <p>{{item.questions_stem}}</p>
@@ -41,7 +41,8 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      flag: false
+      dialogVisible: false,
+      index:""
     };
   },
   computed: {
@@ -56,12 +57,12 @@ export default {
       this.$store.dispatch("testmanager/updatetest");
       this.$router.push({ path: "testlist" });
     },
-    confirmdel(index) {
-      this.$store.dispatch("testmanager/deletetest", index);
-      this.flag = false;
+    confirmdel() {
+     let index = this.index;
+      this.$store.dispatch("testmanager/deletetest",index);
     },
-    edit_del_btn() {
-      this.flag = true;
+    edit_del_btn(index) {
+      this.index = index;
     }
   }
 };
@@ -75,51 +76,6 @@ export default {
   box-sizing: border-box;
   padding: 40px;
   overflow-y: auto;
-  .delmask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    padding-top: 100px;
-    justify-content: center;
-    .deldialog {
-      width: 400px;
-      height: 200px;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      p {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-          .delcancel{
-              width: 70px;
-              height:40px;
-              line-height: 40px;
-              text-align: center;
-              border:1px solid #ccc;
-              margin-right:20px;
-              border-radius:5px;
-          }
-          .confirmbtn{
-               width: 70px;
-               height:40px;
-               line-height: 40px;
-              text-align: center;
-               border:1px solid #ccc;
-               background:blue;
-               color:white;
-              border-radius:5px;
-               
-        }
-      }
-    }
-  }
   .createboard {
     width: 100%;
     // height: 500px;
@@ -151,8 +107,8 @@ export default {
         height: 100px;
         display: flex;
         justify-content: space-between;
-        .edit-delete {
-          color: blue;
+        >p{
+          line-height: 100px;
         }
       }
       .eachdescribe {

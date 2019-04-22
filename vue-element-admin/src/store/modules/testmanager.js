@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getToken} from '@/utils/auth'
 
-import {test} from "@/api/apitestmanager"
+import {testtype,testclass,testlist,addtest,updatetest,deletetest,getdetail} from "@/api/apitestmanager"
 
 const state={
     testlistdata:[],//获取列表
@@ -21,38 +21,26 @@ const state={
 
 }
 const mutations = {
-    // GET_TYPE:(state,examtype)=>{
-    //     state.testType = examtype
-    // },
-    //1.获取所有考试类型/exam/exam/Type get
-    gettestType(state,data){
-        // console.log(data,"考试类型");
-        if(data.code === 1){
-            state.testType = data.data
-        }
+    //1.获取所有考试类型
+    GET_TYPE:(state,examtype)=>{
+        state.testType = examtype.data
     },
     //2.获取所有课程
-    gettestClass(state,data){
-        // console.log(data,"所有课程");
-        if(data.code === 1){
-            state.testClass = data.data
-        }
+    gettestClass:(state,data)=>{
+        state.testClass = data.data
     },
     //3.获取试卷列表
-    gettestlist(state,data){
-        if(data.code === 1){
-            state.testlistdata = data.exam;
-        }
+    gettestlist:(state,data)=>{
+        state.testlistdata = data.exam;
     },
     //4.创建试卷
-    addtest(state,data){
+    addtest:(state,data)=>{
         if(data.code === 1){//创建试题成功 保存数据试题 和试题id
             state.addflag === true;
             Object.assign(state,data.data);
             if(data.data.questions){
                 state.questions = data.data.questions;
                 state.exam_exam_id = data.data.exam_exam_id;
-                // console.log(state.questions,"随机有题")
                 let ids = data.data.questions.map(item=>{
                     return item.questions_id
                 });
@@ -64,81 +52,62 @@ const mutations = {
         }
     },
     //5.更新试卷
-    updatetest(state,data){
+    updatetest:(state,data)=>{
         if(data.code === 1){
             console.log(data)
         }
     },
     //5.1 删除试卷
-    deletetest(state,payload){
+    deletetest:(state,payload)=>{
         if(payload.data.code ===1){
             state.questions.splice(payload.index,1);
-            // console.log("删除成功")
+            console.log("删除成功")
         }
     },
     //6.获取详情
-    getdetail(state,data){
+    getdetail:(state,data)=>{
         if(data.code ===1){
             state.testdetail = data.data.questions;
         }
     }
 }
 const actions = {
-    // async test({commit}){
-    //     let result = await test()
-    //     commmit("GET_TYPE",result.data)
-    // },
-    //1.获取所有考试类型/exam/exam/Type get
-    gettestType(context){
-        axios.get("/api/exam/examType",{
-            headers:{authorization:getToken()}
-        }).then(res=>{
-            context.commit("gettestType",res.data)
-        })
+    async gettestType({commit}){
+        let result = await testtype();
+        commit("GET_TYPE",result)
     },
+ 
     //2.获取所有课程
-    gettestClass(context){
-       axios.get("/api/exam/subject",{
-            headers:{authorization:getToken()}
-       }).then(res=>{
-           context.commit("gettestClass",res.data)
-       })
-
+    async gettestClass({commit}){
+        let result = await testclass();
+        commit("gettestClass",result)
     },
     //3.获取试卷列表
-    gettestlist(context,payload){
-        axios.get("/api/exam/exam",{
-            headers:{authorization:getToken()}
-        }).then(res=>{
-            context.commit("gettestlist",res.data);
-        });
+    async gettestlist({commit}){
+        let result = await testlist();
+        commit("gettestlist",result)
     },
     //4.创建试卷
-    addtest(context,payload){
-        // Object.assign(this.state,payload);
-        axios.post("/api/exam/exam",payload,{ headers:{authorization:getToken()}}).then(res=>{
-            context.commit("addtest",res.data);
-        })
+    async  addtest({commit},payload){
+        let result = await addtest(payload);
+        commit("addtest",result)
     },
      //5.更新试卷
-     updatetest(context,payload){
-         ///exam/exam/w5tcy-g2dts  question_ids
-         axios.put(`/api/exam/exam/${state.exam_exam_id}`,{question_ids:state. question_ids},{ headers:{authorization:getToken()}}).then((res) =>{
-            context.commit("updatetest",res)
-        })   
+     async  updatetest({commit}){
+         console.log(commit,"gx")
+        let result = await updatetest(state.exam_exam_id,{question_ids:state.question_ids});
+        commit("updatetest",result)
     },
+    
     //5-1.删除试卷某题
-    deletetest(context,payload){
-        axios.delete(`/api/exam/exam/${state.exam_exam_id}`,{ headers:{authorization:getToken()}}).then(res=>{
-            context.commit("deletetest",{data:res.data,index:payload})
-        });
+    async  deletetest({commit},payload){
+        let result = await deletetest(state.exam_exam_id);
+        commit("deletetest",{data:result,index:payload})
     },
     //6.获取详情/exam/exam/w5tcy-g2dts
-    getdetail(context,payload){
-        axios.get(`/api/exam/exam/${payload}`,{ headers:{authorization:getToken()}}).then(res=>{
-            // console.log(res,"详情");
-            context.commit("getdetail",res.data)
-        });
+    async  getdetail({commit},payload){
+        let result = await getdetail(payload);
+        commit("getdetail",result)
     }
 }
 export default {

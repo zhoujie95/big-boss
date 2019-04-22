@@ -84,6 +84,8 @@ export default {
   methods: {
     aa() {
       this.$store.dispatch("testmanager/gettestlist");
+      this.$store.dispatch("testmanager/gettestType");
+      this.$store.dispatch("testmanager/gettestClass");
     },
     //点击查看详情
     handleEdit(index, row) {
