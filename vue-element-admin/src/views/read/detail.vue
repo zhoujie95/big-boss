@@ -11,11 +11,11 @@
           <div class="div">
             <div class="div-left">
             <span>学生答案</span>
-            <p>{{item.student_answer}}</p>
+            <code>{{item.student_answer}}</code>
             </div>
              <div class="div-right">
             <span>标准答案</span>
-            <p>{{item.questions_answer}}</p>
+            <code>{{item.questions_answer}}</code>
             <!-- <markdown-editor value='item.questions_answer'/> -->
              </div>
 
@@ -75,7 +75,7 @@ export default {
 .box {
   width: 100%;
   margin-top: 64px;
-  height: 1200px;
+  height: 1300px;
   padding-left: 20px;
   background: #f0f2f5;
   h2 {
@@ -113,17 +113,18 @@ export default {
         .div-left{
           width:200px;
 
-          p{
+          code{
             line-height: 25px;
+            width:200px;
             margin-top:10px;
-                      padding:0;
+            padding:10px;
           }
         }
         .div-right{
           flex:1;
-               p{
-                 background:#f0f2f5;
-                 border-radius: 10px;
+               code{
+                 width:500px;
+                 margin-left:10px;
                  margin-top:5px;
             line-height: 25px;
           }
@@ -136,7 +137,7 @@ export default {
       position: fixed;
       top: 50%;
       margin-top: -150px;
-      right: 100px;
+      right: 50px;
       height: 261.5px;
       border-radius: 10px;
       overflow: hidden;

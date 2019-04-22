@@ -20,6 +20,12 @@ const userRouter={
       component: () => import('@/views/userview/usertwo'),
       name: 'userView',
       meta: { title: 'userView' }
+    },
+    {
+      path: 'avatar',
+      component: () => import('@/views/userview/avatar'),
+      name: 'avatar',
+      meta:{title:'avator'}
     }
   ]
 }

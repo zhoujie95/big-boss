@@ -88,6 +88,7 @@ export default {
   width: 100%;
   height: calc(100vh - 64px);
   box-sizing: border-box;
+  margin-top:64px;
   padding: 0 24px;
   background: #f0f2f5;
   overflow: auto;

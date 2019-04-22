@@ -19,7 +19,7 @@
       </div>
       <div class="right">
         <p>答案信息</p>
-        <markdown-editor v-model='answer' style='height:400px;marginTop:60px'/>
+        <markdown-editor v-model='answer' style='height:600px;marginTop:60px'/>
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@ export default {
     font-size:14px;
     line-height: 25px;
     .left {
-      width: 700px;
+      width: 800px;
       height: 100%;
       margin: 0 20px 0 30px;
       border-radius: 10px;
@@ -112,7 +112,7 @@ export default {
       }
     }
     .right {
-      width: 600px;
+      width: 500px;
       height: 100%;
       border-radius: 10px;
       background: #fff;

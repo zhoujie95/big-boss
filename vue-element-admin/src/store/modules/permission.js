@@ -52,22 +52,14 @@ const actions = {
   generateRoutes({ commit },viewAuthority) {
     // 获取用户所拥有的view_ids
     let view_ids = viewAuthority.map(item=>item.view_id);
-    // console.log('view_ids.....',view_ids)
+
     //在所有的路由里过滤一遍，获取能访问的路由
     let accessedRoutes = filterAsyncRoutes(asyncRoutes,view_ids);
     //console.log('access.....',accessedRoutes)
+    
     //更新路由
     commit('SET_ROUTES',accessedRoutes)
-    // return new Promise(resolve => {
-    //   let accessedRoutes
-    //   if (roles.includes('admin')) {
-    //     accessedRoutes = asyncRoutes
-    //   } else {
-    //     accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-    //   }
-    //   commit('SET_ROUTES', accessedRoutes)
-    //   resolve(accessedRoutes)
-    // })
+    return accessedRoutes
   }
 }
 
