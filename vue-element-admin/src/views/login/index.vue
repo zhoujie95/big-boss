@@ -89,8 +89,18 @@ export default {
   data() {
     //用户名的自定义校验
     const validateUsername = (rule, value, callback) => {
+<<<<<<< HEAD
       if (!value) {
         callback(new Error('Please enter the correct user name哇哇哇'))
+=======
+<<<<<<< HEAD
+      if (!value) {
+        callback(new Error('Please enter the correct user name哇哇哇'))
+=======
+      if (!validUsername(value)) {
+        callback(new Error('请输入正确的用户名'))
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
+>>>>>>> 4c6d52aeea6c0daf3c88dcb4cf919d5abe08402f
       } else {
         callback()
       }
@@ -140,6 +150,10 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 4c6d52aeea6c0daf3c88dcb4cf919d5abe08402f
  
     ...mapActions({
       login:'user/login'
@@ -156,6 +170,15 @@ export default {
         this.capsTooltip = false
       }
     },
+<<<<<<< HEAD
+=======
+=======
+    ...mapActions({
+      login:'user/login',
+      generateRoutes: 'permission/generateRoutes'
+    }),
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
+>>>>>>> 4c6d52aeea6c0daf3c88dcb4cf919d5abe08402f
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -173,8 +196,12 @@ export default {
         if (valid) {
           //console.log(this.loginForm)
           this.loading = true
+<<<<<<< HEAD
           //请求登陆接口  返回token
           //调用仓库里的user/login方法，放用户名密码发过去，请求接口，接受返回值（返回值就是函数里return出来的请求接口的返回值）
+=======
+<<<<<<< HEAD
+>>>>>>> 4c6d52aeea6c0daf3c88dcb4cf919d5abe08402f
           let res = await this.login(this.loginForm)
           console.log('login res...',res)
           if (res.code == 1){
@@ -183,17 +210,45 @@ export default {
 <<<<<<< HEAD
            this.loading = false
 
+<<<<<<< HEAD
 =======
           this.loading = false
       
 >>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
+=======
+          //console.log('login...',res)
+          // this.$store.dispatch('user/login', this.loginForm)
+          //   .then(() => {
+          //     this.$router.push({ path: this.redirect || '/' })
+          //     this.loading = false
+          //   })
+          //   .catch(() => {
+          //     this.loading = false
+          //   })
+=======
+          let res=await this.login(this.loginForm)
+          if (res.code == 1){
+            await this.generateRoutes([]);
+            this.$router.push({ path: this.redirect || '/' })
+          }
+          //this.loading = false
+      
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
+>>>>>>> 4c6d52aeea6c0daf3c88dcb4cf919d5abe08402f
         } else {
           console.log('error submit!!')
           return false
         }
       })
     }
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 582fbaa7cf6bba16c63e05848f8a1176099eeda6
+>>>>>>> 4c6d52aeea6c0daf3c88dcb4cf919d5abe08402f
   }
 }
 </script>

@@ -1,4 +1,5 @@
 <template>
+
   <div class="addtest">
     <div class="addtest-wrap">
       <div class="addtest-title">添加考试</div>
@@ -7,18 +8,18 @@
           <p>
             <span>*</span>试卷名称
           </p>
-          <el-input class="inpname"></el-input>
+          <el-input class="inpname" v-model="title"></el-input>
         </div>
         <div class="eachboard">
           <p>
             <span>*</span>选择考试类型:
           </p>
-          <el-select v-model="value1" placeholder="">
+          <el-select v-model="exam_id" placeholder="">
             <el-option
-              v-for="item in options1"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in testType"
+              :key="item.exam_id"
+              :label="item.exam_name"
+              :value="item.exam_id"
             ></el-option>
           </el-select>
         </div>
@@ -26,12 +27,12 @@
           <p>
             <span>*</span>选择课程:
           </p>
-          <el-select placeholder="" v-model="value2">
+          <el-select placeholder="" v-model="subject_id">
             <el-option
-              v-for="item in options2"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in testClass"
+              :key="item.subject_id"
+              :label="item.subject_text"
+              :value="item.subject_id"
             ></el-option>
           </el-select>
         </div>
@@ -41,7 +42,7 @@
           </p>
           <el-input-number
             class=".inpsize"
-            v-model="num8"
+            v-model="number"
             value=""
             controls-position="right"
             @change="handleChange"
@@ -59,6 +60,7 @@
             placeholder="开始时间"
             suffix-icon="el-icon-date"
             default-time="12:00:00"
+            v-model="start_time"
           ></el-date-picker>
           <span>-</span>
           <el-date-picker
@@ -67,10 +69,11 @@
             placeholder="结束时间"
             suffix-icon="el-icon-date"
             default-time="12:00:00"
+            v-model="end_time"
           ></el-date-picker>
         </div>
         <div class="eachboard">
-          <p class="button">创建试卷</p>
+          <p class="button" @click="createtest">创建试卷</p>
         </div>
       </div>
     </div>
@@ -79,62 +82,56 @@
 
 <script>
 /* eslint-disable */
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      num8: "",
-      options1: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value1: "",
-      options2: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value2: ""
+      number: "",
+      title: "",
+      start_time: "",
+      end_time: "",
+      exam_id: "",
+      subject_id: ""
     };
+  },
+  computed:{
+    ...mapState("testmanager",{
+      testType:state=>state.testType,
+      testClass:state=>state.testClass
+    })
   },
   methods: {
     handleChange(value) {
-      console.log(value);
+    },
+    createtest(){
+      let { number,
+      title,
+      start_time,
+      end_time,
+      exam_id,
+      subject_id} = this;
+      if(number && title && start_time && end_time &&  exam_id && subject_id){
+        this.$store.dispatch("testmanager/addtest", { number,
+        title,
+        start_time:start_time*1,
+        end_time:end_time*1,
+        exam_id,
+        subject_id})
+        this.$router.push({path:"edittest"})
+      }
+    },
+    //获取考试类型
+    gettestType(){
+      this.$store.dispatch("testmanager/gettestType")
+    },
+    //获取所有课程
+    gettestClass(){
+      this.$store.dispatch("testmanager/gettestClass")
     }
+  },
+  mounted(){
+    this.gettestType();
+    this.gettestClass();
   }
 };
 </script>

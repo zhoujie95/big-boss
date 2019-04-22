@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { login, logout, getInfo,getViewAuthority } from '@/api/user'
-=======
-import { login, logout, getInfo, getViewAuthority} from '@/api/user'
->>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -13,13 +9,8 @@ const state = {
   avatar: '',
   introduction: '',
   roles: [],
-<<<<<<< HEAD
   userInfo:{},   //登陆用户信息
   viewAuthority: []   // 用户路由权限
-=======
-  userInfo:{},
-  viewAuthority:[]
->>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
 }
 
 const mutations = {
@@ -38,19 +29,11 @@ const mutations = {
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
-<<<<<<< HEAD
   SET_USERINFO:(state,data)=>{
     state.userInfo = data
   },
   SET_VIEWLUYOUS:(state,viewAuthority)=>{
     state.viewAuthority=viewAuthority
-=======
-  SET_USERINFO:(state,userInfo)=>{
-     state.userInfo=userInfo
-  },
-  SET_VIEWAUTHORITY:(state,viewAuthority)=>{
-     state.viewAuthority=viewAuthority
->>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
   }
 }
 
@@ -75,7 +58,6 @@ const actions = {
     // })
   },
 
-<<<<<<< HEAD
   // get user info
   //请求用户信息
   async getInfo({ commit }) {
@@ -118,53 +100,6 @@ const actions = {
     }
     return []
   },
-=======
-  // 获取登陆信息
-  async getInfo({ commit }) {
-    let data = await getInfo()
-    //console.log('data....', data)
-    commit('SET_USERINFO', data.data)
-    return data.data
-  },
-  //获取视图权限
-  async getViewAuthority({commit},payload){
-   let userAuthority=await getViewAuthority()
-   //console.log('user....',userAuthority)
-   if(userAuthority.code==1){
-      commit('SET_VIEWAUTHORITY',userAuthority.data)
-      return userAuthority.data
-   }
-   return []
-  //  commit('SET_VIEWAUTHORITY',userAuthority.data)
-  //  return userAuthority.data
-  },
-    // return new Promise((resolve, reject) => {
-    //   getInfo(state.token).then(response => {
-    //     const { data } = response
-
-    //     if (!data) {
-    //       reject('Verification failed, please Login again.')
-    //     }
-
-    //     const { roles, name, avatar, introduction } = data
-
-    //     // roles must be a non-empty array
-    //     if (!roles || roles.length <= 0) {
-    //       reject('getInfo: roles must be a non-null array!')
-    //     }
-
-    //     commit('SET_ROLES', roles)
-    //     commit('SET_NAME', name)
-    //     commit('SET_AVATAR', avatar)
-    //     commit('SET_INTRODUCTION', introduction)
-    //     resolve(data)
-    //   }).catch(error => {
-    //     reject(error)
-    //   })
-    // })
-
-
->>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {

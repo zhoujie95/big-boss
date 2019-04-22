@@ -20,6 +20,16 @@ const testRouter={
       component: () => import('@/views/testmanager/testlist'),
       name: 'testlist',
       meta: { title: 'testList' }
+    },
+    {
+      path:"edittest",
+      component:()=>import("@/views/testmanager/edittest"),
+      name:"edittest"   
+    },
+    {
+      path:"testdetail",
+      component:()=>import("@/views/testmanager/testdetail"),
+      name:"testdetail"
     }
   ]
 }
