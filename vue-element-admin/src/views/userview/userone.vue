@@ -5,31 +5,40 @@
       <div>
         <dl>
           <dt>
-            <span>添加用户</span>
-            <span id="active">更新用户</span>
+            <span
+              v-for="(val,key) in title"
+              :key="key"
+              @click="titleclick(key)"
+              :id="index==key?'active':'null'"
+            >{{val}}</span>
           </dt>
           <dd>
             <el-select v-model="value" placeholder="请选择身份id" class="sele">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
-            <input type="text" placeholder="请添加用户名">
-            <input type="text" placeholder="请输入密码">
-            <el-select v-model="value2" placeholder="请选择身份id" class="sele">
+            <input type="text" placeholder="请添加用户名" v-model="name">
+            <input type="text" placeholder="请输入密码" v-model="password">
+            <el-select
+              v-model="value2"
+              placeholder="请选择身份id"
+              class="sele"
+              :style="index==0?'display:none':'display:block'"
+            >
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="item in user"
+                :key="item.user_id"
+                :label="item.user_id"
+                :value="item.user_id"
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
-              <button>重置</button>
+              <button @click="adduser()">确定</button>
+              <button @click="reset()">重置</button>
             </p>
           </dd>
         </dl>
@@ -40,10 +49,10 @@
             <span id="active">添加身份</span>
           </dt>
           <dd>
-            <input type="text" placeholder="请输入身份名称">
+            <input type="text" placeholder="请输入身份名称" v-model="shenfenname">
             <p>
-              <button>确定</button>
-              <button>重置</button>
+              <button @click="addshenfen()">确定</button>
+              <button @click="reset1()">重置</button>
             </p>
           </dd>
         </dl>
@@ -54,12 +63,12 @@
             <span id="active">添加api接口权限</span>
           </dt>
           <dd>
-            <input type="text" placeholder="请输入api接口权限名称">
-            <input type="text" placeholder="请输入api接口权限url">
-            <input type="text" placeholder="请输入api接口权限方法">
+            <input type="text" placeholder="请输入api接口权限名称" v-model="apiname">
+            <input type="text" placeholder="请输入api接口权限url" v-model="apiurl">
+            <input type="text" placeholder="请输入api接口权限方法" v-model="apitype">
             <p>
-              <button>确定</button>
-              <button>重置</button>
+              <button @click="addapi">确定</button>
+              <button @click="reset2()">重置</button>
             </p>
           </dd>
         </dl>
@@ -70,17 +79,17 @@
             <span id="active">添加视图接口权限</span>
           </dt>
           <dd>
-            <el-select v-model="value3" placeholder="请选择已有视图" class="sele">
+            <el-select v-model="value3"  placeholder="请选择已有视图" class="sele">
               <el-option
                 v-for="item in view"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.view_authority_id"
+                :label="item.view_authority_text"
+                :value="item.view_authority_text"
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
-              <button>重置</button>
+              <button @click="addview">确定</button>
+              <button @click="reset3()">重置</button>
             </p>
           </dd>
         </dl>
@@ -93,23 +102,23 @@
           <dd>
             <el-select v-model="value4" placeholder="请选择身份id" class="sele">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
             <el-select v-model="value7" placeholder="请选择api接口权限" class="sele">
               <el-option
                 v-for="item in api"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.api_authority_id"
+                :label="item.api_authority_text"
+                :value="item.api_authority_id"
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
-              <button>重置</button>
+              <button @click="apishenfen">确定</button>
+              <button @click="reset4()">重置</button>
             </p>
           </dd>
         </dl>
@@ -122,23 +131,23 @@
           <dd>
             <el-select v-model="value5" placeholder="请选择身份id" class="sele">
               <el-option
-                v-for="item in identity"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="item in shenfen"
+                :key="item.identity_id"
+                :label="item.identity_text"
+                :value="item.identity_id"
               ></el-option>
             </el-select>
             <el-select v-model="value6" placeholder="请选择视图权限id" class="sele">
               <el-option
                 v-for="item in view"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.view_authority_id"
+                :label="item.view_authority_text"
+                :value="item.view_authority_id"
               ></el-option>
             </el-select>
             <p>
-              <button>确定</button>
-              <button>重置</button>
+              <button @click="shenfenview">确定</button>
+              <button @click="reset5()">重置</button>
             </p>
           </dd>
         </dl>
@@ -148,258 +157,169 @@
 </template>
 <script>
 /* eslint-disable */
+import $store from "../../store/modules/userManager";
+import { all } from "q";
 export default {
   data() {
     return {
-      identity: [
-        {
-          value: "选项1",
-          label: "管理者"
-        },
-        {
-          value: "选项2",
-          label: "浏览者"
-        },
-        {
-          value: "选项3",
-          label: "出题者"
-        }
-      ],
-      view: [
-        {
-          value: "选项1",
-          label: "登录"
-        },
-        {
-          value: "选项2",
-          label: "主界面"
-        },
-        {
-          value: "选项3",
-          label: "添加试题"
-        },
-        {
-          value: "选项4",
-          label: "试题界面"
-        },
-        {
-          value: "选项5",
-          label: "查看试题"
-        },
-        {
-          value: "选项6",
-          label: "编辑试题"
-        },
-        {
-          value: "选项7",
-          label: "试题详情"
-        },
-        {
-          value: "选项8",
-          label: "添加用户"
-        },
-        {
-          value: "选项9",
-          label: "角色管理"
-        },
-        {
-          value: "选项10",
-          label: "用户展示"
-        },
-        {
-          value: "选项11",
-          label: "添加考试"
-        },
-        {
-          value: "选项12",
-          label: "班级管理"
-        },
-        {
-          value: "选项13",
-          label: "教室管理"
-        },
-        {
-          value: "选项14",
-          label: "学生管理"
-        },
-        {
-          value: "选项15",
-          label: "判卷列表"
-        },
-        {
-          value: "选项16",
-          label: "创建试卷"
-        },
-        {
-          value: "选项17",
-          label: "试卷详情"
-        },
-        {
-          value: "选项18",
-          label: "特批班级"
-        },
-        {
-          value: "选项19",
-          label: "批卷详情"
-        },
-        {
-          value: "选项20",
-          label: "阅卷"
-        }
-      ],
-      api: [
-        {
-          value: "选项1",
-          label: "获取所有考试类型"
-        },
-        {
-          value: "选项2",
-          label: "获取所有课程"
-        },
-        {
-          value: "选项3",
-          label: "删除指定的试题类型"
-        },
-        {
-          value: "选项4",
-          label: "添加试题类型"
-        },
-        {
-          value: "选项5",
-          label: "获取所有的试题类型"
-        },
-        {
-          value: "选项6",
-          label: "添加试题接口"
-        },
-        {
-          value: "选项7",
-          label: "获取所有试题"
-        },
-        {
-          value: "选项8",
-          label: "展示用户数据"
-        },
-        {
-          value: "选项9",
-          label: "展示api接口权限数据"
-        },
-        {
-          value: "选项10",
-          label: "展示身份数据"
-        },
-        {
-          value: "选项11",
-          label: "展示身份和api权限关系"
-        },
-        {
-          value: "选项12",
-          label: "添加用户"
-        },
-        {
-          value: "选项13",
-          label: "添加视图权限"
-        },
-        {
-          value: "选项14",
-          label: "添加身份"
-        },
-        {
-          value: "选项15",
-          label: "添加api接口权限"
-        },
-        {
-          value: "选项16",
-          label: "给身份设定api接口权限"
-        },
-        {
-          value: "选项17",
-          label: "更新用户信息(用户名，用户密码，用户身份)"
-        },
-        {
-          value: "选项18",
-          label: "登录接口"
-        },
-        {
-          value: "选项19",
-          label: "获取当前用户信息"
-        },
-        {
-          value: "选项20",
-          label: "获取视图权限数据"
-        },
-        {
-          value: "选项21",
-          label: "给身份设定视图权限"
-        },
-        {
-          value: "选项22",
-          label: "展示身份和视图权限关系"
-        },
-        {
-          value: "选项23",
-          label: "根据用户id,返回该用户的视图"
-        },
-        {
-          value: "选项24",
-          label: "按条件获取用户数据"
-        },
-        {
-          value: "选项25",
-          label: "更新试题"
-        },
-        {
-          value: "选项26",
-          label: "添加学生"
-        },
-        {
-          value: "选项27",
-          label: "查看所有学生"
-        },
-        {
-          value: "选项28",
-          label: "查看所有教室"
-        },
-        {
-          value: "选项29",
-          label: "添加教室"
-        },
-        {
-          value: "选项30",
-          label: "查看所有班级"
-        },
-        {
-          value: "选项31",
-          label: "添加班级"
-        },
-        {
-          value: "选项32",
-          label: "更新班级"
-        },
-        {
-          value: "选项33",
-          label: "更新教室"
-        },
-        {
-          value: "选项34",
-          label: "获取学生试卷列表"
-        }
-      ],
       value: "",
       value2: "",
       value3: "",
       value4: "",
       value5: "",
       value6: "",
-      value7: ""
+      value7: "",
+      title: ["添加用户", "更新用户"],
+      index: 0,
+      name: "",
+      password: "",
+      shenfenname: "",
+      apiname: "",
+      apiurl: "",
+      apitype: "",
+      viewid: ""
     };
+  },
+  methods: {
+    titleclick(index) {
+      this.index = index;
+    },
+    dd() {
+      this.$store.dispatch("userManager/identity");
+    },
+    bb() {
+      this.$store.dispatch("userManager/views");
+    },
+    nn() {
+      this.$store.dispatch("userManager/api");
+    },
+     users() {
+      this.$store.dispatch("userManager/user");
+    },
+    adduser() {
+      this.name = this.name;
+      this.password = this.password;
+      this.value = this.value;
+      this.$store.dispatch("userManager/adduser", {
+        user_name: this.name,
+        user_pwd: this.password,
+        identity_id: this.value
+      });
+      this.$message($store.state.msg);
+    },
+     newuser() {
+      this.name = this.name;
+      this.password = this.password;
+      this.value = this.value;
+      this.value2= this.value2;
+      this.$store.dispatch("userManager/newuser", {
+        user_id: this.value2,
+        user_name: this.name,
+        user_pwd:this.password,
+        identity_id:this.value
+      });
+      this.$message($store.state.msg);
+    },
+    addshenfen() {
+      this.shenfenname = this.shenfenname;
+      this.$store.dispatch("userManager/addshenfen", {
+        identity_text: this.shenfenname
+      });
+      this.$message($store.state.msg);
+    },
+    addapi() {
+      this.apiname = this.apiname;
+      this.apiurl = this.apiurl;
+      this.apitype = this.apitype;
+      this.$store.dispatch("userManager/addapi", {
+        api_authority_text: this.apiname,
+        api_authority_url: this.apiurl,
+        api_authority_mehtod: this.apitype
+      });
+      this.$message($store.state.msg);
+    },
+    addview() {
+      this.value3 = this.value3;
+      this.$store.dispatch("userManager/addview", {
+        view_authority_text: this.value3
+      });
+      this.$message($store.state.msg);
+    },
+    apishenfen() {
+      this.value4 = this.value4;
+      this.value5 = this.value5;
+      this.$store.dispatch("userManager/apishenfen", {
+        identity_id: this.value4,
+        api_authority_id: this.value5
+      });
+      this.$message($store.state.msg);
+    },
+    shenfenview() {
+      this.value6 = this.value6;
+      this.value7 = this.value7;
+      this.$store.dispatch("userManager/shenfenview", {
+        identity_id: this.value6,
+        view_authority_id: this.value7
+      });
+      this.$message($store.state.msg);
+    },
+    reset(){
+      this.value="";
+      this.name="";
+      this.password="";
+      this.value2="";
+    },
+     reset1(){
+      this.shenfenname="";
+    },
+     reset2(){
+      this.apiname="";
+      this.apiurl="";
+      this.apitype="";
+    },
+     reset3(){
+      this.value3="";
+    },reset4(){
+      this.value4="";
+       this.value5="";
+    }, reset5(){
+      this.value6="";
+       this.value7="";
+    }
+  },
+  computed: {
+    shenfen() {
+      return $store.state.shenfen;
+    },
+    view() {
+      return $store.state.view;
+    },
+    api() {
+      return $store.state.apis;
+    },
+    user() {
+      return $store.state.user;
+    },
+  },
+  mounted() {
+    this.dd();
+    this.bb();
+    this.nn();
+     this.users();
   }
-};
+}
 </script>
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
 .box {
   padding-left: 20px;
   background: #f0f2f5;
+  margin-top: 70px;
+  width: 100%;
+  cursor: pointer;
 }
 .head {
   font-size: 22px;
@@ -417,6 +337,7 @@ export default {
 }
 .wrap div dl {
   margin-left: 10px;
+  margin-top: 20px;
 }
 .wrap div span {
   width: 160px;
@@ -435,11 +356,10 @@ export default {
   height: 32px;
   border: 1px solid #d9d9d9;
   font-size: 14px;
-  margin-left: -40px;
 }
 .wrap div dl .sele {
   display: block;
-  margin-left: -40px;
+
   margin-top: 20px;
 }
 .wrap div dl button:nth-child(1) {
@@ -449,7 +369,7 @@ export default {
   background: #295eff;
   border: none;
   border-radius: 5px;
-  margin-left: -40px;
+  margin-top: 20px;
 }
 .wrap div dl button:nth-child(2) {
   width: 60px;
@@ -457,6 +377,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-left: 10px;
+  margin-top: 20px;
 }
 #active {
   border: 1px solid #0139fd;

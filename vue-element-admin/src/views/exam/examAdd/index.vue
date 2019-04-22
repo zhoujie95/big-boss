@@ -51,10 +51,10 @@
         <template>
           <el-select v-model="value" placeholder="请选择">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in examtype"
+              :key="item.exam_id"
+              :label="item.exam_name"
+              :value="item.exam_id"
             ></el-option>
           </el-select>
         </template>
@@ -62,10 +62,10 @@
         <template>
           <el-select v-model="value" placeholder="请选择">
             <el-option
-              v-for="item in classes"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in classtype"
+              :key="item.subject_id"
+              :label="item.subject_text"
+              :value="item.subject_id"
             ></el-option>
           </el-select>
         </template>
@@ -73,10 +73,10 @@
         <template>
           <el-select v-model="value" placeholder="请选择">
             <el-option
-              v-for="item in types"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in  questiontype"
+              :key="item.questions_type_id"
+              :label="item.questions_type_text"
+              :value="item.questions_type_sort"
             ></el-option>
           </el-select>
         </template>
@@ -126,87 +126,38 @@
 </template>
 <script>
 /* eslint-disable */
+import {mapActions,mapState} from 'vuex'
 export default {
-  props: {},
+  computed:{
+    ...mapState({
+       testType:state=>state.addexam.testType,
+       classType:state=>state.addexam.classType,
+       questionType:state=>state.addexam.questionType
+    })
+  },
+  methods:{
+     ...mapActions({
+        gettype:'addexam/gettype',
+        getclass:'addexam/getclass',
+        getquestion:'addexam/getquestion'
+     })
+  },
   data() {
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "周考一"
-        },
-        {
-          value: "选项2",
-          label: "周考二"
-        },
-        {
-          value: "选项3",
-          label: "周考三"
-        },
-        {
-          value: "选项4",
-          label: "月考"
-        }
-      ],
-      classes: [
-        {
-          value: "选项1",
-          label: "JS上"
-        },
-        {
-          value: "选项2",
-          label: "JS下"
-        },
-        {
-          value: "选项3",
-          label: "模块化开发"
-        },
-        {
-          value: "选项4",
-          label: "移动端开发"
-        },
-        {
-          value: "选项5",
-          label: "node基础"
-        },
-        {
-          value: "选项6",
-          label: "组件化开发(vue)"
-        },
-        {
-          value: "选项7",
-          label: "渐进式开发(react)"
-        },
-        {
-          value: "选项8",
-          label: "项目实战"
-        }
-      ],
-      types: [
-        {
-          value: "选项1",
-          label: "简答题"
-        },
-        {
-          value: "选项2",
-          label: "代码阅读器"
-        },
-        {
-          value: "选项3",
-          label: "代码补全"
-        },
-        {
-          value: "选项4",
-          label: "修改bug"
-        },
-        {
-          value: "选项5",
-          label: "手写代码"
-        }
-      ],
+      examtype: [],
+      classtype: [],
+      questiontype: [],
       input: "",
       value: ""
     };
+  },
+  mounted(){
+    this.gettype()
+    this.getclass()
+    this.getquestion()
+    this.examtype=this.testType.data
+    this.classtype=this.classType.data
+    this.questiontype=this.questionType.data
   }
 };
 </script>

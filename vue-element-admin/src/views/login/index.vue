@@ -29,14 +29,13 @@
             <svg-icon icon-class="password" />
           </span>
           <el-input
-            :key="passwordType"
             ref="password"
+            :key="passwordType"
             v-model="loginForm.password"
             :type="passwordType"
             :placeholder="$t('login.password')"
             name="password"
             auto-complete="on"
-            @keyup.native="checkCapslock"
             @blur="capsTooltip = false"
             @keyup.enter.native="handleLogin"
           />
@@ -88,6 +87,7 @@ export default {
   name: 'Login',
   components: { LangSelect, SocialSign },
   data() {
+    //用户名的自定义校验
     const validateUsername = (rule, value, callback) => {
       if (!value) {
         callback(new Error('Please enter the correct user name哇哇哇'))
@@ -97,7 +97,7 @@ export default {
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能少于6位'))
       } else {
         callback()
       }
