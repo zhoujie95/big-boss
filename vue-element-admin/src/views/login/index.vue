@@ -47,7 +47,7 @@
       </el-tooltip>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
-        {{ $t('login.logIn') }}
+        {{ $t('login.logIn') }}95登陆
       </el-button>
 
       <div style="position:relative">
@@ -166,11 +166,15 @@ export default {
         this.$refs.password.focus()
       })
     },
+    //点击登陆按钮
     handleLogin() {
       this.$refs.loginForm.validate(async valid => {
+        //vaild:登陆from表单做的验证,通过执行下边
         if (valid) {
           //console.log(this.loginForm)
           this.loading = true
+          //请求登陆接口  返回token
+          //调用仓库里的user/login方法，放用户名密码发过去，请求接口，接受返回值（返回值就是函数里return出来的请求接口的返回值）
           let res = await this.login(this.loginForm)
           console.log('login res...',res)
           if (res.code == 1){
@@ -178,15 +182,6 @@ export default {
           }
            this.loading = false
 
-          //console.log('login...',res)
-          // this.$store.dispatch('user/login', this.loginForm)
-          //   .then(() => {
-          //     this.$router.push({ path: this.redirect || '/' })
-          //     this.loading = false
-          //   })
-          //   .catch(() => {
-          //     this.loading = false
-          //   })
         } else {
           console.log('error submit!!')
           return false

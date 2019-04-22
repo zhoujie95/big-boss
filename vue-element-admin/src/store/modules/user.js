@@ -38,8 +38,8 @@ const mutations = {
 
 const actions = {
   // user login
+  //接受参数，用户名密码，请求接口！接受返回值，设置token,把接收到的返回值return出去
   async login({ commit }, userInfo) {
-    //console.log('userInfo',userInfo)
     const { username, password } = userInfo
     let res = await login({user_name:username,user_pwd:password})
     //console.log('res...',res)
@@ -58,6 +58,7 @@ const actions = {
   },
 
   // get user info
+  //请求用户信息
   async getInfo({ commit }) {
       let data = await getInfo();
       //console.log('data...',data)
@@ -88,6 +89,7 @@ const actions = {
     //   })
     // })
   },
+  //通过身份获取权限
   async getViewAuthority({commit}){
     let viewluyous = await getViewAuthority()
     //console.log(viewluyous)

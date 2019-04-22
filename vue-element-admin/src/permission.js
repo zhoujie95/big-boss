@@ -7,12 +7,12 @@ import { Message } from 'element-ui'
 // 页面加载进度条
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-
+//获取token
 import { getToken } from '@/utils/auth' // get token from cookie
 
 // 配置进度条是否需要Spinner
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
-
+//白名单
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
@@ -43,10 +43,11 @@ router.beforeEach(async(to, from, next) => {
           console.log('userInfo...', userInfo);
           // 2.通过身份获取权限
           const viewAuthority = await store.dispatch('user/getViewAuthority')
+          //console.log(viewAuthority)
           // 3.通过权限生成路由
           let accrouters = await store.dispatch('permission/generateRoutes', viewAuthority)
-          //把动态页面挂载到静态路由上
-          //router.addRoutes(accrouters)
+          //4.把动态页面挂载到静态路由上
+          router.addRoutes(accrouters)
           
           next({ ...to, replace: true })
         } catch (error) {

@@ -16,6 +16,7 @@ import App from './App'
 
 //vuex
 import store from './store'
+//路由
 import router from './router'
 
 //引入国际化配置

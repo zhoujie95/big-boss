@@ -25,7 +25,7 @@ const examRouter={
       path: 'examView',
       component: () => import('@/views/exam/examView/index'),
       name: 'examView',
-      meta: { title: 'examView' , noCache: true,view_id: '9595'}
+      meta: { title: 'examView' , noCache: true,view_id: 'main-watchQuestions'}
     }
   ]
 }

@@ -55,6 +55,7 @@ const actions = {
     let accessedRoutes = filterAsyncRoutes(asyncRoutes, view_ids);
     //console.log(accessedRoutes)
     commit('SET_ROUTES',accessedRoutes)
+    return accessedRoutes
   }
 }
 

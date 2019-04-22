@@ -44,12 +44,9 @@ import readRouter from './modules/readManage'
  * 不授权限控制的页面
  * all roles can be accessed
  */
+//静态路由
 export const constantRoutes = [
   
-  userRouter,
-  testRouter,
-  classRouter,
-  readRouter,
   {
     path: '/redirect',
     component: Layout,
@@ -125,8 +122,13 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
+//动态路由
 export const asyncRoutes = [
   examRouter,
+  userRouter,
+  classRouter,
+  testRouter,
+  readRouter,
   // {
   //   path: '/permission',
   //   component: Layout,
