@@ -76,7 +76,8 @@ export default {
     classroomManage:'教室管理',
     studentManage:'学生管理',
     readManage:'阅卷管理',
-    readReady:'待批试卷'
+    readReady:'待批试卷',
+    avator:'头像上传'
   },
   navbar: {
     logOut: '退出登录',

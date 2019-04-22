@@ -13,6 +13,18 @@ const getters = {
   permission_routes: state => state.permission.routes,
   addRoutes: state => state.permission.addRoutes,
   errorLogs: state => state.errorLog.logs,
+<<<<<<< HEAD
   userInfo:state=>state.user.userInfo
+=======
+  userInfo:state=>state.user.userInfo,
+  details:state=>state.testpaper.details.map((item)=>{
+        if(item.status){
+           item['state']='已阅'
+        }else{
+           item['state']='未阅'
+        }
+        return item
+  })
+>>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
 }
 export default getters

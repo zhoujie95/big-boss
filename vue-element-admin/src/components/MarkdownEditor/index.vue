@@ -33,7 +33,7 @@ export default {
     },
     mode: {
       type: String,
-      default: 'markdown'
+      default: 'wysiwyg'
     },
     height: {
       type: String,

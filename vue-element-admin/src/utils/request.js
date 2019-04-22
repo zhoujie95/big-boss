@@ -5,8 +5,13 @@ import { getToken } from '@/utils/auth'
 // create an axios instance
 const service = axios.create({
   baseURL: '/api', // api 的 base_url
+<<<<<<< HEAD
   withCredentials: true, // 跨域请求时发送 cookies
   timeout: 5000 // request timeout
+=======
+  // withCredentials: true, // 跨域请求时发送 cookies
+  timeout: 10000 // request timeout
+>>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
 })
 
 // request interceptor
@@ -22,7 +27,7 @@ service.interceptors.request.use(
   },
   error => {
     // Do something with request error
-    console.log(error) // for debug
+    console.log('error.......',error) // for debug
     return Promise.reject(error)
   }
 )

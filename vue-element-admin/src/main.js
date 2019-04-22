@@ -24,7 +24,7 @@ import i18n from './lang' // Internationalization
 import './icons' // icon
 
 //引入导航守卫
-// import './permission' // permission control
+import './permission' // permission control
 
 import './utils/errorLog' // error log
 

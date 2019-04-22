@@ -47,7 +47,16 @@ import imgupload from './modules/imgupload'
  */
 //静态路由
 export const constantRoutes = [
-  imgupload,
+  examRouter,
+  userRouter,
+  testRouter,
+
+  readRouter,
+  //编辑试题的路由
+  {
+     path:'/edit/Questions/:id',
+     component:()=>import('@/views/exam/examAdd/index')
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -125,11 +134,7 @@ export const constantRoutes = [
  */
 //动态路由
 export const asyncRoutes = [
-  examRouter,
-  userRouter,
   classRouter,
-  testRouter,
-  readRouter,
   // {
   //   path: '/permission',
   //   component: Layout,

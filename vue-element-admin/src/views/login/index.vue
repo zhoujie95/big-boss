@@ -180,8 +180,13 @@ export default {
           if (res.code == 1){
             this.$router.push({ path: this.redirect || '/' })
           }
+<<<<<<< HEAD
            this.loading = false
 
+=======
+          this.loading = false
+      
+>>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
         } else {
           console.log('error submit!!')
           return false
