@@ -13,7 +13,6 @@
               :value="item.exam_id"
             ></el-option>
           </el-select>
-          
         </div>
         <div class="itemoclass">
           <span>课程:</span>

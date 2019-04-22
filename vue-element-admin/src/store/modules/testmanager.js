@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { getToken} from '@/utils/auth'
+
+import {test} from "@/api/apitestmanager"
+
 const state={
     testlistdata:[],//获取列表
     addflag:false,
@@ -15,8 +18,12 @@ const state={
     questions:[],//编辑时的原有的题目
     question_ids:"[]",
     testdetail:[]//详情页面的题
+
 }
 const mutations = {
+    // GET_TYPE:(state,examtype)=>{
+    //     state.testType = examtype
+    // },
     //1.获取所有考试类型/exam/exam/Type get
     gettestType(state,data){
         // console.log(data,"考试类型");
@@ -77,6 +84,10 @@ const mutations = {
     }
 }
 const actions = {
+    // async test({commit}){
+    //     let result = await test()
+    //     commmit("GET_TYPE",result.data)
+    // },
     //1.获取所有考试类型/exam/exam/Type get
     gettestType(context){
         axios.get("/api/exam/examType",{
