@@ -28,6 +28,8 @@ router.beforeEach(async(to, from, next) => {
       // const hasRoles = store.getters.roles && store.getters.roles.length > 0
 
       const userInfo = store.getters.userInfo;
+      //获取的用户信息
+      
       //console.log('user....',userInfo)
 
       if (userInfo.user_name) {

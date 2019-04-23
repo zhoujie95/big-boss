@@ -1,4 +1,4 @@
-import { login, logout, getInfo, getViewAuthority} from '@/api/user'
+import { login, logout, getInfo, getViewAuthority,updateuser} from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -65,6 +65,7 @@ const actions = {
   //  commit('SET_VIEWAUTHORITY',userAuthority.data)
   //  return userAuthority.data
   },
+
     // return new Promise((resolve, reject) => {
     //   getInfo(state.token).then(response => {
     //     const { data } = response
