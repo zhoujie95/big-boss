@@ -27,6 +27,7 @@
 <script>
 import ImageCropper from '@/components/ImageCropper'
 import PanThumb from '@/components/PanThumb'
+import {mapState,mapActions} from 'vuex'
 
 export default {
   name: 'AvatarUploadDemo',
@@ -38,12 +39,21 @@ export default {
       image: localStorage.getItem('imgurl')||'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
     }
   },
+  computed: {
+    ...mapState({
+      userInfo:state=>state.user.userInfo
+    })
+  },
   methods: {
+    ...mapActions({
+      upuserdata:'user/upuserdata'
+    }),
     cropSuccess(resData) {
+      
       this.imagecropperShow = false
       this.imagecropperKey = this.imagecropperKey + 1
       this.image = resData[0].path
-      localStorage.setItem('imgurl',resData[0].path)
+      this.upuserdata({user_id:this.userInfo.user_id,user_name:this.userInfo.user_name,avatar:resData[0].path})
     },
     close() {
       this.imagecropperShow = false

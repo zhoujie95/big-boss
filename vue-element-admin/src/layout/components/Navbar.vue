@@ -24,8 +24,9 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="userInfo.avatar" class="user-avatar">
          <!-- <i class="el-icon-caret-bottom" /> -->
+         <span>{{userInfo.user_name}}</span>
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
@@ -72,7 +73,8 @@ export default {
       'sidebar',
       'name',
       'avatar',
-      'device'
+      'device',
+      'userInfo'
     ])
   },
   methods: {
@@ -163,14 +165,12 @@ export default {
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
-
         .user-avatar {
           cursor: pointer;
           width: 40px;
           height: 40px;
           border-radius: 10px;
         }
-
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
@@ -182,4 +182,5 @@ export default {
     }
   }
 }
+
 </style>

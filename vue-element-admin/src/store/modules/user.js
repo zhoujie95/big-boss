@@ -1,4 +1,4 @@
-import { login, logout, getInfo,getViewAuthority } from '@/api/user'
+import { login, logout, getInfo,getViewAuthority,upuesrdatas } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -46,16 +46,7 @@ const actions = {
     //console.log('res...',res)
     setToken(res.token)
     return res
-    // return new Promise((resolve, reject) => {
-    //   login({ username: username.trim(), password: password }).then(response => {
-    //     const { data } = response
-    //     commit('SET_TOKEN', data.token)
-    //     setToken(data.token)
-    //     resolve()
-    //   }).catch(error => {
-    //     reject(error)
-    //   })
-    // })
+  
   },
 
   // get user info
@@ -65,30 +56,7 @@ const actions = {
       //console.log('data...',data)
       commit('SET_USERINFO',data.data)
       return data.data
-    // return new Promise((resolve, reject) => {
-    //   getInfo(state.token).then(response => {
-    //     const { data } = response
-
-    //     if (!data) {
-    //       reject('Verification failed, please Login again.')
-    //     }
-
-    //     const { roles, name, avatar, introduction } = data
-
-    //     // roles must be a non-empty array
-    //     if (!roles || roles.length <= 0) {
-    //       reject('getInfo: roles must be a non-null array!')
-    //     }
-
-    //     commit('SET_ROLES', roles)
-    //     commit('SET_NAME', name)
-    //     commit('SET_AVATAR', avatar)
-    //     commit('SET_INTRODUCTION', introduction)
-    //     resolve(data)
-    //   }).catch(error => {
-    //     reject(error)
-    //   })
-    // })
+   
   },
   //通过身份获取权限
   async getViewAuthority({commit}){
@@ -99,6 +67,12 @@ const actions = {
       return viewluyous.data
     }
     return []
+  },
+  //更新用户信息
+  async upuserdata({commit},played){
+    console.log(played)
+     let yh = await upuesrdatas(played)
+     console.log(yh)
   },
   // user logout
   logout({ commit, state }) {
