@@ -149,136 +149,6 @@ export default {
 </script>
 <style scoped lang='scss'>
 .box {
-<<<<<<< HEAD
-  padding-left: 20px;
-  background: #f0f2f5;
-}
-.head {
-  font-size: 22px;
-  line-height: 40px;
-}
-.wrap {
-  margin-top: 30px;
-  background: #fff;
-  height: 200px;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  list-style: none;
-}
-.wrap div {
-  display: flex;
-}
-.wrap label {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
-  line-height: 100px;
-  padding-left: 80px;
-  display: inline-block;
-}
-.wrap ul {
-  list-style: none;
-  display: flex;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-}
-.wrap ul li {
-  padding-left: 30px;
-  line-height: 92px;
-}
-.wrap ul li:nth-child(1) {
-  padding-left: 0;
-}
-.nav {
-  margin-top: 5px;
-}
-.sele {
-  display: inline-block;
-  width: 350px;
-  margin-left: 10px;
-  margin-top: -7px;
-}
-.exam label {
-  line-height: 20px;
-}
-.exam button {
-  margin-left: 20px;
-  margin-top: -5px;
-  width: 100px;
-  height: 30px;
-  line-height: 4px;
-}
-.content {
-  margin-top: 30px;
-  background: #fff;
-  height: auto;
-  border: 1px solid #fff;
-  border-radius: 10px;
-}
-.small {
-  /* border: 1px solid #eee; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-}
-.left {
-  margin-left: 20px;
-}
-.left p {
-  display: block;
-  color: rgba(0, 0, 0, 0.65);
-  margin-bottom: 4px;
-  font-size: 14px;
-  line-height: 22px;
-}
-.left a {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 14px;
-  line-height: 22px;
-  color: blue;
-}
-.left div {
-  display: block;
-}
-.left div ul {
-  display: flex;
-  list-style: none;
-  /* margin-left: -50px; */
-}
-.left ul li {
-  margin-left: 10px;
-  line-height: 20px;
-  height: 22px;
-  padding: 0 7px;
-  border-radius: 2px;
-  border: 1px solid #d9d9d9;
-  font-size: 12px;
-}
-.left ul li:nth-child(1) {
-  color: #1890ff;
-  background: #e6f7ff;
-  border-color: #91d5ff;
-}
-.left ul li:nth-child(2) {
-  color: #2f54eb;
-  background: #f0f5ff;
-  border-color: #adc6ff;
-}
-.left ul li:nth-child(3) {
-  color: #fa8c16;
-  background: #fff7e6;
-  border-color: #ffd591;
-}
-.right {
-  margin-right: 20px;
-  color: #2f54eb;
-}
-.fen {
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
-=======
   position: relative;
   width: 100%;
   height: 900px;
@@ -328,7 +198,7 @@ export default {
           flex: 1;
           display: flex;
           & > li {
-            padding: 5px 10px;
+            padding: 5px 5px;
             text-align: center;
             font-size: 14px;
             &:nth-of-type(1) {
@@ -408,8 +278,5 @@ export default {
       }
     }
   }
->>>>>>> a581b80f0a250198a195e82c7a28b3d5d2e117d7
 }
 </style>
-
-
