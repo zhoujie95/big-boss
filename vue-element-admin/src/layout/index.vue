@@ -23,7 +23,7 @@
 import RightPanel from '@/components/RightPanel'
 import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-import { mapState } from 'vuex'
+import { mapState ,mapActions } from 'vuex'
 
 export default {
   name: 'Layout',
@@ -53,7 +53,8 @@ export default {
       }
     }
   },
-  methods: {
+
+  methods: {  
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }

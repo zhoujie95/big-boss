@@ -48,16 +48,13 @@ const mutations = {
 }
 
 const actions = {
-  //生成侧边路由
-  generateRoutes({ commit },viewAuthority) {
-    // 获取用户所拥有的view_ids
-    let view_ids = viewAuthority.map(item=>item.view_id);
-
-    //在所有的路由里过滤一遍，获取能访问的路由
-    let accessedRoutes = filterAsyncRoutes(asyncRoutes,view_ids);
-    //console.log('access.....',accessedRoutes)
-    
-    //更新路由
+  //roles就是全部对应的数据
+  generateRoutes({ commit }, roles) {
+    //获取全部view_ids
+    let view_ids = roles.map(item=>item.view_id)
+    //通过递归，得到用户可以访问的路由
+    let accessedRoutes = filterAsyncRoutes(asyncRoutes, view_ids);
+    //console.log(accessedRoutes)
     commit('SET_ROUTES',accessedRoutes)
     return accessedRoutes
   }

@@ -4,7 +4,7 @@ const TokenKey = 'authorization'
 
 export function getToken() {
   return Cookies.get(TokenKey)
-}
+}          
 
 export function setToken(token) {
   return Cookies.set(TokenKey, token,{expires:10})

@@ -28,7 +28,6 @@ const mutations = {
     state.allquestions=payload
   }
 }
-
 const actions = {
 
   //请求所有考试类型
@@ -36,7 +35,7 @@ const actions = {
     let result = await gettype()
     commit('gettype', result.data)
   },
-
+ 
   //请求所有课程类型的数据
   async getclass({ commit }, payload) {
     let result = await getclass()

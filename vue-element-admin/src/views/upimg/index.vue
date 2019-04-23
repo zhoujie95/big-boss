@@ -28,6 +28,7 @@
 import ImageCropper from '@/components/ImageCropper'
 import PanThumb from '@/components/PanThumb'
 
+
 export default {
   name: 'AvatarUploadDemo',
   components: { ImageCropper, PanThumb },
@@ -35,15 +36,15 @@ export default {
     return {
       imagecropperShow: false,
       imagecropperKey: 0,
-      image:'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
+      image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
     }
   },
   methods: {
     cropSuccess(resData) {
+      //console.log(resData)
       this.imagecropperShow = false
       this.imagecropperKey = this.imagecropperKey + 1
       this.image = resData[0].path
-      //localStorage.setItem('imgurl',resData[0].path)
     },
     close() {
       this.imagecropperShow = false
@@ -62,4 +63,3 @@ export default {
     margin-top:70px;
   }
 </style>
-

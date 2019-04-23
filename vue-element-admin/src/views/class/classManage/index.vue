@@ -2,11 +2,11 @@
   <div class="box">
     <h2>班级管理</h2>
     <div class="box-content">
-      <el-button type="primary" @click='showdialog'>+ 添加班级</el-button>
-      <el-table :data="tableData" stripe style="width:100%">
-        <el-table-column prop="classroom" label="班级名" width="180"></el-table-column>
-        <el-table-column prop="class" label="课程名" width="180"></el-table-column>
-        <el-table-column prop="num" label="教室号"></el-table-column>
+      <el-button type="primary" @click="addclass">+ 添加班级</el-button>
+      <el-table :data="bandata" stripe style="width:100%">
+        <el-table-column prop="grade_name" label="班级名" width="180"></el-table-column>
+        <el-table-column prop="subject_text" label="课程名" width="180"></el-table-column>
+        <el-table-column prop="room_text" label="教室号"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -14,84 +14,72 @@
           </template>
         </el-table-column>
       </el-table>
-       <div class="dialog" v-if='dialogshow'>
-          <p>添加班级 <span @click='closedialog'>X</span></p>
-          <p> <b>*</b> 班级名:</p>
-          <el-input placeholder="班级名" v-model='classname'></el-input>
-          <p> <b>*</b> 教室名:</p>
-          <el-select v-model="roomnum" placeholder="请选择教室号">
-            <el-option
-              v-for="item in classroom"
-              :key="item.subject_id"
-              :label="item.subject_text"
-              :value="item.subject_id"
-            ></el-option>
-          </el-select>
-          <p> <b>*</b> 课程名:</p>
-          <el-select v-model="lesson" placeholder="请选择课程名">
-            <el-option
-              v-for="item in classroom"
-              :key="item.subject_id"
-              :label="item.subject_text"
-              :value="item.subject_id"
-            ></el-option>
-          </el-select>
-          <div class='btn'>
-             <el-button @click='closedialog'>取消</el-button>
-             <el-button type='primary' @click='closedialog'>确定</el-button>
-          </div>
-       </div>
+       <bj-dialog v-if="dialogshow" v-on:showdislog="showdislog" :type="type" :name="name" :banjiid="banjiid"/>
     </div>
     <div class="mask" v-if='dialogshow'></div>
   </div>
 </template>
 <script>
+import {mapState,mapActions} from 'vuex'
+import BjDialog from '@/components/banjitk/bjdialog.vue'
 export default {
-  methods: {
-     showdialog(){
-        this.dialogshow=true
-     },
-     closedialog(){
-        this.dialogshow=false
-     }
-  },
-  data() {
-    return {
+   data(){
+     return{
       dialogshow:false,
-      lesson:'',
-      classname:'',
-      roomnum:'',
-      classroom:[],
-      tableData: [
-        {
-          classroom: "2016-05-02",
-          num: "王小虎",
-          class: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          classroom: "2016-05-02",
-          num: "王小虎",
-          class: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          classroom: "2016-05-02",
-          num: "王小虎",
-          class: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          classroom: "2016-05-02",
-          num: "王小虎",
-          class: "上海市普陀区金沙江路 1518 弄"
-        }
-      ]
-    };
+      type:'',
+      name:''
+     }
+   },
+   components:{
+     BjDialog
+   },
+  computed: {
+    ...mapState({
+        bandata:state=>state.addbanji.bandata
+    })
+  },
+  mounted() {
+    this.getbandata()
+    this.getjiaoshi()
+    this.getkecheng()
+  },
+  methods: {
+    
+    ...mapActions({
+        getbandata:'addbanji/getbandata',
+        getjiaoshi:'addbanji/getjiaoshi',
+        getkecheng:'addbanji/getkecheng',
+        addbanji:'addbanji/addbanji',
+        delbanji:'addbanji/delbanji'
+    }),
+    addclass() {
+      this.dialogshow = true
+      this.type = 'add'
+    },
+    showdislog(){
+      this.getbandata()
+      this.dialogshow = false
+    },
+    handleEdit(ind,rew){
+      //console.log(ind,rew)
+      this.dialogshow = true
+      this.type = 'xiu'
+      this.name = rew.grade_name
+      this.banjiid = rew.grade_id
+    },
+    async handleDelete(ind,rew){
+      //console.log(rew.grade_id)
+      await this.delbanji({grade_id:rew.grade_id})
+      await this.getbandata()
+    }
   }
+ 
 };
 </script>
 <style scoped lang="scss">
 .box {
   width: 100%;
-  height: calc(100vh - 84px);
+  //height: calc(100vh - 84px);
   overflow: hidden;
   &>.mask{
        width:1519.2px;

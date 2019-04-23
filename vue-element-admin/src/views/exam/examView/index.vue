@@ -198,7 +198,7 @@ export default {
           flex: 1;
           display: flex;
           & > li {
-            padding: 5px 10px;
+            padding: 5px 5px;
             text-align: center;
             font-size: 14px;
             &:nth-of-type(1) {
@@ -280,5 +280,3 @@ export default {
   }
 }
 </style>
-
-

@@ -16,6 +16,7 @@ import App from './App'
 
 //vuex
 import store from './store'
+//路由
 import router from './router'
 
 //引入国际化配置
@@ -30,11 +31,11 @@ import './utils/errorLog' // error log
 //挂载自定义过滤器
 import * as filters from './filters' // global filters
 
-//挂载mock 拦截请求
+// //挂载mock 拦截请求
 // import { mockXHR } from '../mock' // simulation data
-import ElementUI from 'element-ui';
+ import ElementUI from 'element-ui';
 
-// mock api in github pages site build
+// // mock api in github pages site build
 // if (process.env.NODE_ENV === 'production') { mockXHR() }
 
 Vue.use(Element, {
@@ -58,3 +59,4 @@ new Vue({
   i18n,
   render: h => h(App)
 })
+

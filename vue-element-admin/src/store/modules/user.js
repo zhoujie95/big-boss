@@ -9,7 +9,8 @@ const state = {
   introduction: '',
   roles: [],
   userInfo:{},
-  viewAuthority:[]
+  viewAuthority:[],
+  updata:[]
 }
 
 const mutations = {
@@ -33,6 +34,9 @@ const mutations = {
   },
   SET_VIEWAUTHORITY:(state,viewAuthority)=>{
      state.viewAuthority=viewAuthority
+  },
+  SET_UPDATA:(state,updates)=>{
+      state.updata=updates
   }
 }
 
@@ -65,33 +69,10 @@ const actions = {
   //  commit('SET_VIEWAUTHORITY',userAuthority.data)
   //  return userAuthority.data
   },
-
-    // return new Promise((resolve, reject) => {
-    //   getInfo(state.token).then(response => {
-    //     const { data } = response
-
-    //     if (!data) {
-    //       reject('Verification failed, please Login again.')
-    //     }
-
-    //     const { roles, name, avatar, introduction } = data
-
-    //     // roles must be a non-empty array
-    //     if (!roles || roles.length <= 0) {
-    //       reject('getInfo: roles must be a non-null array!')
-    //     }
-
-    //     commit('SET_ROLES', roles)
-    //     commit('SET_NAME', name)
-    //     commit('SET_AVATAR', avatar)
-    //     commit('SET_INTRODUCTION', introduction)
-    //     resolve(data)
-    //   }).catch(error => {
-    //     reject(error)
-    //   })
-    // })
-
-
+  async updateuser({commit},payload){
+      let result=await updateuser(payload)
+      return result
+  },
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
