@@ -1,13 +1,14 @@
 import { asyncRoutes, constantRoutes } from '@/router'
+import { access } from 'fs';
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
  * @param roles
  * @param route
  */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
+function hasPermission(view_ids, route) {
+  if (route.meta && route.meta.view_id) {
+    return view_ids.some(item => item === route.meta.view_id)
   } else {
     return true
   }
@@ -18,14 +19,14 @@ function hasPermission(roles, route) {
  * @param routes asyncRoutes
  * @param roles
  */
-export function filterAsyncRoutes(routes, roles) {
+export function filterAsyncRoutes(routes, view_ids) {
   const res = []
 
   routes.forEach(route => {
     const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
+    if (hasPermission(view_ids, tmp)) {
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
+        tmp.children = filterAsyncRoutes(tmp.children, view_ids)
       }
       res.push(tmp)
     }
@@ -47,17 +48,15 @@ const mutations = {
 }
 
 const actions = {
+  //roles就是全部对应的数据
   generateRoutes({ commit }, roles) {
-    return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
-    })
+    //获取全部view_ids
+    let view_ids = roles.map(item=>item.view_id)
+    //通过递归，得到用户可以访问的路由
+    let accessedRoutes = filterAsyncRoutes(asyncRoutes, view_ids);
+    //console.log(accessedRoutes)
+    commit('SET_ROUTES',accessedRoutes)
+    return accessedRoutes
   }
 }
 

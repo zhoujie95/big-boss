@@ -31,15 +31,15 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/api':{
-         target:`http://169.254.95.2:7001/`,
-         changeOrigin:true,
-         pathRewrite:{
-            '/api':''
-         }
+        '/api': {
+          target: `http://169.254.95.2:7001/`,
+          changeOrigin: true,
+          pathRewrite: {
+            '/api': ''
+          }
+        }
       }
-    }
-  },
+    },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.

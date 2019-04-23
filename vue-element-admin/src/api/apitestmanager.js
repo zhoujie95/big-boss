@@ -1,5 +1,6 @@
 
 import request from '@/utils/request'
+
 //考试类型
 export let testtype=()=>{
     return request({
@@ -17,16 +18,17 @@ export let testclass=()=>{
 } 
 
 //试卷列表
-export let testlist=()=>{
+export let testlist=(data)=>{
+
     return request({
         url:"/exam/exam",
-        method:"get"
+        method:"get",
+        data
     })
 } 
 
 //创建试卷
 export let addtest=(data)=>{
-    console.log(data,"创建试卷")
     return request({
         url:"/exam/exam",
         method:"post",
@@ -35,7 +37,6 @@ export let addtest=(data)=>{
 } 
 //更新试卷 
 export let updatetest=(dt,data)=>{
-    console.log(dt,data)
     return request({
         url:`/exam/exam/${dt}`,
         method:"put",

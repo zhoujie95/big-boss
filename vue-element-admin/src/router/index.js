@@ -17,6 +17,7 @@ import userRouter from './modules/userManage'
 import testRouter from './modules/testManage'
 import classRouter from './modules/classManage'
 import readRouter from './modules/readManage'
+import imgupload from './modules/imgupload'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -44,12 +45,18 @@ import readRouter from './modules/readManage'
  * 不授权限控制的页面
  * all roles can be accessed
  */
+//静态路由
 export const constantRoutes = [
   examRouter,
   userRouter,
   testRouter,
-  classRouter,
+
   readRouter,
+  //编辑试题的路由
+  {
+     path:'/edit/Questions/:id',
+     component:()=>import('@/views/exam/examAdd/index')
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -125,7 +132,9 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
+//动态路由
 export const asyncRoutes = [
+  classRouter,
   // {
   //   path: '/permission',
   //   component: Layout,

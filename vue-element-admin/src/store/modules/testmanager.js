@@ -46,7 +46,6 @@ const mutations = {
                 });
                 state.question_ids= JSON.stringify(ids);
             }
-            // console.log(data,"添加成功");
         }else{//创建失败
             state.addflag === false;
         }
@@ -82,13 +81,14 @@ const actions = {
         commit("gettestClass",result)
     },
     //3.获取试卷列表
-    async gettestlist({commit}){
-        let result = await testlist();
+    async gettestlist({commit},dis){
+        let result = await testlist(dis);
         commit("gettestlist",result)
     },
     //4.创建试卷
     async  addtest({commit},payload){
         let result = await addtest(payload);
+
         commit("addtest",result)
     },
      //5.更新试卷

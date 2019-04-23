@@ -3,11 +3,10 @@
     <h2>教室管理</h2>
     <div class="box-content">
       <el-button type="primary" @click="openroom">+ 添加教室</el-button>
-      <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="date" label="教室号" width="180"></el-table-column>
+      <el-table :data="jiaodata" stripe style="width: 100%">
+        <el-table-column prop="room_text" label="教室号" width="300"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -16,42 +15,41 @@
   </div>
 </template>
 <script>
+import {mapActions,mapState} from 'vuex'
 export default {
+  
+  computed: {
+    ...mapState({
+        jiaodata:state=>state.addjiaoshi.jiaodata
+    })
+  },
   methods: {
+    ...mapActions({
+        getjiaoshi:'addjiaoshi/getjiaoshi',
+        patydata:'addjiaoshi/addjiaoshi',
+        deljiaoshi:'addjiaoshi/deljiaoshi'
+    }),
+    //弹框  添加教室
     openroom() {
       this.$prompt("教室号", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        inputValue: "教室名"
-      });
+      }).then(async ({ value }) => {
+          await this.patydata(value)
+          await this.getjiaoshi()
+        })
+    },
+    //点击删除  第一个参数是下标 第二个是删除的数据
+    async handleDelete(ind,rew){
+      //console.log(rew.room_id)
+      await this.deljiaoshi({room_id:rew.room_id})
+      await this.getjiaoshi()
     }
   },
-  props: {},
-  data() {
-    return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ]
-    };
+  async mounted() {
+    //加载完成   请求数据
+    await this.getjiaoshi()
+
   }
 };
 </script>
@@ -59,7 +57,7 @@ export default {
 .box {
   position: relative;
   width: 100%;
-  height: calc(100vh - 84px);
+  // height: calc(100vh - 84px);
   background: #edeff2;
   overflow: hidden;
   & > h2 {

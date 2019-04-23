@@ -13,7 +13,7 @@ const userRouter={
       path: 'adduser',
       component: () => import('@/views/userview/userone'),
       name: 'adduser',
-      meta: { title: 'userAdd' }
+      meta: { title: 'userAdd' ,view_id:'main-addUser'}
     },
     {
       path: 'userView',
@@ -22,10 +22,10 @@ const userRouter={
       meta: { title: 'userView' }
     },
     {
-      path: 'userPicture',
-      component: () => import('@/views/userview/userthree'),
-      name: 'userView',
-      meta: { title: 'userPicture' }
+      path: 'avatar',
+      component: () => import('@/views/userview/avatar'),
+      name: 'avatar',
+      meta:{title:'avator'}
     }
   ]
 }

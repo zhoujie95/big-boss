@@ -7,10 +7,10 @@ export function login(data) {
     data
   })
 }
-
+//添加用户信息
 export function getInfo(token) {
   return request({
-    url: '/user/info',
+    url: '/user/userInfo',
     method: 'get',
     params: { token }
   })
@@ -22,4 +22,10 @@ export function logout() {
     method: 'post'
   })
 }
-
+//获取视图权限
+export function getViewAuthority(){
+    return request({
+      url:'/user/view_authority',
+      method:'get'
+    })
+}

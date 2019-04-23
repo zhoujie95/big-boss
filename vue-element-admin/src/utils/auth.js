@@ -4,10 +4,10 @@ const TokenKey = 'authorization'
 
 export function getToken() {
   return Cookies.get(TokenKey)
-}
+}          
 
 export function setToken(token) {
-  return Cookies.set(TokenKey, token,{expires:7})
+  return Cookies.set(TokenKey, token,{expires:10})
 }
 
 export function removeToken() {

@@ -25,7 +25,7 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="findbtn">
+        <div class="findbtn" @click="findtest">
           <svg-icon icon-class="search"/>&nbsp;&nbsp;查询
         </div>
       </div>
@@ -95,6 +95,13 @@ export default {
     //点击切换高亮
     lightblue(e) {
       this.light = e;
+    },
+    //点击查询
+    findtest(){
+      let {subject_id,exam_id} = this
+      console.log(this.subject_id)
+      console.log(this.exam_id)
+      this.$store.dispatch("testmanager/gettestlist",{subject_id,exam_id})
     }
   },
   computed: {
