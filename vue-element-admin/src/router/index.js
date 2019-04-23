@@ -17,7 +17,6 @@ import userRouter from './modules/userManage'
 import testRouter from './modules/testManage'
 import classRouter from './modules/classManage'
 import readRouter from './modules/readManage'
-import imgupload from './modules/imgupload'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -50,7 +49,6 @@ export const constantRoutes = [
   examRouter,
   userRouter,
   testRouter,
-
   readRouter,
   //编辑试题的路由
   {
