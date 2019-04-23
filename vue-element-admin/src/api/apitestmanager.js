@@ -34,7 +34,6 @@ export let addtest=(data)=>{
     })
 } 
 //更新试卷 
-
 export let updatetest=(dt,data)=>{
     console.log(dt,data)
     return request({
