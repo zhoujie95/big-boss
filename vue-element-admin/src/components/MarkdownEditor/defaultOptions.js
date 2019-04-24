@@ -1,10 +1,10 @@
 // doc: https://nhnent.github.io/tui.editor/api/latest/ToastUIEditor.html#ToastUIEditor
 export default {
-  minHeight: '100px',
+  minHeight:"400px",
   previewStyle: 'vertical',
-  useCommandShortcut:false,
-  useDefaultHTMLSanitizer:false,
-  usageStatistics:true,
+  useCommandShortcut: true,
+  useDefaultHTMLSanitizer: true,
+  usageStatistics: true,
   hideModeSwitch: true,
   toolbarItems: [
     // 'heading',

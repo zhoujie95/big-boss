@@ -47,6 +47,13 @@ import readRouter from './modules/readManage'
  */
 //静态路由
 export const constantRoutes = [
+<<<<<<< HEAD
+=======
+  examRouter,
+  userRouter,
+  testRouter,
+  readRouter,
+>>>>>>> fd9b674006f99cbaef246e68bc4cbeb616946418
   //编辑试题的路由
   {
      path:'/edit/Questions/:id',

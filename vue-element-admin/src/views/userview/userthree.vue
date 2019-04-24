@@ -1,6 +1,6 @@
 <template>
   <div class="components-container">
-    <code>
+    <code>This is based on
       <a class="link-type" href="//github.com/dai-siki/vue-image-crop-upload"> vue-image-crop-upload</a>.
       {{ $t('components.imageUploadTips') }}
     </code>
@@ -16,7 +16,7 @@
       :key="imagecropperKey"
       :width="300"
       :height="300"
-      url="http://123.206.55.50:11000/upload"
+      url=" http://123.206.55.50:11000/upload"
       lang-type="en"
       @close="close"
       @crop-upload-success="cropSuccess"
@@ -40,10 +40,10 @@ export default {
   },
   methods: {
     cropSuccess(resData) {
-      //console.log(resData)
       this.imagecropperShow = false
       this.imagecropperKey = this.imagecropperKey + 1
       this.image = resData[0].path
+      console.log(resData)
     },
     close() {
       this.imagecropperShow = false
@@ -58,7 +58,5 @@ export default {
     height: 200px;
     border-radius: 50%;
   }
-  .components-container{
-    margin-top:70px;
-  }
 </style>
+
