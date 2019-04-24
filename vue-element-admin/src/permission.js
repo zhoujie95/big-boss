@@ -7,7 +7,7 @@ import { Message } from 'element-ui'
 // 页面加载进度条
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-//获取token
+//获取token!
 import { getToken } from '@/utils/auth' // get token from cookie
 
 // 配置进度条是否需要Spinner
