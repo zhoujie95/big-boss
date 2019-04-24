@@ -13,13 +13,13 @@ const classRouter={
       path: 'classManage',
       component: () => import('@/views/class/classManage/index'),
       name: 'classManage',
-      meta: { title: 'classManage',view_id:'main-student' }
+      meta: { title: 'classManage',view_id:'main-grade' }
     },
     {
       path: 'classroomManage',
       component: () => import('@/views/class/classroomManage/index'),
       name: 'classroomManage',
-      meta: { title: 'classroomManage',view_id:'main-student' }
+      meta: { title: 'classroomManage',view_id:'main-room' }
     },
     {
       path: 'studentManage',

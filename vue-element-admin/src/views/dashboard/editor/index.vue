@@ -8,7 +8,7 @@
           icon="upload"
           style="position: absolute;bottom:100px;margin-left:10px;"
           @click="imagecropperShow=true"
-        >Change Avatar</el-button>
+        >更改头像</el-button>
       </div>
     </div>
     <div>
@@ -52,6 +52,7 @@ export default {
       this.imagecropperShow = false;
       this.imagecropperKey = this.imagecropperKey + 1;
       this.image = resData[0].path;
+      localStorage.setItem('imgurl',resData[0].path)
       //console.log(this.userInfo)
      await this.updateuser({
         user_id:this.userInfo.user_id,
@@ -91,7 +92,7 @@ export default {
   }
   .info-container {
     position: relative;
-    margin-left: 190px;
+    margin-left: 150px;
     height: 150px;
     line-height: 200px;
     .display_name {
@@ -99,7 +100,7 @@ export default {
       line-height: 48px;
       color: #212121;
       position: absolute;
-      top: 25px;
+      top: 30px;
     }
   }
 }

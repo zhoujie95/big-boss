@@ -67,6 +67,11 @@ export default {
     LangSelect,
     Search
   },
+  data(){
+    return{
+      imgurl:localStorage.getItem('imgurl')
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
