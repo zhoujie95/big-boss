@@ -35,7 +35,7 @@ const mutations = {
     user(state, data) {
         if (data.code == 1) {
             state.user = data.data
-            // console.log(state.user);
+            console.log(state.user);
         }
     },
     identityapi(state, data) {
@@ -153,7 +153,7 @@ const actions = {
     },
     //更新用户
     newuser(context, payload) {
-        // console.log(payload);
+        console.log(payload);
         axios.put("/user/user", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('newuser',res.data);
         })

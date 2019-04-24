@@ -32,7 +32,7 @@
               <el-option
                 v-for="item in user"
                 :key="item.user_id"
-                :label="item.user_id"
+                :label="item.user_name"
                 :value="item.user_id"
               ></el-option>
             </el-select>
