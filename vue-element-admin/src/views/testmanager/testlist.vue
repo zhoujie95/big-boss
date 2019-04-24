@@ -98,8 +98,7 @@ export default {
       if(e){
         this.$store.dispatch("testmanager/gettestlist",{index:e})
       }else{
-
-        // this.$store.dispatch("testmanager/gettestlist");
+        this.$store.dispatch("testmanager/gettestlist");
       }
     },
     //点击查询

@@ -48,6 +48,8 @@ const mutations = {
                 let crr = [],drr=[];
                 result.exam.map(item=>{
                     let time = item.end_time;
+                    item.end_time = moment(item.end_time*1).format('YYYY-MM-DD HH:mm:ss');
+                    item.start_time = moment(item.start_time*1).format('YYYY-MM-DD HH:mm:ss');
                     time*1 > new Date()*1 ? crr.push(item) : drr.push(item); 
                 });
                 dis.index === 1 ? state.testlistdata = crr : state.testlistdata = drr;
