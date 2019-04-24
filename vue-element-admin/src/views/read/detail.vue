@@ -6,7 +6,10 @@
       <div class="main_left">
         <div class="item_exam" v-for="(item) in student?student.questions:[]" :key="item.exam_exam_id">
           <p>{{item.title}}</p>
-          <p class='describe'>{{item.questions_stem}}</p>
+          <p class='describe'>
+   
+            {{item.questions_stem}}
+          </p>
           <!-- <markdown-editor/> -->
           <div class="div">
             <div class="div-left">
@@ -45,7 +48,8 @@ import MarkdownEditor from "@/components/MarkdownEditor";
 export default {
   data() {
     return {
-      score: 0
+      score: 0,
+      //url:this.$store.student.questions[0].questions_stem.split('(')[1].split(')')[0]
     };
   },
   components: {
@@ -58,7 +62,7 @@ export default {
   },
   async mounted() {
     await this.getstudent(this.$route.query);
-    //console.log("student....", this.student);
+    console.log("student....",this.$store);
   },
   methods: {
     ...mapActions({

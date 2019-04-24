@@ -29,3 +29,9 @@ export function getViewAuthority(){
       method:'get'
     })
 }
+//更新用户信息
+export let updateuser=(params)=>{
+  //console.log('params....',params)
+   return request.put('/user/user',params)
+}
+
