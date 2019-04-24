@@ -26,6 +26,7 @@
         </router-link>
       </div>
     </div>
+    <!-- <h1>没有权限</h1> -->
   </div>
 </template>
 
@@ -42,6 +43,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1{
+  color: red;
+}
 .wscn-http404-container{
   transform: translate(-50%,-50%);
   position: absolute;

@@ -31,7 +31,10 @@ router.beforeEach(async(to, from, next) => {
       // determine whether the user has obtained his permission roles through getInfo
       // const hasRoles = store.getters.roles && store.getters.roles.length > 0
       const userInfo = store.getters.userInfo;
-      // 判断是否获取过用户信息，如果有就不再获取，如果没有就第一次获取
+      //获取的用户信息
+      
+      //console.log('user....',userInfo)
+
       if (userInfo.user_name) {
         next()
       } else {
@@ -42,7 +45,7 @@ router.beforeEach(async(to, from, next) => {
           const userInfo = await store.dispatch('user/getInfo')
           // console.log('userInfo...', userInfo);
           // 2.通过身份获取权限
-          const viewAuthority = await store.dispatch('user/getViewAuthority')
+          const viewAuthority = await store.dispatch('user/getViewAuthority',userInfo)
           //console.log(viewAuthority)
           // 3.通过权限生成路由
           let accrouters = await store.dispatch('permission/generateRoutes', viewAuthority)
@@ -50,7 +53,8 @@ router.beforeEach(async(to, from, next) => {
           //4.把动态页面挂载到静态路由上
           router.addRoutes(accrouters)
           next({ ...to, replace: true })
-        } catch (error) {
+        } 
+        catch (error) {
           console.log('error....', error);
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

@@ -17,7 +17,7 @@ import userRouter from './modules/userManage'
 import testRouter from './modules/testManage'
 import classRouter from './modules/classManage'
 import readRouter from './modules/readManage'
-import imgupload from './modules/imgupload'
+//import imgupload from './modules/imgupload'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -47,10 +47,6 @@ import imgupload from './modules/imgupload'
  */
 //静态路由
 export const constantRoutes = [
-  examRouter,
-  userRouter,
-  testRouter,
-  readRouter,
   //编辑试题的路由
   {
      path:'/edit/Questions/:id',
@@ -133,7 +129,11 @@ export const constantRoutes = [
  */
 //动态路由
 export const asyncRoutes = [
+  examRouter,
+  userRouter,
+  testRouter,
   classRouter,
+  readRouter,
   // {
   //   path: '/permission',
   //   component: Layout,
