@@ -74,6 +74,12 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
+ mounted(){
+      this.getclass();
+      this.gettype();
+      this.getquestion();
+      this.getAllQues(); 
+  },
   computed: {
     ...mapState({
       testType: state => state.addexam.testType,
@@ -100,8 +106,8 @@ export default {
     changeState(ind) {
       this.defaultIndex = ind;
     },
-    async selects() {
-      await this.selectQues({
+    selects() {
+      this.selectQues({
         subject_id: this.classType[this.defaultIndex].subject_id,
         exam_id: this.exam,
         questions_type_id: this.ques
@@ -129,12 +135,6 @@ export default {
         });
       }
     }
-  },
-   mounted() {
-     this.getclass();
-     this.gettype();
-     this.getquestion();
-     this.getAllQues();
   },
   data() {
     return {

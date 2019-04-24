@@ -23,9 +23,13 @@ export function logout() {
   })
 }
 //获取视图权限
-export let getViewAuthority=(params)=>{
-  //console.log('params....',params)
-   return request.get('/user/new',{params:{...params}})
+export function getViewAuthority(params){
+  //console.log(params)
+ return request.get('/user/new',{
+   params:{
+     user_id:params.user_id
+   }
+ })
 }
 //更新用户信息
 export let updateuser=(params)=>{

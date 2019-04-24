@@ -32,7 +32,7 @@
               <el-option
                 v-for="item in user"
                 :key="item.user_id"
-                :label="item.user_id"
+                :label="item.user_name"
                 :value="item.user_id"
               ></el-option>
             </el-select>
@@ -79,16 +79,16 @@
             <span id="active">添加视图接口权限</span>
           </dt>
           <dd>
-            <el-select v-model="value3"  placeholder="请选择已有视图" class="sele">
+            <el-select v-model="value3"  placeholder="请选择已有视图" class="sele"> 
               <el-option
                 v-for="item in view"
-                :key="item.view_authority_id"
+                :key="item.view_id"
                 :label="item.view_authority_text"
-                :value="item.view_authority_text"
+                :value="item.view_id"
               ></el-option>
             </el-select>
             <p>
-              <button @click="addview">确定</button>
+              <button @click="addview()">确定</button>
               <button @click="reset3()">重置</button>
             </p>
           </dd>
@@ -177,7 +177,7 @@ export default {
       apiname: "",
       apiurl: "",
       apitype: "",
-      viewid: ""
+     text:""
     };
   },
   methods: {
@@ -240,8 +240,13 @@ export default {
     },
     addview() {
       this.value3 = this.value3;
+      for(var i=0;i<$store.state.view.length;i++){
+        if($store.state.view[i].view_id===this.value3){
+          this.text=$store.state.view[i].view_authority_text
+        }
+      }
       this.$store.dispatch("userManager/addview", {
-        view_authority_text: this.value3
+        view_authority_text: this.text,view_id:this.value3
       });
       this.$message($store.state.msg);
     },
@@ -263,6 +268,7 @@ export default {
       });
       this.$message($store.state.msg);
     },
+    //重置按钮
     reset(){
       this.value="";
       this.name="";
@@ -279,10 +285,12 @@ export default {
     },
      reset3(){
       this.value3="";
-    },reset4(){
+    },
+    reset4(){
       this.value4="";
        this.value5="";
-    }, reset5(){
+    },
+     reset5(){
       this.value6="";
        this.value7="";
     }
