@@ -25,6 +25,7 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="userInfo.avatar" class="user-avatar">
+          <span>{{userInfo.user_name}}</span>
          <!-- <i class="el-icon-caret-bottom" /> -->
          <span>{{userInfo.user_name}}</span>
         </div>
@@ -49,7 +50,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters ,mapState,mapActions} from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
@@ -68,6 +69,11 @@ export default {
     LangSelect,
     Search
   },
+  data(){
+    return{
+      imgurl:localStorage.getItem('imgurl')
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
@@ -82,8 +88,10 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
+      
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+
     }
   }
 }

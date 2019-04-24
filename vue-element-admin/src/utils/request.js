@@ -6,7 +6,7 @@ import { getToken } from '@/utils/auth'
 const service = axios.create({
   baseURL: '/api', // api 的 base_url
 
-  withCredentials: false, // 跨域请求时不发送 cookies
+  withCredentials: false, // 跨域请求时发送 cookies
 
   // withCredentials: true, // 跨域请求时发送 cookies
 

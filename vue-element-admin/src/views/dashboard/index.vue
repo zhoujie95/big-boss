@@ -1,6 +1,7 @@
 <template>
   <div class="dashboard-container">
-    
+    <!-- <component :is="currentRole" /> -->
+    <h1>北京八维考试系统</h1>
   </div>
 </template>
 
@@ -29,3 +30,10 @@ export default {
   }
 }
 </script>
+<style>
+h1{
+  margin-top: 180px;
+  margin-left: 200px;
+}
+</style>
+
