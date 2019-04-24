@@ -25,8 +25,8 @@
             ></el-option>
           </el-select>
         </div>
-        <div class="findbtn" @click="findtest">
-          <svg-icon icon-class="search"/>&nbsp;&nbsp;查询
+        <div class="findbtn" @click="findlist(exam_id,subject_id)">
+          <svg-icon icon-class="search" />&nbsp;&nbsp;查询
         </div>
       </div>
       <div class="testlist-box">
@@ -95,13 +95,18 @@ export default {
     //点击切换高亮
     lightblue(e) {
       this.light = e;
+      if(e){
+        this.$store.dispatch("testmanager/gettestlist",{index:e})
+      }else{
+
+        // this.$store.dispatch("testmanager/gettestlist");
+      }
     },
     //点击查询
-    findtest(){
-      let {subject_id,exam_id} = this
-      console.log(this.subject_id)
-      console.log(this.exam_id)
-      this.$store.dispatch("testmanager/gettestlist",{subject_id,exam_id})
+    findlist(exam_id,subject_id){
+      if(exam_id && subject_id){
+        this.$store.dispatch("testmanager/gettestlist",{exam_id,subject_id});
+      }
     }
   },
   computed: {

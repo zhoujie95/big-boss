@@ -50,7 +50,6 @@ export const constantRoutes = [
   examRouter,
   userRouter,
   testRouter,
-
   readRouter,
   //编辑试题的路由
   {

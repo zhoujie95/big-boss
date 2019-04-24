@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from "moment"
 import { getToken} from '@/utils/auth'
 
 import {testtype,testclass,testlist,addtest,updatetest,deletetest,getdetail} from "@/api/apitestmanager"
@@ -29,9 +30,36 @@ const mutations = {
     gettestClass:(state,data)=>{
         state.testClass = data.data
     },
-    //3.获取试卷列表
+    //3.获取试卷列表 筛选 全选 进行中 已完成
     gettestlist:(state,data)=>{
-        state.testlistdata = data.exam;
+        let {result,dis} = data;
+        if(dis){
+            if(dis.hasOwnProperty("subject_id")){
+                console.log(dis)
+                let brr = [],{subject_id,exam_id} = dis; 
+                state.testlistdata.map(item=>{
+                if(item.subject_id === subject_id && item.exam_id === exam_id){
+                        brr.push(item)
+                    }
+                }
+            );
+                state.testlistdata = brr;
+            }else{
+                let crr = [],drr=[];
+                result.exam.map(item=>{
+                    let time = item.end_time;
+                    time*1 > new Date()*1 ? crr.push(item) : drr.push(item); 
+                });
+                dis.index === 1 ? state.testlistdata = crr : state.testlistdata = drr;
+            }
+        }else{
+            result.exam.map(item=>{
+                item.end_time = moment(item.end_time*1).format('YYYY-MM-DD HH:mm:ss');
+                item.start_time = moment(item.start_time*1).format('YYYY-MM-DD HH:mm:ss');
+                return 
+            })
+            state.testlistdata = result.exam;
+        }
     },
     //4.创建试卷
     addtest:(state,data)=>{
@@ -82,13 +110,12 @@ const actions = {
     },
     //3.获取试卷列表
     async gettestlist({commit},dis){
-        let result = await testlist(dis);
-        commit("gettestlist",result)
+        let result = await testlist();
+        commit("gettestlist",{result,dis});
     },
     //4.创建试卷
     async  addtest({commit},payload){
         let result = await addtest(payload);
-
         commit("addtest",result)
     },
      //5.更新试卷
@@ -107,6 +134,7 @@ const actions = {
         let result = await getdetail(payload);
         commit("getdetail",result)
     }
+   
 }
 export default {
     namespaced:true,

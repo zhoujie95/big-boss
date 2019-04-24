@@ -4,8 +4,11 @@
         <div class="detailcontent">
             <div class="eachdetail" v-for="(item,index) in testdetail" :key="index">
                 <p>{{index+1}}.&nbsp;&nbsp;&nbsp;{{item.title}}</p>
-                <p>{{item.questions_stem}}</p>
-                <p>答案:&nbsp;{{item.questions_answer}}</p>
+                <markdown-editor v-model="item.questions_stem" />
+                <span>答案</span>
+                <markdown-editor v-model="item.questions_answer" />
+                <!-- <p>{{item.questions_stem}}</p>
+                <p>答案:&nbsp;{{item.questions_answer}}</p> -->
                 <p><b>类型:&nbsp;&nbsp;</b>{{item.questions_type_text}}
                 <b>来源:&nbsp;&nbsp;</b>
                 {{item.subject_text}}</p>
@@ -16,16 +19,20 @@
 <script>
 
 import {mapState} from "vuex";
-
+import MarkdownEditor from "@/components/MarkdownEditor";
 export default {
     computed:{
          ...mapState("testmanager",{
             testdetail:state=>state.testdetail
         })
+    },
+    components:{
+         MarkdownEditor
     }
 }
 </script>
 <style  lang="scss">
+
     .testdetail{
         width: 100%;
         margin-top:64px;

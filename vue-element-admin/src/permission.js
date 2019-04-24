@@ -46,6 +46,7 @@ router.beforeEach(async(to, from, next) => {
           //console.log(viewAuthority)
           // 3.通过权限生成路由
           let accrouters = await store.dispatch('permission/generateRoutes', viewAuthority)
+          // console.log(accrouters)
           //4.把动态页面挂载到静态路由上
           router.addRoutes(accrouters)
           next({ ...to, replace: true })

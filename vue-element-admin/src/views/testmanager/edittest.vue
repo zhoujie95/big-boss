@@ -23,8 +23,11 @@
                             <el-button type="text" @click="dialogVisible = true,edit_del_btn(index)">删除</el-button>
                         </div>
                         <div class="eachdescribe">
-                            <p>{{item.questions_stem}}</p>
-                            <p>答案:&nbsp;{{item.questions_answer}}</p>
+                           <markdown-editor v-model="item.questions_stem" />
+                           <span>答案</span>
+                           <markdown-editor v-model="item.questions_answer" />
+                            <!-- <p>{{item.questions_stem}}</p> -->
+                            <!-- <p>答案:&nbsp;{{item.questions_answer}}</p> -->
                             <p><b>类型:&nbsp;&nbsp;</b>{{item.questions_type_text}}
                             <b>来源:&nbsp;&nbsp;</b>
                             {{item.subject_text}}</p>
@@ -38,12 +41,17 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import MarkdownEditor from "@/components/MarkdownEditor";
 export default {
   data() {
     return {
       dialogVisible: false,
       index:""
+     
     };
+  },
+  components:{
+    MarkdownEditor
   },
   computed: {
     ...mapState("testmanager", {
