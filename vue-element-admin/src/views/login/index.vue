@@ -104,8 +104,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'chenmanjie',
-        password: 'Chenmanjie123!'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -156,6 +156,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
+          //console.log(this.loginForm)
           this.loading = true
           let res=await this.login(this.loginForm)
           if (res.code == 1){

@@ -40,7 +40,7 @@ router.beforeEach(async(to, from, next) => {
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
           // 1.如果没有用户信息就去获取用户信息
           const userInfo = await store.dispatch('user/getInfo')
-          console.log('userInfo...', userInfo);
+          //console.log('userInfo...', userInfo);
           // 2.通过身份获取权限
           const viewAuthority = await store.dispatch('user/getViewAuthority')
           //console.log(viewAuthority)

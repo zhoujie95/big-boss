@@ -41,6 +41,7 @@ const actions = {
   // user login
   //接受参数，用户名密码，请求接口！接受返回值，设置token,把接收到的返回值return出去
   async login({ commit }, userInfo) {
+    //console.log(userInfo)
     const { username, password } = userInfo
     let res = await login({user_name:username,user_pwd:password})
     //console.log('res...',res)

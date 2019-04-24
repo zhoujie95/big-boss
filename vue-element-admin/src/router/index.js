@@ -46,10 +46,7 @@ import readRouter from './modules/readManage'
  */
 //静态路由
 export const constantRoutes = [
-  examRouter,
-  userRouter,
-  testRouter,
-  readRouter,
+  
   //编辑试题的路由
   {
      path:'/edit/Questions/:id',
@@ -132,7 +129,11 @@ export const constantRoutes = [
  */
 //动态路由
 export const asyncRoutes = [
+  examRouter,
   classRouter,
+  userRouter,
+  testRouter,
+  readRouter,
   // {
   //   path: '/permission',
   //   component: Layout,
