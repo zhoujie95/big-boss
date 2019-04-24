@@ -50,12 +50,14 @@ const mutations = {
     },
     adduser(state, data){
             state.msg = data.msg
+            // console.log(state.msg);
     },
     addshenfen(state,data){
         state.msg = data.msg
     },
     addapi(state,data){
         state.msg = data.msg
+        // console.log(state.msg);
     },
     addview(state,data){
         state.msg = data.msg
@@ -110,6 +112,7 @@ const actions = {
     },
     //添加用户
     adduser(context,payload) {
+        // console.log(payload);
         axios.post("/api/user", payload, { headers: { authorization: getToken() } }).then(res => {
           
             context.commit('adduser',res.data);
@@ -126,12 +129,13 @@ const actions = {
         // console.log(payload);
         axios.get("/api/user/authorityApi/edit", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addapi',res.data);
+            console.log(res);
         })
     },
     //添加视图借口
     addview(context, payload) {
-        console.log(payload)
-        axios.get("/api/user/authorityView/edit", payload, { headers: { authorization: getToken() } }).then(res => {
+        // console.log(payload)
+        axios.get("/api/user/authorityView/edit",payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addview',res.data);
         })
     },
@@ -149,7 +153,7 @@ const actions = {
     },
     //更新用户
     newuser(context, payload) {
-        console.log(payload);
+        // console.log(payload);
         axios.put("/user/user", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('newuser',res.data);
         })
