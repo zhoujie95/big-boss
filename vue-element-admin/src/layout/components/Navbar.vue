@@ -27,7 +27,6 @@
           <img :src="userInfo.avatar" class="user-avatar">
           <span>{{userInfo.user_name}}</span>
          <!-- <i class="el-icon-caret-bottom" /> -->
-         <span>{{userInfo.user_name}}</span>
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">

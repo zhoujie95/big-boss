@@ -130,15 +130,9 @@ export const constantRoutes = [
 //动态路由
 export const asyncRoutes = [
   examRouter,
-<<<<<<< HEAD
-  classRouter,
-  userRouter,
-  testRouter,
-=======
   userRouter,
   testRouter,
   classRouter,
->>>>>>> ab120e399c181afc549e3e74da837cb238be1b37
   readRouter,
   // {
   //   path: '/permission',
@@ -409,7 +403,7 @@ export const asyncRoutes = [
   //   ]
   // },
 
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/dashboard', hidden: true }
 ]
 
 const createRouter = () => new Router({

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { login, logout, getInfo,getViewAuthority,upuesrdatas } from '@/api/user'
-=======
 import { login, logout, getInfo, getViewAuthority,updateuser} from '@/api/user'
->>>>>>> ab120e399c181afc549e3e74da837cb238be1b37
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
