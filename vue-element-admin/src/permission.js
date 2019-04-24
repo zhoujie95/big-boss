@@ -45,8 +45,8 @@ router.beforeEach(async(to, from, next) => {
           const userInfo = await store.dispatch('user/getInfo')
           //console.log('userInfo...', userInfo);
           // 2.通过身份获取权限
-          const viewAuthority = await store.dispatch('user/getViewAuthority')
-          console.log(viewAuthority)
+          const viewAuthority = await store.dispatch('user/getViewAuthority',userInfo)
+          //console.log(viewAuthority)
           // 3.通过权限生成路由
           let accrouters = await store.dispatch('permission/generateRoutes', viewAuthority)
           //4.把动态页面挂载到静态路由上

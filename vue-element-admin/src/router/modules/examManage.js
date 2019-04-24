@@ -25,21 +25,21 @@ const examRouter={
       path: 'examView',
       component: () => import('@/views/exam/examView/index'),
       name: 'examView',
-      meta: { title: 'examView',view_id:'main-watchQuestions' }
+      meta: { title: 'examView',noCache: true,view_id:'main-watchQuestions' }
     },
     //编辑试题的路由
     {
       path: '/edit/Questions',
       component: () => import('@/views/exam/examAdd/index'),
       name: 'editquestion',
-      // meta:{view_id: "main-editQuestions"}
+       //meta:{view_id: "main-editQuestions",noCache: true}
     },
     //查看试题详情的路由
     {
       path: '/detail/Questions',
       component: () => import('@/views/exam/examView/detail'),
       name: 'detail',
-      // meta:{view_id: "main-questionsDetail"}
+      //meta:{view_id: "main-questionsDetail",noCache: true}
     },
   ]
 }

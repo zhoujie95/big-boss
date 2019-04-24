@@ -49,6 +49,7 @@
 
 <script>
 import { mapGetters ,mapState,mapActions} from 'vuex'
+
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
@@ -56,7 +57,7 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import Search from '@/components/HeaderSearch'
-
+import { getToken } from '@/utils/auth'
 export default {
   components: {
     Breadcrumb,
