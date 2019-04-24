@@ -280,10 +280,12 @@ export default {
     },
      reset3(){
       this.value3="";
-    },reset4(){
+    },
+    reset4(){
       this.value4="";
        this.value5="";
-    }, reset5(){
+    },
+     reset5(){
       this.value6="";
        this.value7="";
     }
