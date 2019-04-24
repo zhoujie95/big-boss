@@ -37,6 +37,9 @@ const mutations = {
   },
   SET_UPDATA:(state,updates)=>{
       state.updata=updates
+  },
+  SET_USER:(state)=>{
+    state.userInfo = {}
   }
 }
 
@@ -75,8 +78,10 @@ const actions = {
   },
   // user logout
   logout({ commit, state }) {
+    
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
+        commit('SET_USER')
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         commit('SET_USERINFO',{})

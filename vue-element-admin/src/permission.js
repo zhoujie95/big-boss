@@ -53,7 +53,8 @@ router.beforeEach(async(to, from, next) => {
           router.addRoutes(accrouters)
           
           next({ ...to, replace: true })
-        } catch (error) {
+        } 
+        catch (error) {
           console.log('error....', error);
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

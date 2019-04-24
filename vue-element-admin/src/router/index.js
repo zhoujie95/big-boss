@@ -47,7 +47,6 @@ import readRouter from './modules/readManage'
  */
 //静态路由
 export const constantRoutes = [
-
   //编辑试题的路由
   {
      path:'/edit/Questions/:id',
@@ -85,7 +84,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
     redirect: 'dashboard',
     children: [
@@ -404,7 +403,7 @@ export const asyncRoutes = [
   //   ]
   // },
 
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/dashboard', hidden: true }
 ]
 
 const createRouter = () => new Router({
