@@ -6,7 +6,8 @@ const examRouter={
   name:'exam',
   meta: {
     title: 'examMange',
-    icon: 'documentation'
+    icon: 'documentation',
+    view_id:'main-watchQuestions'
   },
   children: [
     {
@@ -32,14 +33,14 @@ const examRouter={
       path: '/edit/Questions',
       component: () => import('@/views/exam/examAdd/index'),
       name: 'editquestion',
-      // meta:{view_id: "main-editQuestions"}
+       //meta:{view_id: "main-editQuestions", noCache: true}
     },
     //查看试题详情的路由
     {
       path: '/detail/Questions',
       component: () => import('@/views/exam/examView/detail'),
       name: 'detail',
-      // meta:{view_id: "main-questionsDetail"}
+      // meta:{view_id: "main-questionsDetail", noCache: true}
     },
   ]
 }

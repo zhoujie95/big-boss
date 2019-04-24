@@ -6,7 +6,8 @@ const testRouter={
   name:'test',
   meta: {
     title: 'testManage',
-    icon: 'list'
+    icon: 'list',
+    view_id:'main-examEdit'
   },
   children: [
     {

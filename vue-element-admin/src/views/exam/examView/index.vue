@@ -130,11 +130,11 @@ export default {
       }
     }
   },
-  async mounted() {
-    await this.getclass();
-    await this.gettype();
-    await this.getquestion();
-    await this.getAllQues();
+   mounted() {
+     this.getclass();
+     this.gettype();
+     this.getquestion();
+     this.getAllQues();
   },
   data() {
     return {

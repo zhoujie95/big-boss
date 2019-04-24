@@ -37,6 +37,9 @@ const mutations = {
   },
   SET_UPDATA:(state,updates)=>{
       state.updata=updates
+  },
+  SET_USER:(state)=>{
+    state.userInfo = {}
   }
 }
 
@@ -59,7 +62,7 @@ const actions = {
   },
   //获取视图权限
   async getViewAuthority({commit},payload){
-   let userAuthority=await getViewAuthority()
+   let userAuthority=await getViewAuthority({user_id:payload.user_id})
    //console.log('user....',userAuthority)
    if(userAuthority.code==1){
       commit('SET_VIEWAUTHORITY',userAuthority.data)
@@ -75,8 +78,10 @@ const actions = {
   },
   // user logout
   logout({ commit, state }) {
+    
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
+        commit('SET_USER')
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()
