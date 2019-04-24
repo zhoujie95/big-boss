@@ -25,6 +25,7 @@ const mutations = {
     views(state, data) {
         if (data.code == 1) {
             state.view = data.data
+            // console.log(state.view);
         }
     },
     api(state, data) {
@@ -122,23 +123,26 @@ const actions = {
     },
     //添加api
     addapi(context, payload) {
-        console.log(payload);
+        // console.log(payload);
         axios.get("/api/user/authorityApi/edit"+payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addapi',res.data);
-            console.log(res);
+            // console.log(res);
         })
     },
     //添加视图借口
     addview(context, payload) {
+        console.log(payload);
         axios.get("/api/user/authorityView/edit"+payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addview',res.data);
-            console.log(res);
+            // console.log(res);
         })
     },
     //设置api身份接口
     apishenfen(context, payload) {
+        console.log(payload)
         axios.post("/api/user/setIdentityApi", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('apishenfen',res.data);
+            console.log(res);
         })
     },
     //给身份设置视图
