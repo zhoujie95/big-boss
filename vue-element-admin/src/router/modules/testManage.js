@@ -6,20 +6,21 @@ const testRouter={
   name:'test',
   meta: {
     title: 'testManage',
-    icon: 'list'
+    icon: 'list',
+    view_id:'main-examEdit'
   },
   children: [
     {
       path: 'addtest',
       component: () => import('@/views/testmanager/addtest'),
       name: 'addtest',
-      meta: { title: 'testAdd' }
+      meta: { title: 'testAdd',view_id:'main-examEdit' }
     },
     {
       path: 'testlist',
       component: () => import('@/views/testmanager/testlist'),
       name: 'testlist',
-      meta: { title: 'testList' }
+      meta: { title: 'testList',view_id:'main-examList' }
     },
     {
       path:"edittest",
@@ -29,7 +30,8 @@ const testRouter={
     {
       path:"testdetail",
       component:()=>import("@/views/testmanager/testdetail"),
-      name:"testdetail"
+      name:"testdetail",
+      // meta:{view_id:'main-examDetail'}
     }
   ]
 }
