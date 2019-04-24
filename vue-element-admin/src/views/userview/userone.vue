@@ -263,6 +263,7 @@ export default {
       });
       this.$message($store.state.msg);
     },
+    //重置按钮
     reset(){
       this.value="";
       this.name="";
