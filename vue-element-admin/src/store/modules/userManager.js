@@ -139,10 +139,10 @@ const actions = {
     },
     //设置api身份接口
     apishenfen(context, payload) {
-        console.log(payload)
+        // console.log(payload)
         axios.post("/api/user/setIdentityApi", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('apishenfen',res.data);
-            console.log(res);
+            // console.log(res);
         })
     },
     //给身份设置视图
