@@ -32,20 +32,26 @@ const actions = {
 
   //请求所有考试类型
   async gettype({ commit }, payload) {
-    let result = await gettype()
-    commit('gettype', result.data)
+   await gettype().then(res=>{
+     //console.log('test...',res.data)
+     commit('gettype', res.data)
+   })
   },
  
   //请求所有课程类型的数据
   async getclass({ commit }, payload) {
-    let result = await getclass()
-    commit('getclass', result.data)
+    await getclass().then(res=>{
+      //console.log('class...',res.data)
+      commit('getclass', res.data)
+     })
   },
 
   //请求所有试题类型
   async getquestion({ commit }, payload) {
-    let result = await getquestion()
-    commit('getquestion', result.data)
+    let result=await getquestion()
+
+      commit('getquestion', result.data)
+
     return result.data.length
   },
 
@@ -68,9 +74,11 @@ const actions = {
 
   //获取所有试题
    async getAllQues({commit},payload){
-       let result=await getAllQues(payload)
+        await getAllQues(payload).then(res=>{
+          commit('getAllQues',res.data)
+        })
       //  console.log('quest....',result.data)
-       commit('getAllQues',result.data)
+    
    },
    //按条件查询试题
    async selectQues({commit},payload){

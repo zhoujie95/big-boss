@@ -62,8 +62,8 @@ const actions = {
   },
   //获取视图权限
   async getViewAuthority({commit},payload){
-   let userAuthority=await getViewAuthority({user_id:payload.user_id})
-   //console.log('user....',userAuthority)
+   let userAuthority=await getViewAuthority(payload)
+   //console.log('user....',userAuthority.data)
    if(userAuthority.code==1){
       commit('SET_VIEWAUTHORITY',userAuthority.data)
       return userAuthority.data
@@ -84,6 +84,7 @@ const actions = {
         commit('SET_USER')
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
+        commit('SET_USERINFO',{})
         removeToken()
         resetRouter()
         resolve()

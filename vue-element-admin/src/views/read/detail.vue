@@ -4,25 +4,13 @@
     <h2 class="tit">阅卷</h2>
     <div class="main">
       <div class="main_left">
-        <div class="item_exam" v-for="(item) in student?student.questions:[]" :key="item.exam_exam_id">
+        <div
+          class="item_exam"
+          v-for="(item,i) in student?student.questions:[]"
+          :key="item.exam_exam_id"
+        >
           <p>{{item.title}}</p>
-          <p class='describe'>
-   
-            {{item.questions_stem}}
-          </p>
-          <!-- <markdown-editor/> -->
-          <div class="div">
-            <div class="div-left">
-            <span>学生答案</span>
-            <code>{{item.student_answer}}</code>
-            </div>
-             <div class="div-right">
-            <span>标准答案</span>
-            <code>{{item.questions_answer}}</code>
-            <!-- <markdown-editor value='item.questions_answer'/> -->
-             </div>
-
-          </div>
+          <markdown-editor :value="stem[i]"/>
         </div>
       </div>
       <div class="main_right">
@@ -49,7 +37,8 @@ export default {
   data() {
     return {
       score: 0,
-      //url:this.$store.student.questions[0].questions_stem.split('(')[1].split(')')[0]
+      stem: [],
+      answer: []
     };
   },
   components: {
@@ -62,7 +51,11 @@ export default {
   },
   async mounted() {
     await this.getstudent(this.$route.query);
-    console.log("student....",this.$store);
+    //console.log("student....",this.student);
+    for (var i = 0; i < this.student.questions.length; i++) {
+      this.stem.push(this.student.questions[i].questions_stem);
+      this.answer.push(this.student.questions[i].questions_answer);
+    }
   },
   methods: {
     ...mapActions({
@@ -76,12 +69,18 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.box/deep/.te-ww-container {
+  width: 900px;
+  height: auto;
+  margin: 10px 0;
+}
 .box {
   width: 100%;
   margin-top: 64px;
-  height: 1300px;
+  height: 1700px;
   padding-left: 20px;
   background: #f0f2f5;
+  overflow: auto;
   h2 {
     padding-left: 20px;
   }
@@ -93,47 +92,34 @@ export default {
     margin: 10px auto;
     display: flex;
     .main_left {
-      width: 800px;
-      height:100%;
+      width: 950px;
+      height: 100%;
       display: flex;
       flex-direction: column;
       padding: 20px;
       background: #fff;
       margin: 0 20px 0 20px;
-      p{
-        padding:5px 10px;
-        margin-top:10px;  
-        &.describe{
-          color:#999;
+      .item_exam {
+        &:nth-of-type(1) {
+          height: 900px;
+          margin-bottom: 350px;
+        }
+        &:nth-of-type(2) {
+          height: 100px;
+          margin-bottom: 100px;
+        }
+        &:nth-of-type(3) {
+          height: 100px;
+          margin-bottom: 20px;
+        }
+      }
+      p {
+        padding: 5px 10px;
+        &.describe {
+          color: #999;
           line-height: 30px;
-          margin:10px 0;
           font-weight: normal;
         }
-      }
-      .item_exam{
-        height:auto;
-        &>div{
-        display: flex;
-        .div-left{
-          width:200px;
-
-          code{
-            line-height: 25px;
-            width:200px;
-            margin-top:10px;
-            padding:10px;
-          }
-        }
-        .div-right{
-          flex:1;
-               code{
-                 width:500px;
-                 margin-left:10px;
-                 margin-top:5px;
-            line-height: 25px;
-          }
-        }
-      }
       }
     }
     .main_right {
@@ -141,7 +127,7 @@ export default {
       position: fixed;
       top: 50%;
       margin-top: -150px;
-      right: 50px;
+      right: 6px;
       height: 261.5px;
       border-radius: 10px;
       overflow: hidden;
@@ -178,7 +164,6 @@ export default {
     }
   }
 }
-
 .slider {
   width: 86%;
   margin-left: 7%;

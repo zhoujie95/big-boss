@@ -13,18 +13,20 @@ const readRouter={
     path: 'read',
     component: () => import('@/views/read/read.vue'),
     name: 'reads',
-    meta: { title: 'readReady',view_id:'main-examinationPapers' }
+    meta: { title: 'readReady',view_id:'main-examinationPapers',noCache: true }
   },
   {
     path: 'classmate',
     component: () => import('@/views/read/classmate.vue'),
     name: 'classmate',
-    // meta:{view_id: "main-examPaperClassList"}
+    hidden:true,
+    meta:{view_id: "main-examPaperClassList"}
   },  {
     path: 'details',
     component: () => import('@/views/read/detail.vue'),
     name: 'details',
-    // meta:{view_id: "main-examPaperClassmate"}
+    hidden:true,
+    meta:{view_id: "main-examPaperClassmate"}
   }]
 }
 

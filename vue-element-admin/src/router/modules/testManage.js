@@ -14,24 +14,25 @@ const testRouter={
       path: 'addtest',
       component: () => import('@/views/testmanager/addtest'),
       name: 'addtest',
-      meta: { title: 'testAdd',view_id:'main-examEdit' }
+      meta: { title: 'testAdd',view_id:'main-examEdit' ,noCache: true}
     },
     {
       path: 'testlist',
       component: () => import('@/views/testmanager/testlist'),
       name: 'testlist',
-      meta: { title: 'testList',view_id:'main-examList' }
+      meta: { title: 'testList',view_id:'main-examList' ,noCache: true}
     },
     {
       path:"edittest",
       component:()=>import("@/views/testmanager/edittest"),
-      name:"edittest"   
+      name:"edittest"
     },
     {
       path:"testdetail",
       component:()=>import("@/views/testmanager/testdetail"),
       name:"testdetail",
-      // meta:{view_id:'main-examDetail'}
+      hidden:true,
+       meta:{view_id:'main-examDetail',noCache: true}
     }
   ]
 }

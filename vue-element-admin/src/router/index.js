@@ -84,7 +84,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
     redirect: 'dashboard',
     children: [
@@ -403,7 +403,7 @@ export const asyncRoutes = [
   //   ]
   // },
 
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/dashboard', hidden: true }
 ]
 
 const createRouter = () => new Router({
