@@ -28,6 +28,9 @@
         <div class="findbtn" @click="findlist(exam_id,subject_id)">
           <svg-icon icon-class="search" />&nbsp;&nbsp;查询
         </div>
+        <div class="findbtn" @click="daochu">
+          <svg-icon icon-class="search" />&nbsp;&nbsp;导出
+        </div>
       </div>
       <div class="testlist-box">
         <div class="listtitle">
@@ -48,7 +51,9 @@
                 <el-button
                   size="mini"
                   @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                  
             </template>
+            
             </el-table-column>
           </el-table>
         </div>
@@ -106,6 +111,25 @@ export default {
       if(exam_id && subject_id){
         this.$store.dispatch("testmanager/gettestlist",{exam_id,subject_id});
       }
+    },
+    daochu(){
+      console.log(this.testlistdata)
+      let headers = Object.keys(this.testlistdata[0])
+      console.log(headers)
+      let list = this.testlistdata.map(item=>{
+        let arr = Object.values(item)
+        return arr.map(item=>JSON.stringify(item))
+      })
+      console.log(list)
+      import('@/vendor/Export2Excel').then(excel => {
+        excel.export_json_to_excel({
+          header: headers,
+          data:list,
+          filename: '试卷列表',
+          bookType: 'xlsx'
+        })
+        
+      })
     }
   },
   computed: {
