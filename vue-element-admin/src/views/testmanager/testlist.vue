@@ -28,9 +28,13 @@
         <div class="findbtn" @click="findlist(exam_id,subject_id)">
           <svg-icon icon-class="search" />&nbsp;&nbsp;查询
         </div>
+<<<<<<< HEAD
         <div class="daobtn" @click="daochu">
           <svg-icon icon-class="search" />&nbsp;&nbsp;导出
         </div>
+=======
+        <el-button type='primary' @click='exportExcel'>导出试卷</el-button>
+>>>>>>> 474c9bd30eaa7b933b4d6c289adce8bc109d2171
       </div>
       <div class="testlist-box">
         <div class="listtitle">
@@ -112,23 +116,22 @@ export default {
         this.$store.dispatch("testmanager/gettestlist",{exam_id,subject_id});
       }
     },
-    daochu(){
-      console.log(this.testlistdata)
-      let headers = Object.keys(this.testlistdata[0])
-      console.log(headers)
-      let list = this.testlistdata.map(item=>{
-        let arr = Object.values(item)
-        return arr.map(item=>JSON.stringify(item))
+    exportExcel(){
+      //console.log(this.testlistdata)
+      let header=Object.keys(this.testlistdata[0])
+      let list=this.testlistdata.map(item=>{
+          let arr=Object.values(item)
+          return arr.map(item=>JSON.stringify(item))
       })
-      console.log(list)
-      import('@/vendor/Export2Excel').then(excel => {
+      //console.log(list)
+      //导出试卷--->
+       import('@/vendor/Export2Excel').then(excel => {
         excel.export_json_to_excel({
-          header: headers,
+          header:header,
           data:list,
-          filename: '试卷列表',
+          filename:'',
           bookType: 'xlsx'
         })
-        
       })
     }
   },
@@ -168,6 +171,13 @@ export default {
       border-radius: 10px;
       display: flex;
       padding: 40px;
+      .el-button{
+        height:37px;
+        line-height: 20px;
+        font-size: 16px;
+        margin-left:10px;
+        background: #0000FF;
+      }
       .itemoclass {
         width: 350px;
         height: 50px;

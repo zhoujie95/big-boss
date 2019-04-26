@@ -54,8 +54,10 @@ export default {
   data() {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
-    this.onlyOneChild = null
-    return {}
+    this.onlyOneChild=null
+    return {
+
+    }
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
@@ -70,7 +72,7 @@ export default {
           return true
         }
       })
-
+       //console.log('showing....',showingChildren)
       // When there is only one child router, the child router is displayed by default
       //当只有一个子路由器时，默认情况下显示子路由器
       if (showingChildren.length === 1) {
@@ -87,7 +89,9 @@ export default {
       // Show parent if there are no child router to display
       //如果没有要显示的子路由器，则显示父路由器
       if (showingChildren.length === 0) {
-        this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
+        //console.log('1111',children)
+        //console.log('parent',parent)
+        this.onlyOneChild = { ... parent, path: '', noShowingChildren:true}
         return true
       }
 

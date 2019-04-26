@@ -1,14 +1,13 @@
 <template>
   <div class="dashboard-editor-container">
     <div class="clearfix">
-      <pan-thumb :image="userInfo.avatar"/>
+      <pan-thumb :image="userInfo.avatar||''">
+        Your roles:
+        <span class="pan-info-roles">{{userInfo.identity_text}}</span>
+      </pan-thumb>
       <div class="info-container">
-        <el-button
-          type="primary"
-          icon="upload"
-          style="position: absolute;bottom:100px;margin-left:10px;"
-          @click="imagecropperShow=true"
-        >更改头像</el-button>
+        <span class="display_name">{{userInfo.user_name }}</span>
+        <span style="font-size:20px;padding-top:20px;display:inline-block;" @click="imagecropperShow=true">Editor's Dashboard</span>
       </div>
     </div>
     <div>
@@ -54,15 +53,17 @@ export default {
       this.imagecropperKey = this.imagecropperKey + 1;
       this.image = resData[0].path;
       localStorage.setItem('imgurl',resData[0].path)
-      console.log(this.userInfo)
      await this.updateuser({
         user_id:this.userInfo.user_id,
         avatar:this.image,
         user_name:this.userInfo.user_name
       }).then(res=>{
-         if(res.code===1){
-           this.getInfo()
+         if(res){
+          if(res.code===1){
+            this.getInfo()
+          }
          }
+     
       })
     },
     close() {
@@ -74,35 +75,33 @@ export default {
 
 <style lang="scss" scoped>
 .emptyGif {
-  display: block;
-  width: 45%;
-  margin: 0 auto;
-}
-
-.dashboard-editor-container {
-  background-color: #e3e3e3;
-  height: 900px;
-  min-height: 100vh;
-  padding: 50px 60px 0px;
-  margin-top: 64px;
-  .pan-info-roles {
-    font-size: 12px;
-    font-weight: 700;
-    color: #333;
     display: block;
+    width: 45%;
+    margin: 0 auto;
   }
-  .info-container {
-    position: relative;
-    margin-left: 150px;
-    height: 150px;
-    line-height: 200px;
-    .display_name {
-      font-size: 48px;
-      line-height: 48px;
-      color: #212121;
-      position: absolute;
-      top: 30px;
+  .dashboard-editor-container {
+    background-color: #e3e3e3;
+    min-height: 150vh;
+    margin-top:64px;
+    padding: 50px 60px 0px;
+    .pan-info-roles {
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+      display: block;
+    }
+    .info-container {
+      position: relative;
+      margin-left: 190px;
+      height: 150px;
+      line-height: 200px;
+      .display_name {
+        font-size: 48px;
+        line-height: 48px;
+        color: #212121;
+        position: absolute;
+        top: 25px;
+      }
     }
   }
-}
 </style>

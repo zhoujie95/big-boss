@@ -1,13 +1,11 @@
 <template>
   <div class="dashboard-container">
-    <div class="ting"></div>
     <component :is="currentRole" />
-    <!-- <h1>北京八维考试系统</h1> -->
   </div>
 </template>
 
 <script>
-import { mapGetters,mapState} from 'vuex'
+import {mapState } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
 
@@ -20,15 +18,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'roles'
-    ]),
     ...mapState({
-      identity_text:state=>state.user.userInfo.identity_text
+      userInfo:state=>state.user.userInfo
     })
   },
   created() {
-    if (this.identity_text!=='管理员') {
+    //console.log(this.userInfo.identity_text)
+    if (this.userInfo.identity_text!=='管理员') {
       this.currentRole = 'editorDashboard'
     }
   }

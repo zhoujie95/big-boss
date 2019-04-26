@@ -41,17 +41,22 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
+          //1
           // 1.如果没有用户信息就去获取用户信息
           const userInfo = await store.dispatch('user/getInfo')
           //console.log('userInfo...', userInfo);
+
           // 2.通过身份获取权限
           const viewAuthority = await store.dispatch('user/getViewAuthority',userInfo)
-          //console.log(viewAuthority)
+          //console.log('view......',viewAuthority)
+
           // 3.通过权限生成路由
           let accrouters = await store.dispatch('permission/generateRoutes', viewAuthority)
           // console.log(accrouters)
+
           //4.把动态页面挂载到静态路由上
           router.addRoutes(accrouters)
+
           next({ ...to, replace: true })
         } 
         catch (error) {

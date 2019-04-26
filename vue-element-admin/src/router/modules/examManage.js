@@ -13,19 +13,19 @@ const examRouter={
       path: 'examAdd',
       component: () => import('@/views/exam/examAdd/index'),
       name: 'examAdd',
-      meta: { title: 'examAdd', noCache: true,view_id: 'main-addQuestions'}
+      meta: { title: 'examAdd',view_id: 'main-addQuestions'}
     },
     {
       path: 'examType',
       component: () => import('@/views/exam/examType/index'),
       name: 'examType',
-      meta: { title: 'examType' , noCache: true,view_id: 'main-questionsType'}
+      meta: { title: 'examType',view_id: 'main-questionsType'}
     },
     {
       path: 'examView',
       component: () => import('@/views/exam/examView/index'),
       name: 'examView',
-      meta: { title: 'examView',noCache: true,view_id:'main-watchQuestions' }
+      meta: { title: 'examView',view_id:'main-watchQuestions' }
     },
     //编辑试题的路由
     {
@@ -43,6 +43,13 @@ const examRouter={
       hidden:true,
       meta:{view_id: "main-questionsDetail"}
     },
+    //上传表格的路由
+    {
+      path:'upload',
+      name:'upload',
+      component:()=>import('@/views/exam/uploadExcel/index'),
+      meta:{title:'upload',view_id:'login'}
+    }
   ]
 }
 
