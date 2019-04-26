@@ -43,6 +43,13 @@ const examRouter={
       hidden:true,
       meta:{view_id: "main-questionsDetail"}
     },
+    //上传表格的路由
+    {
+      path:'upload',
+      name:'upload',
+      component:()=>import('@/views/exam/uploadExcel/index'),
+      meta:{title:'upload',view_id:'login'}
+    }
   ]
 }
 
