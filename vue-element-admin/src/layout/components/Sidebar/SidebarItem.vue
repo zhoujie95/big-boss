@@ -59,22 +59,33 @@ export default {
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
+      
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
+          //Temp set(如果只有一个显示子元素，则使用)
           this.onlyOneChild = item
           return true
         }
       })
 
       // When there is only one child router, the child router is displayed by default
+      //当只有一个子路由器时，默认情况下显示子路由器
       if (showingChildren.length === 1) {
-        return true
+        //console.log(showingChildren)
+        if(showingChildren[0].path=='dashboard'){
+          return true
+        }
+        if(showingChildren[0].path=='edittest'){
+          return true
+        }
+        return false
       }
 
       // Show parent if there are no child router to display
+      //如果没有要显示的子路由器，则显示父路由器
       if (showingChildren.length === 0) {
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true

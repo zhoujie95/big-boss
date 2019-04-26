@@ -6,8 +6,7 @@ const userRouter={
   name:'user',
   meta: {
     title: 'userManage',
-    icon: 'user',
-    view_id:'main-addUser'
+    icon: 'user'
   },
   children: [
     {

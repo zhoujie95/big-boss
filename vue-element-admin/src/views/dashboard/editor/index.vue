@@ -49,11 +49,12 @@ export default {
         getInfo:'user/getInfo'
     }),
    async cropSuccess(resData) {
+     
       this.imagecropperShow = false;
       this.imagecropperKey = this.imagecropperKey + 1;
       this.image = resData[0].path;
       localStorage.setItem('imgurl',resData[0].path)
-      //console.log(this.userInfo)
+      console.log(this.userInfo)
      await this.updateuser({
         user_id:this.userInfo.user_id,
         avatar:this.image,

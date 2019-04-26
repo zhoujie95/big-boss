@@ -6,8 +6,7 @@ const readRouter={
   name:'read',
   meta: {
     title:'readManage',
-    icon: 'edit',
-    view_id:'main-examinationPapers'
+    icon: 'edit'
   },
   children:[{
     path: 'read',

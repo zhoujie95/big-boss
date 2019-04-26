@@ -6,8 +6,7 @@ const examRouter={
   name:'exam',
   meta: {
     title: 'examMange',
-    icon: 'documentation',
-    view_id:'main-watchQuestions'
+    icon: 'documentation'
   },
   children: [
     {

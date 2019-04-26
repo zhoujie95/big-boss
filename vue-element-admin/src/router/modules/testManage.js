@@ -6,8 +6,7 @@ const testRouter={
   name:'test',
   meta: {
     title: 'testManage',
-    icon: 'list',
-    view_id:'main-examEdit'
+    icon: 'list'
   },
   children: [
     {
@@ -26,6 +25,7 @@ const testRouter={
       path:"edittest",
       component:()=>import("@/views/testmanager/edittest"),
       name:"edittest"
+      
     },
     {
       path:"testdetail",

@@ -6,8 +6,7 @@ const classRouter={
   name:'class',
   meta: {
     title: 'classManage',
-    icon: 'nested',
-    view_id:'main-grade'
+    icon: 'nested'
   },
   children: [
     {

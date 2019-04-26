@@ -28,7 +28,7 @@
         <div class="findbtn" @click="findlist(exam_id,subject_id)">
           <svg-icon icon-class="search" />&nbsp;&nbsp;查询
         </div>
-        <div class="findbtn" @click="daochu">
+        <div class="daobtn" @click="daochu">
           <svg-icon icon-class="search" />&nbsp;&nbsp;导出
         </div>
       </div>
@@ -180,6 +180,16 @@ export default {
         background: blue;
         color: white;
         border-radius: 5px;
+      }
+      .daobtn{
+        width: 150px;
+        height: 37px;
+        text-align: center;
+        line-height: 37px;
+        background: blue;
+        color: white;
+        border-radius: 5px;
+        margin-left: 10px;
       }
     }
     .testlist-box {
