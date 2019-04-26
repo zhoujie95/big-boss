@@ -29,9 +29,11 @@ import './permission' // permission control
 import './utils/errorLog' // error log
 
 //挂载自定义过滤器
+
 import * as filters from './filters' // global filters
 
 // //挂载mock 拦截请求
+
 // import { mockXHR } from '../mock' // simulation data
  import ElementUI from 'element-ui';
 

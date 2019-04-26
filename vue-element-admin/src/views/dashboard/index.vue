@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <!-- <component :is="currentRole" /> -->
-    <h1>北京八维考试系统</h1>
+    <component :is="currentRole" />
   </div>
 </template>
 
@@ -26,7 +25,7 @@ export default {
   created() {
     if (!this.roles.includes('admin')) {
       this.currentRole = 'editorDashboard'
-    }
+      }
   }
 }
 </script>
