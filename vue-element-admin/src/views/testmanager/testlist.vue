@@ -28,6 +28,7 @@
         <div class="findbtn" @click="findlist(exam_id,subject_id)">
           <svg-icon icon-class="search" />&nbsp;&nbsp;查询
         </div>
+        <el-button type='primary' @click='exportExcel'>导出试卷</el-button>
       </div>
       <div class="testlist-box">
         <div class="listtitle">
@@ -106,6 +107,24 @@ export default {
       if(exam_id && subject_id){
         this.$store.dispatch("testmanager/gettestlist",{exam_id,subject_id});
       }
+    },
+    exportExcel(){
+      //console.log(this.testlistdata)
+      let header=Object.keys(this.testlistdata[0])
+      let list=this.testlistdata.map(item=>{
+          let arr=Object.values(item)
+          return arr.map(item=>JSON.stringify(item))
+      })
+      //console.log(list)
+      //导出试卷--->
+       import('@/vendor/Export2Excel').then(excel => {
+        excel.export_json_to_excel({
+          header:header,
+          data:list,
+          filename:'',
+          bookType: 'xlsx'
+        })
+      })
     }
   },
   computed: {
@@ -144,6 +163,13 @@ export default {
       border-radius: 10px;
       display: flex;
       padding: 40px;
+      .el-button{
+        height:37px;
+        line-height: 20px;
+        font-size: 16px;
+        margin-left:10px;
+        background: #0000FF;
+      }
       .itemoclass {
         width: 350px;
         height: 50px;

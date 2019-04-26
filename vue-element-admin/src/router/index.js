@@ -134,6 +134,7 @@ export const asyncRoutes = [
   testRouter,
   classRouter,
   readRouter,
+  { path: '*', redirect: '/dashboard', hidden: true }
   // {
   //   path: '/permission',
   //   component: Layout,
@@ -403,7 +404,7 @@ export const asyncRoutes = [
   //   ]
   // },
 
-  { path: '*', redirect: '/dashboard', hidden: true }
+
 ]
 
 const createRouter = () => new Router({
