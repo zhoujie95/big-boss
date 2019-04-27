@@ -232,7 +232,7 @@ export default {
       this.apiurl = this.apiurl;
       this.apitype = this.apitype;
       this.$store.dispatch("userManager/addapi", 
-        'api_authority_text'+'='+encodeURI(this.apiname)+"&"+'api_authority_url'+"="+ this.apiurl+'&'+'api_authority_mehtod'+"="+this.apitype
+        'api_authority_text='+encodeURI(this.apiname)+'&api_authority_url='+this.apiurl+'&api_authority_method='+this.apitype
       );
       this.$message($store.state.msg);
     },
