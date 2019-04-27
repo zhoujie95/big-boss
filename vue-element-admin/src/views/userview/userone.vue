@@ -231,11 +231,9 @@ export default {
       this.apiname = this.apiname;
       this.apiurl = this.apiurl;
       this.apitype = this.apitype;
-      this.$store.dispatch("userManager/addapi", {
-        api_authority_text: this.apiname,
-        api_authority_url: this.apiurl,
-        api_authority_mehtod: this.apitype
-      });
+      this.$store.dispatch("userManager/addapi", 
+        'api_authority_text'+'='+encodeURI(this.apiname)+"&"+'api_authority_url'+"="+ this.apiurl+'&'+'api_authority_mehtod'+"="+this.apitype
+      );
       this.$message($store.state.msg);
     },
     addview() {
@@ -245,9 +243,9 @@ export default {
           this.text=$store.state.view[i].view_authority_text
         }
       }
-      this.$store.dispatch("userManager/addview", {
-        view_authority_text: this.text,view_id:this.value3
-      });
+      this.$store.dispatch("userManager/addview", 
+        'view_authority_text'+'='+this.text+'&'+'view_id'+'='+this.value3
+      );
       this.$message($store.state.msg);
     },
     apishenfen() {

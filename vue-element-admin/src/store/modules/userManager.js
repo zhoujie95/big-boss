@@ -82,12 +82,14 @@ const actions = {
     views(context) {
         axios.get('/api/user/view_authority', { headers: { authorization: state.token } }).then((res) => {
             context.commit('views', res.data);
+            // console.log(res);
         })
     },
     //api权限
     api(context) {
         axios.get('/api/user/api_authority', { headers: { authorization: state.token } }).then((res) => {
             context.commit('api', res.data);
+            console.log(res);
         })
     },
     //用户展示
@@ -123,18 +125,18 @@ const actions = {
     },
     //添加api
     addapi(context, payload) {
-        // console.log(payload);
-        axios.get("/api/user/authorityApi/edit"+payload, { headers: { authorization: getToken() } }).then(res => {
+        console.log(payload);
+        axios.get("/api/user/authorityApi/edit"+'?'+payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addapi',res.data);
-            // console.log(res);
+            console.log(res);
         })
     },
     //添加视图借口
     addview(context, payload) {
-        console.log(payload);
-        axios.get("/api/user/authorityView/edit"+payload, { headers: { authorization: getToken() } }).then(res => {
+        // console.log(payload);
+        axios.get("/api/user/authorityView/edit"+'?'+payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addview',res.data);
-            // console.log(res);
+            // console.log(res.data);
         })
     },
     //设置api身份接口
@@ -154,7 +156,7 @@ const actions = {
     //更新用户
     newuser(context, payload) {
         console.log(payload);
-        axios.put("/user/user", payload, { headers: { authorization: getToken() } }).then(res => {
+        axios.put("/api/user/user", payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('newuser',res.data);
         })
     },
