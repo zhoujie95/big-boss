@@ -39,7 +39,7 @@
         <el-table-column prop="state" label="阅卷状态" width="180"/>
         <el-table-column prop="start_time" label="开始时间" width="180"/>
         <el-table-column prop="end_time" label="结束时间" width="180"/>
-        <el-table-column  label="成材率" width="180">-</el-table-column>
+        <el-table-column prop='score' label="成材率" width="180"/>
         <el-table-column label="操作">批卷</el-table-column>
       </el-table>
       <div class="block">
