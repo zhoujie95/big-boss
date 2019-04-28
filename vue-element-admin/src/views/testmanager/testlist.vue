@@ -28,13 +28,7 @@
         <div class="findbtn" @click="findlist(exam_id,subject_id)">
           <svg-icon icon-class="search" />&nbsp;&nbsp;查询
         </div>
-<<<<<<< HEAD
-        <div class="daobtn" @click="daochu">
-          <svg-icon icon-class="search" />&nbsp;&nbsp;导出
-        </div>
-=======
         <el-button type='primary' @click='exportExcel'>导出试卷</el-button>
->>>>>>> 474c9bd30eaa7b933b4d6c289adce8bc109d2171
       </div>
       <div class="testlist-box">
         <div class="listtitle">
