@@ -1,4 +1,5 @@
 <template>
+<div class="box">
   <el-table :data="list" style="width: 100%;padding-top: 15px;">
     <el-table-column label="Order_No" min-width="200">
       <template slot-scope="scope">
@@ -18,6 +19,7 @@
       </template>
     </el-table-column>
   </el-table>
+  </div>
 </template>
 
 <script>
@@ -38,18 +40,24 @@ export default {
   },
   data() {
     return {
-      list: null
+      list:[]
     }
   },
-  created() {
-    this.fetchData()
-  },
+  // created() {
+  //   //this.fetchData()
+  // },
   methods: {
-    fetchData() {
-      transactionList().then(response => {
-        this.list = response.data.items.slice(0, 8)
-      })
-    }
+  //   fetchData() {
+  //     transactionList().then(response => {
+  //       this.list = response.data.items.slice(0, 8)
+  //     })
+  //   }
   }
 }
 </script>
+<style>
+.dashboard-container{
+  margin-top:64px;
+}
+</style>
+
