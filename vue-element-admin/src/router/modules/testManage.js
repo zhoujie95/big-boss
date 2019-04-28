@@ -25,6 +25,7 @@ const testRouter={
       path:"edittest",
       component:()=>import("@/views/testmanager/edittest"),
       name:"edittest"
+      
     },
     {
       path:"testdetail",

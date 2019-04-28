@@ -31,6 +31,10 @@ export default {
 }
 </script>
 <style>
+.ting{
+  width: 100%;
+  height: 50px;
+}
 h1{
   margin-top: 180px;
   margin-left: 200px;

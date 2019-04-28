@@ -48,6 +48,7 @@ export default {
         getInfo:'user/getInfo'
     }),
    async cropSuccess(resData) {
+     
       this.imagecropperShow = false;
       this.imagecropperKey = this.imagecropperKey + 1;
       this.image = resData[0].path;

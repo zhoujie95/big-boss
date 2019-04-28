@@ -47,6 +47,7 @@ const actions = {
   // user login
 
   async login({ commit }, userInfo) {
+    //console.log(userInfo)
     const { username, password } = userInfo
     let res = await login({user_name: username, user_pwd: password});
     setToken(res.token);
@@ -75,6 +76,12 @@ const actions = {
   async updateuser({commit},payload){
       let result=await updateuser(payload)
       return result
+  },
+  //更新用户信息
+  async upuserdata({commit},played){
+    console.log(played)
+     let yh = await upuesrdatas(played)
+     console.log(yh)
   },
   // user logout
   logout({ commit, state }) {
