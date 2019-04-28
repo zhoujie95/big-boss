@@ -2,7 +2,8 @@
 import {gettype,getclass,getquestion,
         addquestion,addQuesType,getAllQues,
         selectQues,
-        updateques} from '@/api/exam.js'
+        updateques,
+        deleteQues} from '@/api/exam.js'
 
 const state = {
    testType:[],
@@ -58,6 +59,8 @@ const actions = {
   //添加试题
   async addquestion({commit},payload){
      let result=await addquestion(payload)
+     //console.log('result..',result)
+     return result
   },
 
   //添加试题类型
@@ -88,6 +91,10 @@ const actions = {
    //更新试题
    async updateques({commit},payload){
        let result=await updateques(payload)
+   },
+   async deleteQues({commit},payload){
+     let result=await deleteQues(payload)
+     return result
    }
 }
 

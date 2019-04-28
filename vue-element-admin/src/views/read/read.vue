@@ -57,6 +57,7 @@ export default {
   },
  async mounted(){
      await this.getpaper()
+     console.log(this.paperData)
   },
   methods: {
     ...mapActions({
