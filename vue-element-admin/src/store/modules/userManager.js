@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import {shenfen} from '@/api/userManager.js';
+import { identity, view_authority, api_authority, user, identity_api, identity_view, adduse, addshenfen, addapi, addview, apishenfen, shenfenview, newuser } from '@/api/apiuser';
 import { getToken } from '@/utils/auth';
 
 const state = {
@@ -14,18 +14,18 @@ const state = {
     user: [],
     list: [],
     viewlist: [],
-    msg:""
+    msg: ''
 }
 const mutations = {
     identity(state, data) {
         if (data.code == 1) {
             state.shenfen = data.data
+
         }
     },
     views(state, data) {
         if (data.code == 1) {
             state.view = data.data
-            // console.log(state.view);
         }
     },
     api(state, data) {
@@ -48,115 +48,102 @@ const mutations = {
             state.viewlist = data.data
         }
     },
-    adduser(state, data){
-            state.msg = data.msg
-    },
-    addshenfen(state,data){
+    adduser(state, data) {
         state.msg = data.msg
     },
-    addapi(state,data){
+    addshenfen(state, data) {
         state.msg = data.msg
     },
-    addview(state,data){
+    addapi(state, data) {
         state.msg = data.msg
     },
-    apishenfen(state,data){
+    addview(state, data) {
         state.msg = data.msg
     },
-    shenfenview(state,data){
+    apishenfen(state, data) {
         state.msg = data.msg
     },
-    newuser(state,data){
+    shenfenview(state, data) {
+        state.msg = data.msg
+    },
+    newuser(state, data) {
         state.msg = data.msg
     }
 }
 const actions = {
     //身份权限
-    identity(context) {
-        axios.get('/api/user/identity', { headers: { authorization: state.token } }).then((res) => {
-            context.commit('identity', res.data);
-
-        })
+    async identity({ commit }) {
+        let result = await identity();
+        commit('identity', result);
     },
     //视图权限
-    views(context) {
-        axios.get('/api/user/view_authority', { headers: { authorization: state.token } }).then((res) => {
-            context.commit('views', res.data);
-        })
+    async views({ commit }) {
+        let result = await view_authority()
+        commit('views', result);
+
     },
     //api权限
-    api(context) {
-        axios.get('/api/user/api_authority', { headers: { authorization: state.token } }).then((res) => {
-            context.commit('api', res.data);
-        })
+    async api({ commit }) {
+        let result = await api_authority()
+        commit('api', result);
     },
-    //用户展示
-    user(context) {
-        axios.get('/api/user/user', { headers: { authorization: state.token } }).then((res) => {
-            context.commit('user', res.data);
-        })
+    // 用户展示
+    async user({ commit }) {
+        let result = await user()
+        commit('user', result);
+
     },
     //身份和api权限关系
-    identityapi(context) {
-        axios.get('/api/user/identity_api_authority_relation', { headers: { authorization: state.token } }).then((res) => {
-            context.commit('identityapi', res.data);
-        })
+    async identityapi({ commit }) {
+        let result = await identity_api()
+        commit('identityapi', result);
+
     },
     //身份和视图权限关系
-    identityview(context) {
-        axios.get('/api/user/identity_view_authority_relation', { headers: { authorization: state.token } }).then((res) => {
-            context.commit('identityview', res.data);
-        })
+    async identityview({ commit }) {
+        let result = await identity_view()
+        commit('identityview', result);
     },
-    //添加用户
-    adduser(context,payload) {
-        axios.post("/api/user", payload, { headers: { authorization: getToken() } }).then(res => {
-          
-            context.commit('adduser',res.data);
-        })
+
+
+
+
+    // //添加用户
+    async adduser({ commit }, payload) {
+        let result = await adduser(payload);
+        commit('adduser', result);
     },
     //添加身份
-    addshenfen(context, payload) {
-        axios.post("/api/user/identity/edit", payload, { headers: { authorization: getToken() } }).then(res => {
-            context.commit('addshenfen',res.data);
-        })
+    async addshenfen({ commit }, payload) {
+        let result = await addshenfen(payload);
+        commit('addshenfen', result);
+
     },
     //添加api
-    addapi(context, payload) {
-        // console.log(payload);
-        axios.get("/api/user/authorityApi/edit"+payload, { headers: { authorization: getToken() } }).then(res => {
-            context.commit('addapi',res.data);
-            // console.log(res);
-        })
+    async addapi({ commit }, payload) {
+        let result = await addapi(payload);
+        commit('addapi', result);
     },
     //添加视图借口
-    addview(context, payload) {
-        console.log(payload);
-        axios.get("/api/user/authorityView/edit"+payload, { headers: { authorization: getToken() } }).then(res => {
-            context.commit('addview',res.data);
-            // console.log(res);
-        })
+    async addview({ commit }, payload) {
+        let result = await addview(payload);
+        commit('addview', result);
     },
     //设置api身份接口
-    apishenfen(context, payload) {
-        console.log(payload)
-        axios.post("/api/user/setIdentityApi", payload, { headers: { authorization: getToken() } }).then(res => {
-            context.commit('apishenfen',res.data);
-            console.log(res);
-        })
+    async apishenfen({ commit }, payload) {
+        let result = await apishenfen(payload);
+        commit('apishenfen', result);
     },
     //给身份设置视图
-    shenfenview(context, payload) {
-        axios.post("/api/user/setIdentityView", payload, { headers: { authorization: getToken() } }).then(res => {
-            context.commit('shenfenview',res.data);
-        })
+    async shenfenview({ commit }, payload) {
+        let result = await shenfenview(payload);
+        commit('shenfenview', result);
+
     },
     //更新用户
-    newuser(context, payload) {
-        console.log(payload);
-        axios.put("/user/user", payload, { headers: { authorization: getToken() } }).then(res => {
-            context.commit('newuser',res.data);
-        })
+    async newuser({ commit }, payload) {
+        let result = await newuser(payload);
+        commit('newuser', result);
     },
 
 }
