@@ -14,7 +14,7 @@ const state = {
     user: [],
     list: [],
     viewlist: [],
-    msg:""
+    msg:''
 }
 const mutations = {
     identity(state, data) {
@@ -49,7 +49,7 @@ const mutations = {
         }
     },
     adduser(state, data){
-            state.msg = data.msg
+        state.msg=data.msg
     },
     addshenfen(state,data){
         state.msg = data.msg
@@ -125,10 +125,9 @@ const actions = {
     },
     //添加api
     addapi(context, payload) {
-        console.log(payload);
         axios.get("/api/user/authorityApi/edit"+'?'+payload, { headers: { authorization: getToken() } }).then(res => {
             context.commit('addapi',res.data);
-            console.log(res);
+     
         })
     },
     //添加视图借口
