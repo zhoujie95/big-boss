@@ -155,6 +155,7 @@ export default {
       })
     },
     handleLogin() {
+       _hmt.push(['_trackEvent','考试管理平台','tap','登录按钮点击'])
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           //console.log(this.loginForm)
