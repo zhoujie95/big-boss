@@ -24,6 +24,7 @@ const actions = {
     //删除教室
     async deljiaoshi({commit},res){
         let str = await deljiaoshi(res)
+        return str
     }
 }
 

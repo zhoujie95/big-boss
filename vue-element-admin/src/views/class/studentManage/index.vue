@@ -90,7 +90,13 @@ export default {
     }),
     async handleDelete(ind,rew){
       //console.log(rew.student_id)
-      await this.delstudent({student_id:rew.student_id})
+      let del = await this.delstudent({student_id:rew.student_id})
+      if(del.code==1){
+        this.$message({
+            message:"删除成功",
+            duration:1000
+          });
+      }
       await this.getstudent()
     },
     handleSizeChange(val) {

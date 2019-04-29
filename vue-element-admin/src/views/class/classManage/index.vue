@@ -27,7 +27,8 @@ export default {
      return{
       dialogshow:false,
       type:'',
-      name:''
+      name:'',
+      banjiid:''
      }
    },
    components:{

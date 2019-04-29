@@ -24,7 +24,7 @@ const actions = {
     //删除学生
     async delstudent({commit},parmse){
         let ind = await delxuesheng(parmse)
-        console.log(ind)
+        return ind
     },
     //搜索学生
     soustudent({commit},paylond){

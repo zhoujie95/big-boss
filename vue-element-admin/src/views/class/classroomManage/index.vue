@@ -42,7 +42,14 @@ export default {
     //点击删除  第一个参数是下标 第二个是删除的数据
     async handleDelete(ind,rew){
       //console.log(rew.room_id)
-      await this.deljiaoshi({room_id:rew.room_id})
+      let wawa = await this.deljiaoshi({room_id:rew.room_id})
+      //console.log('wawawa...',wawa)
+      if(wawa.code==1){
+        this.$message({
+            message:"删除成功",
+            duration:1000
+          });
+      }
       await this.getjiaoshi()
     }
   },
