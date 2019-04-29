@@ -45,6 +45,30 @@ const mutations = {
         if (data.code == 1) {
             state.viewlist = data.data
         }
+    },
+
+
+
+    adduser:(state, data)=> {
+        return data
+    },
+    addshenfen:(state, data)=>{
+        return data
+    },
+    addapi(state, data) {
+        return data
+    },
+    addview(state, data) {
+        return data
+    },
+    apishenfen(state, data) {
+        return data
+    },
+    shenfenview(state, data) {
+        return data
+    },
+    newuser(state, data) {
+        return data
     }
 }
 const actions = {
