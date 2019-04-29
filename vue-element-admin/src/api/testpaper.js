@@ -21,3 +21,7 @@ export let getClasses=(params)=>{
 export let getstudent=(params)=>{
      return request.get(`/exam/student/${params.exam_student_id}`)
 }
+//批改试卷
+export let upscore=(params)=>{
+     return request.put('/exam/student/t27znv-gu7azm-qpq9ai-laaf9m',params)
+}

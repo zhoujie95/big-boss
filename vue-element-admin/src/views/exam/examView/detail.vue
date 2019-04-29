@@ -19,7 +19,7 @@
       </div>
       <div class="right">
         <p>答案信息</p>
-        <markdown-editor v-model='answer' style='height:600px;marginTop:60px'/>
+        <markdown-editor v-model='answer' style='height:400px;marginTop:60px'/>
       </div>
     </div>
   </div>
@@ -46,6 +46,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.box/deep/.tui-editor-contents{
+  height:600px;
+}
 .box {
   position: relative;
   width: 100%;
@@ -77,7 +80,6 @@ export default {
       .left-top {
         margin-top:10px;
         p {
-          margin: 10px 0;
           font-size:14px;
         }
         .nav {

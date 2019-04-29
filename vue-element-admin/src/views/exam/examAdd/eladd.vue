@@ -48,39 +48,41 @@
             </div>
           </div>
         </div>
-        <p>请选择考试类型:</p>
-        <template>
-          <el-select v-model="exam"  placeholder="请选择">
-            <el-option
-              v-for="item in testType"
-              :key="item.exam_id"
-              :label="item.exam_name"
-              :value="item.exam_id"
-            ></el-option>
-          </el-select>
-        </template>
-        <p>请选择课程类型:</p>
-        <template>
-          <el-select v-model="classes" placeholder="请选择">
-            <el-option
-              v-for="item in classType"
-              :key="item.subject_id"
-              :label="item.subject_text"
-              :value="item.subject_id"
-            ></el-option>
-          </el-select>
-        </template>
-        <p>请选择题目类型:</p>
-        <template>
-          <el-select v-model="question" placeholder="请选择">
-            <el-option
-              v-for="item in questionType"
-              :key="item.questions_type_id"
-              :label="item.questions_type_text"
-              :value="item.questions_type_id"
-            ></el-option>
-          </el-select>
-        </template>
+          <el-form :rules='rules' :model="ruleForm" ref='ruleForms'>
+            <p>请选择考试类型:</p>
+            <el-form-item>
+                <el-select v-model="ruleForm.exam"  placeholder="请选择">
+                <el-option
+                  v-for="item in testType"
+                  :key="item.exam_id"
+                  :label="item.exam_name"
+                  :value="item.exam_id"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+            <p>请选择课程类型:</p>
+            <el-form-item>
+              <el-select v-model="ruleForm.classes" placeholder="请选择">
+                <el-option
+                  v-for="item in classType"
+                  :key="item.subject_id"
+                  :label="item.subject_text"
+                  :value="item.subject_id"
+                ></el-option>
+              </el-select>
+          </el-form-item>
+          <p>请选择题目类型:</p>
+          <el-form-item>
+            <el-select v-model="ruleForm.question" placeholder="请选择">
+              <el-option
+                v-for="item in questionType"
+                :key="item.questions_type_id"
+                :label="item.questions_type_text"
+                :value="item.questions_type_id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
         <div class="examAdd-title">
           <div class="title-header">
             <ul>
@@ -133,14 +135,24 @@ export default {
   props:['titles','data','handeltype'],
   data(){
      return{
+       ruleForm:{
+        exam:'',
+        classes:'',
+        question:'',
+       },
         title:'',
         content:'',
         content2:'',
-        exam:'',
-        classes:'',
-        question:''
+        rules:{
+        exam:[
+          {required: true,message:'请选择考试类型'},
+          {required:true,message:'请选择课程类型'},
+          {required:true,message:'请选择题目类型'}
+        ]
+      },
      }
   },
+
   computed:{
     ...mapState({
        testType:state=>state.addexam.testType,
@@ -164,22 +176,31 @@ export default {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-       }).then(()=>{
-          if(this.title&&this.content&&this.content2&&this.exam&&this.classes&&this.question){
-              this.addquestion({
-                    questions_type_id:this.question.toString(),
+       }).then(async ()=>{
+           if(!this.ruleForm.question||!this.ruleForm.exam||!this.ruleForm.classes||!this.title||!this.content||!this.content2){
+               this.$alert('参数验证错误',{
+                 type:'warning'
+               })
+           }else{
+                         await this.addquestion({
+                    questions_type_id:this.ruleForm.question.toString(),
                     title:this.title,
                     questions_stem:this.content,
                     questions_answer:this.content2,
                     //课程id
-                    subject_id:this.classes,
+                    subject_id:this.ruleForm.classes,
                     //用户id
                     user_id:this.userInfo.user_id,
                     //考试类型id
-                    exam_id:this.exam
-              })
+                    exam_id:this.ruleForm.exam
+              }).then(res=>{
+                  if(res&&res.code==1){
+                    this.$alert('添加试题成功')
+                  }
+              }) 
            }
-       })
+
+        })
       }else{
         //是编辑页面
         this.$confirm('您确定修改吗?','确定修改这道题吗',{

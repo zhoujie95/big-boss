@@ -6,12 +6,14 @@
         <div class="top-top">
           <label>课程类型:</label>
           <ul class="nav">
-            <li>all</li>
+            <li @click='allchose'
+            :class="{'current':all}"
+            >all</li>
             <li
               v-for="(item,i) in classType"
               :key="item.subject_id"
               @click="changeState(i)"
-              :class="{'current':i===defaultIndex}"
+              :class="{'current':i===defaultIndex||all}"
             >{{item.subject_text}}</li>
           </ul>
         </div>
@@ -60,7 +62,7 @@
         <div class="block">
           <el-pagination
             layout="prev, pager, next"
-            :total="34"
+            :total="allquestions.length"
             :size="5"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -104,14 +106,25 @@ export default {
       this.currentPage = currentPage; //点击第几页
     },
     changeState(ind) {
-      this.defaultIndex = ind;
+      this.defaultIndex =this.defaultIndex==null? ind:null;
+      this.all=false
+    },
+    allchose(){
+       this.all=!this.all;
+       this.defaultIndex=null
     },
     selects() {
-      this.selectQues({
-        subject_id: this.classType[this.defaultIndex].subject_id,
+      let obj={
+        subject_id:this.all?this.classType.map(item=>item.subject_id).join(','):(this.defaultIndex!==null?this.classType[this.defaultIndex].subject_id:''),
         exam_id: this.exam,
         questions_type_id: this.ques
-      });
+      };
+     for(let item of Object.keys(obj)){
+         if(!obj[item]){
+           delete obj[item]
+         }
+     }
+      this.selectQues(obj);
     },
     editQuest(exam_id, e) {
       // console.log(e.target.tagName)
@@ -140,6 +153,7 @@ export default {
     return {
       exam: "",
       ques: "",
+      all:false,
       currentPage: 1, //初始页
       pagesize: 5,
       defaultIndex: null
@@ -159,7 +173,7 @@ export default {
     padding: 10px 0 10px 20px;
   }
   .box-content {
-    width: 95%;
+    width: 98%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -196,11 +210,12 @@ export default {
         }
         .nav {
           flex: 1;
+                  flex-shrink:1;
           display: flex;
           & > li {
-            padding: 5px 5px;
+            flex:1;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             &:nth-of-type(1) {
               width: 50px;
             }

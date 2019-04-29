@@ -23,6 +23,7 @@ export default {
     })
   },
   created() {
+    //console.log(this.userInfo.identity_text)
     if (this.userInfo.identity_text=='管理员') {
       this.currentRole = 'editorDashboard'
     }
