@@ -14,7 +14,6 @@ const state = {
     user: [],
     list: [],
     viewlist: [],
-    msg: '1111'
 }
 const mutations = {
     identity(state, data) {
@@ -46,30 +45,6 @@ const mutations = {
         if (data.code == 1) {
             state.viewlist = data.data
         }
-    },
-
-
-
-    adduser:(state, data)=> {
-        state.msg=data.msg
-    },
-    addshenfen:(state, data)=>{
-         state.msg = data.msg
-    },
-    addapi(state, data) {
-        state.msg = data.msg
-    },
-    addview(state, data) {
-        state.msg = data.msg
-    },
-    apishenfen(state, data) {
-        state.msg = data.msg
-    },
-    shenfenview(state, data) {
-        state.msg = data.msg
-    },
-    newuser(state, data) {
-        state.msg = data.msg
     }
 }
 const actions = {
@@ -105,42 +80,51 @@ const actions = {
         let result = await identity_view()
         commit('identityview', result);
     },
-    // //添加用户
+
+
+
+
+    //添加用户
     async adduser({ commit }, payload) {
         let result = await add_user(payload);
         commit('adduser', result);
-        // return result
+        return result
     },
     //添加身份
     async addshenfen({commit}, payload) {
         let result = await addshenfen(payload);
         commit('addshenfen', result);
+        return result
     },
     //添加api
     async addapi({ commit }, payload) {
         let result = await addapi(payload);
         commit('addapi', result);
+        return result
     },
     //添加视图借口
     async addview({ commit }, payload) {
         let result = await addview(payload);
         commit('addview', result);
+        return result
     },
     //设置api身份接口
     async apishenfen({ commit }, payload) {
         let result = await apishenfen(payload);
         commit('apishenfen', result);
-        console.log(result);
+        return result
     },
     //给身份设置视图
     async shenfenview({ commit }, payload) {
         let result = await shenfenview(payload);
         commit('shenfenview', result);
+        return result
     },
     //更新用户
     async newuser({ commit }, payload) {
         let result = await newuser(payload);
         commit('newuser', result);
+        return result
     },
 
 }

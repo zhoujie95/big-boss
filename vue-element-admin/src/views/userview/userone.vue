@@ -79,7 +79,7 @@
             <span id="active">添加视图接口权限</span>
           </dt>
           <dd>
-            <el-select v-model="value3"  placeholder="请选择已有视图" class="sele"> 
+            <el-select v-model="value3" placeholder="请选择已有视图" class="sele">
               <el-option
                 v-for="item in view"
                 :key="item.view_id"
@@ -159,6 +159,7 @@
 /* eslint-disable */
 import $store from "../../store/modules/userManager";
 import { all } from "q";
+import { constants } from "crypto";
 export default {
   data() {
     return {
@@ -177,8 +178,8 @@ export default {
       apiname: "",
       apiurl: "",
       apitype: "",
-      text:"",
-      msg:""
+      text: "",
+      msg: ""
     };
   },
   methods: {
@@ -194,122 +195,128 @@ export default {
     nn() {
       this.$store.dispatch("userManager/api");
     },
-     users() {
+    users() {
       this.$store.dispatch("userManager/user");
     },
-     adduser() {
+    async adduser() {
       this.name = this.name;
       this.password = this.password;
       this.value = this.value;
-     
-      this.$store.dispatch("userManager/adduser", {
+      let user = await this.$store.dispatch("userManager/adduser", {
         user_name: this.name,
         user_pwd: this.password,
         identity_id: this.value
-      })
-       if($store.state.msg==""){
-        
-      }else{
-      this.$message($store.state.msg);
-      }
-     
+      });
+      this.$message({
+        message: user.msg,
+        duration: 1000
+      });
     },
-     newuser() {
+    async newuser() {
       this.name = this.name;
       this.password = this.password;
       this.value = this.value;
-      this.value2= this.value2;
-      this.$store.dispatch("userManager/newuser", {
+      this.value2 = this.value2;
+      let newu = await this.$store.dispatch("userManager/newuser", {
         user_id: this.value2,
         user_name: this.name,
-        user_pwd:this.password,
-        identity_id:this.value
+        user_pwd: this.password,
+        identity_id: this.value
+      });
+      this.$message({
+        message: newu.msg,
+        duration: 1000
       });
     },
-    addshenfen() {
+    async addshenfen() {
       this.shenfenname = this.shenfenname;
-      this.$store.dispatch("userManager/addshenfen", {
+      let shenfen = await this.$store.dispatch("userManager/addshenfen", {
         identity_text: this.shenfenname
       });
-      if(this.shenfenname==""){
-        this.$message("名称不能为空");
-      }else{
-        this.$message($store.state.msg);
-      }
+      this.$message({
+        message: shenfen.msg,
+        duration: 1000
+      });
     },
-    addapi() {
+    async addapi() {
       this.apiname = this.apiname;
       this.apiurl = this.apiurl;
       this.apitype = this.apitype;
-      
-      if(this.apiname==''||this.apiurl==''||this.apitype==''){
-        this.$message("参数有误");
-      }else{
-        this.$store.dispatch("userManager/addapi",{
-          api_authority_text:this.apiname,api_authority_url:this.apiurl,api_authority_method:this.apitype
-        }
-        
-      );
-         this.$message($store.state.msg);
-      }
+      let shenfen = await this.$store.dispatch("userManager/addapi", {
+        api_authority_text: this.apiname,
+        api_authority_url: this.apiurl,
+        api_authority_method: this.apitype
+      });
+      this.$message({
+        message: shenfen.msg,
+        duration: 1000
+      });
     },
-    addview() {
+    async addview() {
       this.value3 = this.value3;
-      for(var i=0;i<$store.state.view.length;i++){
-        if($store.state.view[i].view_id===this.value3){
-          this.text=$store.state.view[i].view_authority_text
+      for (var i = 0; i < $store.state.view.length; i++) {
+        if ($store.state.view[i].view_id === this.value3) {
+          this.text = $store.state.view[i].view_authority_text;
         }
       }
-       this.$store.dispatch("userManager/addview", {
+      let shenfen = await this.$store.dispatch("userManager/addview", {
         view_authority_text: this.text,
         view_id: this.value3
       });
-      this.$message($store.state.msg);
-     
+      this.$message({
+        message: shenfen.msg,
+        duration: 1000
+      });
     },
-    apishenfen() {
+    async apishenfen() {
       this.value4 = this.value4;
       this.value5 = this.value5;
-      this.$store.dispatch("userManager/apishenfen", {
+      let shenfen = await this.$store.dispatch("userManager/apishenfen", {
         identity_id: this.value4,
         api_authority_id: this.value5
       });
-       this.$message($store.state.msg);
+      this.$message({
+        message: shenfen.msg,
+        duration: 1000
+      });
     },
-    shenfenview() {
+    async shenfenview() {
       this.value6 = this.value6;
       this.value7 = this.value7;
-      this.$store.dispatch("userManager/shenfenview", {
+      let shenfen = await this.$store.dispatch("userManager/shenfenview", {
         identity_id: this.value6,
         view_authority_id: this.value7
       });
-      this.$message($store.state.msg);
+      this.$message({
+        message: shenfen.msg,
+        duration: 1000
+      });
     },
     //重置按钮
-    reset(){
-      this.value="";
-      this.name="";
-      this.password="";
-      this.value2="";
+    reset() {
+      this.value = "";
+      this.name = "";
+      this.password = "";
+      this.value2 = "";
     },
-     reset1(){
-      this.shenfenname="";
+    reset1() {
+      this.shenfenname = "";
     },
-     reset2(){
-      this.apiname="";
-      this.apiurl="";
-      this.apitype="";
+    reset2() {
+      this.apiname = "";
+      this.apiurl = "";
+      this.apitype = "";
     },
-     reset3(){
-      this.value3="";
+    reset3() {
+      this.value3 = "";
     },
-    reset4(){
-      this.value4="";
-       this.value5="";
+    reset4() {
+      this.value4 = "";
+      this.value5 = "";
     },
-     reset5(){
-      this.value6="";
-       this.value7="";
+    reset5() {
+      this.value6 = "";
+      this.value7 = "";
     }
   },
   computed: {
@@ -324,15 +331,16 @@ export default {
     },
     user() {
       return $store.state.user;
-    },
+    }
   },
+
   mounted() {
     this.dd();
     this.bb();
     this.nn();
-     this.users();
+    this.users();
   }
-}
+};
 </script>
 <style scoped>
 * {
