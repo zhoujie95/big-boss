@@ -4,7 +4,8 @@
 
       <div class="title-container">
         <h3 class="title">
-          {{ $t('login.title') }}
+          <!-- {{ $t('login.title') }} -->
+          后台考试系统
         </h3>
         <lang-select class="set-language" />
       </div>
@@ -49,7 +50,7 @@
         {{ $t('login.logIn') }}
       </el-button>
 
-      <div style="position:relative">
+      <!-- <div style="position:relative">
         <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
@@ -64,7 +65,7 @@
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
         </el-button>
-      </div>
+      </div> -->
     </el-form>
 
     <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
@@ -104,8 +105,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'chenmanjie',
+        password: 'Chenmanjie123!'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -156,6 +157,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
+          //console.log(this.loginForm)
           this.loading = true
           let res=await this.login(this.loginForm)
           if (res.code == 1){

@@ -54,9 +54,9 @@ const actions = {
     let view_ids = roles.map(item=>item.view_id)
     //通过递归，得到用户可以访问的路由
     let accessedRoutes = filterAsyncRoutes(asyncRoutes, view_ids);
-    //过滤掉没有子路由的一级路由
+    //console.log(accessedRoutes)
     accessedRoutes=accessedRoutes.filter(item=>item.children&&item.children.length)
-    // console.log('access....',accessedRoutes)
+    //console.log(accessedRoutes)
     commit('SET_ROUTES',accessedRoutes)
     return accessedRoutes
   }

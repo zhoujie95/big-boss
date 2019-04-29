@@ -1,3 +1,7 @@
+.box/deep/.el-table__row{
+  height:65px;
+  line-height: 65px;
+}
 .box{
   position: relative;
   width: 100%;
@@ -5,12 +9,12 @@
   margin-top:64px;
   overflow: hidden;
   &>h2{
-    padding:30px 0 0px 30px;
+    padding:35px 0 0px 49px;
   }
   .box-content{
     margin:20px auto;
     width:95%;
-    height:100%;
+    height:90%;
     border-radius: 10px;
     background: #fff;
     &>.el-button{

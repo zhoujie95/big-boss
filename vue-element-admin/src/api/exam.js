@@ -49,3 +49,7 @@ export let selectQues=(params)=>{
        }
      })
 }
+//删除指定的试题类型
+export let deleteQues=(params)=>{
+   return request.post('/exam/delQuestionsType',params)
+}

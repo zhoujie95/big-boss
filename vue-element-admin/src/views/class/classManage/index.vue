@@ -14,7 +14,7 @@
           </template>
         </el-table-column>
       </el-table>
-       <bj-dialog v-if="dialogshow" v-on:showdislog="showdislog" :type="type" :name="name" :banjiid="banjiid"/>
+       <bj-dialog v-if="dialogshow" v-on:showdislog="showdislog" :type="type" :name="name" :banjiid="banjiid" class="dialogs"/>
     </div>
     <div class="mask" v-if='dialogshow'></div>
   </div>
@@ -93,9 +93,9 @@ export default {
       height:100%;
       background: rgba(0,0,0,0.4);
       position: absolute;
-      z-index:50;
-      top:0;
-      left:0;
+      top:-64px;
+      z-index:60;
+      left:0px;
   }
   & > h2 {
     padding: 20px 0 10px 20px;

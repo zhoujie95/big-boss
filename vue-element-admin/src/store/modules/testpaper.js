@@ -1,4 +1,4 @@
-import {getpaper,getdetail,getClasses,getstudent} from '@/api/testpaper.js'
+import {getpaper,getdetail,getClasses,getstudent,upscore} from '@/api/testpaper.js'
 const state={
   paperData:[],
   details:[],
@@ -51,6 +51,12 @@ const actions = {
   async getstudent({commit},payload){
       let result=await getstudent(payload)
       commit('GET_STUDENT',result.data)
+  },
+  //批改试卷
+  async upscore({commit},payload){
+    //console.log('payload...',payload)
+      let result=await upscore(payload)
+      console.log('result....',result)
   }
 }
 

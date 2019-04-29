@@ -170,7 +170,6 @@ export default {
     align-items: center;
     justify-content: center;
     overflow-y: auto;
-    >>>
    .el-form-item__content { padding:-200px !important; }
    .testnameinp{width: 500px;}
    .el-form-item__label {
@@ -193,7 +192,7 @@ export default {
       display: flex;
       align-items: center;
       font-size: 24px;
-      margin-top: 150px;
+      margin-top: 50px;
     }
     .addtestboard {
       width: 100%;

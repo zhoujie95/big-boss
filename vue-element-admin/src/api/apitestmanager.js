@@ -1,6 +1,12 @@
 
 import request from '@/utils/request'
-
+//考试所有题
+export let getall=()=>{
+    return request({
+        url:"/exam/questions/new",
+        method:"get"
+    })
+}
 //考试类型
 export let testtype=()=>{
     return request({

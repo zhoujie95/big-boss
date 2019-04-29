@@ -16,7 +16,7 @@
         :key="imagecropperKey"
         :width="300"
         :height="300"
-        url="http://123.206.55.50:11000/upload"
+        url="https://service.jasonandjay.com/upload"
         lang-type="en"
         @close="close"
         @crop-upload-success="cropSuccess"
@@ -48,6 +48,7 @@ export default {
         getInfo:'user/getInfo'
     }),
    async cropSuccess(resData) {
+     
       this.imagecropperShow = false;
       this.imagecropperKey = this.imagecropperKey + 1;
       this.image = resData[0].path;

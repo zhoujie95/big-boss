@@ -1,5 +1,13 @@
 <template>
     <div class="edittest">
+      <!-- 添加的弹框 -->
+      <div class="addtestmask" v-show="showmask">
+        <div class="lucency" @click="showmask=false">
+        </div>
+        <div class="rightlayout">
+          <p v-for="(item,index) in alltest" :key="item.questions_id">{{index+1}}:{{item.title}}</p>
+        </div>
+      </div>
       <el-dialog
         title="提示"
         :visible.sync="dialogVisible"
@@ -12,7 +20,7 @@
       </el-dialog>
         <p class="createedit">创建试卷</p>
         <div class="createboard">
-            <p class="addnewqs">添加新题</p>
+            <p class="addnewqs" @click="showmasks(true)">添加新题</p>
             <div class="edittitle">
                 <p>{{title}}</p>
                 <div class="editboard">
@@ -25,8 +33,6 @@
                            <markdown-editor v-model="item.questions_stem" />
                            <span>答案</span>
                            <markdown-editor v-model="item.questions_answer" />
-                            <!-- <p>{{item.questions_stem}}</p> -->
-                            <!-- <p>答案:&nbsp;{{item.questions_answer}}</p> -->
                             <p><b>类型:&nbsp;&nbsp;</b>{{item.questions_type_text}}
                             <b>来源:&nbsp;&nbsp;</b>
                             {{item.subject_text}}</p>
@@ -39,14 +45,14 @@
     </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 import MarkdownEditor from "@/components/MarkdownEditor";
 export default {
   data() {
     return {
       dialogVisible: false,
-      index:""
-     
+      index:"",
+      showmask:false
     };
   },
   components:{
@@ -56,10 +62,12 @@ export default {
     ...mapState("testmanager", {
       addflag: state => state.addflag,
       questions: state => state.questions,
-      title: state => state.title
+      title: state => state.title,
+      alltest:state=>state.alltest
     })
   },
   methods: {
+    ...mapActions("testmanager",["getalltest"]),
     updtatedtest() {
       this.$store.dispatch("testmanager/updatetest");
       this.$router.push({ path: "testlist" });
@@ -70,6 +78,10 @@ export default {
     },
     edit_del_btn(index) {
       this.index = index;
+    },
+    showmasks(flag){
+      this.getalltest();
+      this.showmask=flag;
     }
   }
 };
@@ -83,6 +95,37 @@ export default {
   box-sizing: border-box;
   padding: 40px;
   overflow-y: auto;
+  .addtestmask{
+    width: 100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1002;
+    overflow: hidden;
+    .lucency{
+      width: 60%;
+      height:100%;
+      background:rgba(0,0,0,.4);
+      position:absolute;
+      top:0;
+      left:0;
+    }
+    .rightlayout{
+      width: 40%;
+      height:100%;
+      padding:10px;
+      background:#fff;
+      position: fixed;
+      top:0;
+      right:0;
+      p{
+        width: 100%;
+        height:30px;
+        border-bottom:1px solid #ccc;
+      }
+    }
+  }
   .createboard {
     width: 100%;
     // height: 500px;

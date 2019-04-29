@@ -4,16 +4,10 @@ import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: '/api', // api 的 base_url
-
-  withCredentials: false, // 跨域请求时发送 cookies
-
-  // withCredentials: true, // 跨域请求时发送 cookies
-
-  timeout: 5000, // request timeout
-
-  // withCredentials: true, // 跨域请求时发送 cookies
-  timeout: 10000 // request timeout
+  baseURL: '/api', // api 的 base_url。
+  // baseURL:/jasonandjay\.com/.test(window.location.host)?'https://exam.jasonandjay.com/':'http://169.254.95.2:7001',
+  //withCredentials: false, // 跨域请求时发送 cookies
+  timeout: 5000 // request timeout
 
 })
 

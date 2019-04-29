@@ -24,7 +24,7 @@
         <div class="block">
           <el-slider v-model="score" class="slider"/>
         </div>
-        <el-button type="primary">确定</el-button>
+        <el-button type="primary" @click="upup">确定</el-button>
       </div>
     </div>
   </div>
@@ -51,6 +51,7 @@ export default {
   },
   async mounted() {
     await this.getstudent(this.$route.query);
+    this.score=this.student.score||0
     //console.log("student....",this.student);
     for (var i = 0; i < this.student.questions.length; i++) {
       this.stem.push(this.student.questions[i].questions_stem);
@@ -59,8 +60,30 @@ export default {
   },
   methods: {
     ...mapActions({
-      getstudent: "testpaper/getstudent"
+      getstudent: "testpaper/getstudent",
+      upscore: "testpaper/upscore"
     }),
+    upup() {
+      this.$confirm("你确定批改试卷吗?", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(
+        async () => {
+          await this.upscore({
+            score: this.score
+          }).then(() => {
+            this.$router.push({
+              path: "/read/classmate",
+              query: {
+                exam_student_id: this.getstudent.exam_student_id
+              }
+            });
+          });
+        },
+        () => {}
+      );
+    },
     formatTooltip(val) {
       return val / 100;
     }
@@ -77,7 +100,7 @@ export default {
 .box {
   width: 100%;
   margin-top: 64px;
-  height: 1700px;
+  height: 1800px;
   padding-left: 20px;
   background: #f0f2f5;
   overflow: auto;
@@ -86,7 +109,7 @@ export default {
   }
   .main {
     width: 100%;
-    height: 90%;
+    height: 100%;
     border-radius: 10px;
     background: #f0f2f5;
     margin: 10px auto;
@@ -98,10 +121,10 @@ export default {
       flex-direction: column;
       padding: 20px;
       background: #fff;
-      margin: 0 20px 0 20px;
+      margin: 0 20px 0 10px;
       .item_exam {
         &:nth-of-type(1) {
-          height: 900px;
+          height: 850px;
           margin-bottom: 350px;
         }
         &:nth-of-type(2) {
@@ -123,11 +146,11 @@ export default {
       }
     }
     .main_right {
-      width: 300px;
+      width: 250px;
       position: fixed;
       top: 50%;
       margin-top: -150px;
-      right: 6px;
+      right: 30px;
       height: 261.5px;
       border-radius: 10px;
       overflow: hidden;

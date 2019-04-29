@@ -179,6 +179,7 @@ export default {
 }
 .pagination_box {
   width: 100%;
+  
 }
 .pagination {
   float: right;

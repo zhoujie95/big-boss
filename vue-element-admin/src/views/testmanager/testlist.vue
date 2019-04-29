@@ -49,7 +49,9 @@
                 <el-button
                   size="mini"
                   @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                  
             </template>
+            
             </el-table-column>
           </el-table>
         </div>
@@ -182,6 +184,16 @@ export default {
         background: blue;
         color: white;
         border-radius: 5px;
+      }
+      .daobtn{
+        width: 150px;
+        height: 37px;
+        text-align: center;
+        line-height: 37px;
+        background: blue;
+        color: white;
+        border-radius: 5px;
+        margin-left: 10px;
       }
     }
     .testlist-box {
