@@ -6,8 +6,7 @@ const userRouter={
   name:'user',
   meta: {
     title: 'userManage',
-    icon: 'user',
-    view_id:'main-addUser'
+    icon: 'user'
   },
   children: [
     {
@@ -20,7 +19,7 @@ const userRouter={
       path: 'userView',
       component: () => import('@/views/userview/usertwo'),
       name: 'userView',
-      meta: { title: 'userView',view_id:'main-showUser' }
+      meta: { title: 'userView',view_id:'main-showUser'}
     }
   ]
 }

@@ -6,21 +6,20 @@ const examRouter={
   name:'exam',
   meta: {
     title: 'examMange',
-    icon: 'documentation',
-    view_id:'main-watchQuestions'
+    icon: 'documentation'
   },
   children: [
     {
       path: 'examAdd',
       component: () => import('@/views/exam/examAdd/index'),
       name: 'examAdd',
-      meta: { title: 'examAdd', noCache: true,view_id: 'main-addQuestions'}
+      meta: { title: 'examAdd',view_id: 'main-addQuestions'}
     },
     {
       path: 'examType',
       component: () => import('@/views/exam/examType/index'),
       name: 'examType',
-      meta: { title: 'examType' , noCache: true,view_id: 'main-questionsType'}
+      meta: { title: 'examType',view_id: 'main-questionsType'}
     },
     {
       path: 'examView',
@@ -33,15 +32,24 @@ const examRouter={
       path: '/edit/Questions',
       component: () => import('@/views/exam/examAdd/index'),
       name: 'editquestion',
-       //meta:{view_id: "main-editQuestions", noCache: true}
+      hidden:true,
+      meta:{view_id: "main-editQuestions"}
     },
     //查看试题详情的路由
     {
       path: '/detail/Questions',
       component: () => import('@/views/exam/examView/detail'),
       name: 'detail',
-      // meta:{view_id: "main-questionsDetail", noCache: true}
+      hidden:true,
+      meta:{view_id: "main-questionsDetail"}
     },
+    //上传表格的路由
+    {
+      path:'upload',
+      name:'upload',
+      component:()=>import('@/views/exam/uploadExcel/index'),
+      meta:{title:'upload',view_id:'login'}
+    }
   ]
 }
 

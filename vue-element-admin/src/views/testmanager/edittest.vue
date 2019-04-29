@@ -1,6 +1,5 @@
 <template>
     <div class="edittest">
-     
       <el-dialog
         title="提示"
         :visible.sync="dialogVisible"

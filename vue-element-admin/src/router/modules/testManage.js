@@ -6,32 +6,32 @@ const testRouter={
   name:'test',
   meta: {
     title: 'testManage',
-    icon: 'list',
-    view_id:'main-examEdit'
+    icon: 'list'
   },
   children: [
     {
       path: 'addtest',
-      component: () => import('@/views/testmanager/addtest'),
+      component: () => import('@/views/testmanager/addtest'),//创建试卷
       name: 'addtest',
-      meta: { title: 'testAdd',view_id:'main-examEdit' }
+      meta: { title: 'testAdd',view_id:'main-examEdit'}
     },
     {
       path: 'testlist',
       component: () => import('@/views/testmanager/testlist'),
       name: 'testlist',
-      meta: { title: 'testList',view_id:'main-examList' }
+      meta: { title: 'testList',view_id:'main-examList'}//查看试卷列表
     },
     {
       path:"edittest",
       component:()=>import("@/views/testmanager/edittest"),
-      name:"edittest"   
+      name:"edittest"
     },
     {
       path:"testdetail",
       component:()=>import("@/views/testmanager/testdetail"),
       name:"testdetail",
-      // meta:{view_id:'main-examDetail'}
+      hidden:true,
+      meta:{view_id:'main-examDetail'} //试卷详情
     }
   ]
 }

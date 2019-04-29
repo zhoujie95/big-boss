@@ -5,13 +5,19 @@
         <slot />
       </div>
     </div>
-    <img :src="image" class="pan-thumb">
+    <img :src="this.userInfo.avatar" class="pan-thumb">
   </div>
 </template>
 
 <script>
+import {mapState,mapActions} from 'vuex'
 export default {
   name: 'PanThumb',
+  computed:{
+     ...mapState({
+       userInfo:state=>state.user.userInfo
+     })
+  },
   props: {
     image: {
       type: String,

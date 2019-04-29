@@ -77,7 +77,8 @@ export default {
     studentManage:'学生管理',
     readManage:'阅卷管理',
     readReady:'待批试卷',
-    avator:'头像上传'
+    avator:'头像上传',
+    upload:'导入表格'
   },
   navbar: {
     logOut: '退出登录',

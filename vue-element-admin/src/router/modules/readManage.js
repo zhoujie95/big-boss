@@ -6,25 +6,26 @@ const readRouter={
   name:'read',
   meta: {
     title:'readManage',
-    icon: 'edit',
-    view_id:'main-examinationPapers'
+    icon: 'edit'
   },
   children:[{
     path: 'read',
     component: () => import('@/views/read/read.vue'),
     name: 'reads',
-    meta: { title: 'readReady',view_id:'main-examinationPapers' }
+    meta: { title: 'readReady',view_id:'main-examPaperClassList'}//待批班级
   },
   {
     path: 'classmate',
     component: () => import('@/views/read/classmate.vue'),
     name: 'classmate',
-    // meta:{view_id: "main-examPaperClassList"}
+    hidden:true,
+    meta:{view_id:"main-examPaperClassmate"}//待批试卷
   },  {
     path: 'details',
     component: () => import('@/views/read/detail.vue'),
     name: 'details',
-    // meta:{view_id: "main-examPaperClassmate"}
+    hidden:true,
+    meta:{view_id: "main-examinationPapers"} //阅卷
   }]
 }
 

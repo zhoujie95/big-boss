@@ -145,7 +145,8 @@ export default {
     ...mapState({
        testType:state=>state.addexam.testType,
        classType:state=>state.addexam.classType,
-       questionType:state=>state.addexam.questionType
+       questionType:state=>state.addexam.questionType,
+       userInfo:state=>state.user.userInfo
     })
   },
   methods:{
@@ -173,7 +174,7 @@ export default {
                     //课程id
                     subject_id:this.classes,
                     //用户id
-                    user_id:'w6l6n-cbvl6s',
+                    user_id:this.userInfo.user_id,
                     //考试类型id
                     exam_id:this.exam
               })
