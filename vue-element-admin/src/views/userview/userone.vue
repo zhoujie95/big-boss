@@ -177,8 +177,7 @@ export default {
       apiname: "",
       apiurl: "",
       apitype: "",
-     text:"",
-     msg:""
+     text:""
     };
   },
   methods: {
@@ -259,12 +258,10 @@ export default {
           this.text=$store.state.view[i].view_authority_text
         }
       }
-      if(this.value3==""||this.text==""){
-        this.$message("参数有误");
-      }else{
-       
-      }
-     
+      this.$store.dispatch("userManager/addview", {
+        view_authority_text: this.text,view_id:this.value3
+      });
+      this.$message($store.state.msg);
     },
     apishenfen() {
       this.value4 = this.value4;

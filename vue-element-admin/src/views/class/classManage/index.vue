@@ -57,7 +57,7 @@ export default {
       this.type = 'add'
     },
     showdislog(){
-      this.getbandata()
+      this.getbandata();
       this.dialogshow = false
     },
     handleEdit(ind,rew){
@@ -69,26 +69,33 @@ export default {
     },
     async handleDelete(ind,rew){
       //console.log(rew.grade_id)
-      await this.delbanji({grade_id:rew.grade_id})
-      await this.getbandata()
+     let res =  await this.delbanji({grade_id:rew.grade_id});
+     if(res.code===1){
+       this.$message({
+            message:"删除成功",
+            duration:1000
+          });
+     }
+      await this.getbandata();
     }
   }
  
 };
 </script>
-<style scoped lang="scss">
+<style  lang="scss">
 .box {
   width: 100%;
   //height: calc(100vh - 84px);
-  overflow: hidden;
+  // overflow: hidden;
+  // position:relative;
   &>.mask{
-       width:1519.2px;
-      height:1200px;
+      width:100%;
+      height:100%;
       background: rgba(0,0,0,0.4);
       position: absolute;
-      top:-64px;
-      z-index:60;
-      left:0px;
+      z-index:50;
+      top:0;
+      left:0;
   }
   & > h2 {
     padding: 20px 0 10px 20px;
@@ -99,21 +106,22 @@ export default {
     height: 90%;
     border-radius: 10px;
     background: #fff;
+    // position: relative;
     & > .el-button {
       margin: 20px;
     }
       &>.dialog{
-        position: absolute;
+        position: fixed;
         width:500px;
         height:400px;
         background: #fff;
         border-radius: 10px;
-        top:50%;
-        left:50%;
-        margin-left:-250px;
-        margin-top:-200px;
-        z-index:70;
-        padding:20px;
+        overflow:hidden;
+        margin:auto;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
         .el-select{
           width:100%;
         }

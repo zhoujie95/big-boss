@@ -37,7 +37,8 @@ export default {
             classname:'',
             roomnum:'',
             disabled:false,
-            banjiidw:''
+            banjiidw:'',
+            
         }
     },
     mounted() {
@@ -63,14 +64,14 @@ export default {
         upbanji:'addbanji/upbanji'
     }),
       async btnaddbanji(){
-
+        let res = "";
         if(this.type=='add'){
         let obj = {
             grade_name:this.classname,
             room_id:this.roomnum,
             subject_id:this.lesson
           }
-          await this.addbanji(obj)
+          res = await this.addbanji(obj);
         }else{
           let objw = {
             grade_id : this.banjiidw,
@@ -85,7 +86,13 @@ export default {
       this.classname='',
       this.roomnum=''
       this.banjiidw=''
-      this.$emit('showdislog',this.showdislog)
+      this.$emit('showdislog',this.showdislog);
+       if(res.code ===1 ){
+          this.$message({
+            message:"添加成功",
+            duration:1000
+          });
+      }
     },
     closedialog(){
       this.$emit('showdislog',this.showdislog)

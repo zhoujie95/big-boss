@@ -100,7 +100,11 @@ export default {
 .box {
   width: 100%;
   margin-top: 64px;
+<<<<<<< HEAD
   height: 1800px;
+=======
+  height: 1700px;
+>>>>>>> 1076a968bafd911bcae00d838313c717f763f5bc
   padding-left: 20px;
   background: #f0f2f5;
   overflow: auto;
@@ -121,10 +125,17 @@ export default {
       flex-direction: column;
       padding: 20px;
       background: #fff;
+<<<<<<< HEAD
       margin: 0 20px 0 10px;
       .item_exam {
         &:nth-of-type(1) {
           height: 850px;
+=======
+      margin: 0 20px 0 20px;
+      .item_exam {
+        &:nth-of-type(1) {
+          height: 900px;
+>>>>>>> 1076a968bafd911bcae00d838313c717f763f5bc
           margin-bottom: 350px;
         }
         &:nth-of-type(2) {
@@ -150,7 +161,11 @@ export default {
       position: fixed;
       top: 50%;
       margin-top: -150px;
+<<<<<<< HEAD
       right: 30px;
+=======
+      right: 6px;
+>>>>>>> 1076a968bafd911bcae00d838313c717f763f5bc
       height: 261.5px;
       border-radius: 10px;
       overflow: hidden;

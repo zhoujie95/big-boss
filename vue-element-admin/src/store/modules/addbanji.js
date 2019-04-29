@@ -21,7 +21,8 @@ const actions={
     //获取班级
     async getbandata({commit}){
         let res = await getbanji()
-        commit('upbandata',res.data)
+        commit('upbandata',res.data);
+        return res;
     },
     //获取教室
     async getjiaoshi({commit}){
@@ -35,13 +36,14 @@ const actions={
     },
     //添加班级
     async addbanji({commit},payload){
-        let addbj = await addbanji(payload)
-        //console.log(addbj)
+        let addbj = await addbanji(payload);
+        return addbj;
     },
     //删除班级
     async delbanji({commit},payload){
-        let delbj = await delbanjis(payload)
-        console.log(delbj)
+        let delbj = await delbanjis(payload);
+        return delbj;
+       
     },
     //编辑班级
     async upbanji({commit},payload){

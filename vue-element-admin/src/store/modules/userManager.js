@@ -26,6 +26,7 @@ const mutations = {
     views(state, data) {
         if (data.code == 1) {
             state.view = data.data
+            // console.log(state.view);
         }
     },
     api(state, data) {
