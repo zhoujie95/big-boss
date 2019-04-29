@@ -9,6 +9,15 @@
     <title><%= webpackConfig.name %></title>
   </head>
   <body>
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6a19d9d11b973376012d1dbc528016e1";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
     <script src="<%= BASE_URL %>static/tinymce4.7.5/tinymce.min.js"></script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
