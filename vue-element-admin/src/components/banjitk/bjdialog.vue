@@ -102,7 +102,7 @@ export default {
         border-radius: 10px;
         top:30%;
         left:50%;
-        margin-left:-250px;
+        margin-left:0px;
         margin-top:-200px;
         z-index:70;
         padding:20px;
