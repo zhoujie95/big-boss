@@ -127,8 +127,6 @@ export default {
         }
       }
      await this.selectQues(obj);
-     this.allquestions=this.selectQues
-     this.len=this.allquestions.length
     },
     editQuest(exam_id, e) {
       // console.log(e.target.tagName)

@@ -41,6 +41,7 @@ export let getAllQues=(params)=>{
 }
 //按条件查询试题
 export let selectQues=(params)=>{
+  console.log('params...',params)
      return request.get('/exam/questions/condition',{
        params:{
         subject_id:params.subject_id,
