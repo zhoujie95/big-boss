@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from "moment"
 import { getToken} from '@/utils/auth'
 
-import {testtype,testclass,testlist,addtest,updatetest,deletetest,getdetail} from "@/api/apitestmanager"
+import {getall,testtype,testclass,testlist,addtest,updatetest,deletetest,getdetail} from "@/api/apitestmanager"
 
 const state={
     testlistdata:[],//获取列表
@@ -18,10 +18,15 @@ const state={
     exam_exam_id:"",
     questions:[],//编辑时的原有的题目
     question_ids:"[]",
-    testdetail:[]//详情页面的题
+    testdetail:[],//详情页面的题
+    alltest:[]//获取所有试题
 
 }
 const mutations = {
+      //获取所有考试试题
+      GET_all:(state,payload)=>{
+        state.alltest = payload.data
+    },
     //1.获取所有考试类型
     GET_TYPE:(state,examtype)=>{
         state.testType = examtype.data
@@ -100,6 +105,13 @@ const mutations = {
     }
 }
 const actions = {
+     //7.获取所有试题
+     async getalltest({commit}){
+        let result = await getall();
+        console.log("获取所有试题",result)
+        commit("GET_all",result)
+    },
+    //.获取所有考试类型
     async gettestType({commit}){
         let result = await testtype();
         commit("GET_TYPE",result)
