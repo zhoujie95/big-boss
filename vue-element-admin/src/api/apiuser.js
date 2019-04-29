@@ -47,9 +47,8 @@ export let identity_view=()=>{
 
 //添加用户
 export let adduser=(data)=>{
-    return request({
-        url:"/user",
-        method:"post",
+    //console.log('data...',data)
+    return request.post('/user',{
         data
     })
 } 

@@ -59,7 +59,7 @@ const actions = {
   //添加试题
   async addquestion({commit},payload){
      let result=await addquestion(payload)
-     //console.log('result..',result)
+     console.log('result..',result)
      return result
   },
 

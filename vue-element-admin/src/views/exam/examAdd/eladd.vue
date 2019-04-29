@@ -182,7 +182,7 @@ export default {
                  type:'warning'
                })
            }else{
-                         await this.addquestion({
+              await this.addquestion({
                     questions_type_id:this.ruleForm.question.toString(),
                     title:this.title,
                     questions_stem:this.content,

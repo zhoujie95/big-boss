@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { identity, view_authority, api_authority, user, identity_api, identity_view, adduse, addshenfen, addapi, addview, apishenfen, shenfenview, newuser } from '@/api/apiuser';
+import { identity, view_authority, api_authority, user, identity_api, identity_view, adduser, addshenfen, addapi, addview, apishenfen, shenfenview, newuser } from '@/api/apiuser';
 import { getToken } from '@/utils/auth';
 
 const state = {
@@ -110,7 +110,8 @@ const actions = {
 
     // //添加用户
     async adduser({ commit }, payload) {
-        let result = await adduser(payload);
+       let result= await adduser(payload)
+        //console.log('result...',result)
         commit('adduser', result);
     },
     //添加身份

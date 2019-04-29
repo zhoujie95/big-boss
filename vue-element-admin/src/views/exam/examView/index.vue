@@ -1,69 +1,67 @@
 <template>
-  <div class="box">
-    <h2>查看试题</h2>
-    <div class="box-content">
-      <div class="content-top">
-        <div class="top-top">
-          <label>课程类型:</label>
-          <ul class="nav">
-            <li @click='allchose'
-            :class="{'current':all}"
-            >all</li>
-            <li
-              v-for="(item,i) in classType"
-              :key="item.subject_id"
-              @click="changeState(i)"
-              :class="{'current':i===defaultIndex||all}"
-            >{{item.subject_text}}</li>
+<div class="box">
+  <h2>查看试题</h2>
+  <div class="box-content">
+    <div class="content-top">
+      <div class="top-top">
+        <label>课程类型:</label>
+        <ul class="nav">
+          <li @click="allchose" :class="{'current':all}">all</li>
+          <li
+            v-for="(item,i) in classType"
+            :key="item.subject_id"
+            @click="changeState(i)"
+            :class="{'current':i===defaultIndex||all}"
+          >{{item.subject_text}}</li>
+        </ul>
+      </div>
+      <div class="top-bot">
+        <label>考试类型:</label>
+        <el-select v-model="exam" placeholder="请选择">
+          <el-option
+            v-for="item in testType"
+            :key="item.exam_id"
+            :label="item.exam_name"
+            :value="item.exam_id"
+          ></el-option>
+        </el-select>
+        <label>题目类型:</label>
+        <el-select v-model="ques" placeholder="请选择">
+          <el-option
+            v-for="item in questionType"
+            :key="item.questions_type_id"
+            :label="item.questions_type_text"
+            :value="item.questions_type_id"
+          ></el-option>
+        </el-select>
+        <el-button type="primary" @click="selects">查询</el-button>
+      </div>
+    </div>
+    <div class="content-bot">
+      <div
+        class="bots"
+        v-for="(item,i) in allquestions.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+        :key="i"
+        @click="quesdetail(item,$event)"
+      >
+        <div class="left">
+          <p>{{item.title}}</p>
+          <ul>
+            <li>{{item.questions_type_text}}</li>
+            <li>{{item.subject_text}}</li>
+            <li>{{item.exam_name}}</li>
           </ul>
+          <p>{{item.user_name}}发布</p>
         </div>
-        <div class="top-bot">
-          <label>考试类型:</label>
-          <el-select v-model="exam" placeholder="请选择">
-            <el-option
-              v-for="item in testType"
-              :key="item.exam_id"
-              :label="item.exam_name"
-              :value="item.exam_id"
-            ></el-option>
-          </el-select>
-          <label>题目类型:</label>
-          <el-select v-model="ques" placeholder="请选择">
-            <el-option
-              v-for="item in questionType"
-              :key="item.questions_type_id"
-              :label="item.questions_type_text"
-              :value="item.questions_type_id"
-            ></el-option>
-          </el-select>
-          <el-button type="primary" @click="selects">查询</el-button>
+        <div class="right">
+          <span @click="editQuest(item.json_path,$event)">编辑</span>
         </div>
       </div>
-      <div class="content-bot">
-        <div
-          class="bots"
-          v-for="(item,i) in allquestions.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-          :key="i"
-          @click="quesdetail(item,$event)"
-        >
-          <div class="left">
-            <p>{{item.title}}</p>
-            <ul>
-              <li>{{item.questions_type_text}}</li>
-              <li>{{item.subject_text}}</li>
-              <li>{{item.exam_name}}</li>
-            </ul>
-            <p>{{item.user_name}}发布</p>
-          </div>
-          <div class="right">
-            <span @click="editQuest(item.json_path,$event)">编辑</span>
-          </div>
-        </div>
-        <div class="block">
-          <el-pagination
-            layout="prev, pager, next"
+      <div class="block">
+        <el-pagination
+          layout="prev, pager, next"
             :total="allquestions.length"
-            :size="5"
+            :page-size="5"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
@@ -76,11 +74,11 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
- mounted(){
-      this.getclass();
-      this.gettype();
-      this.getquestion();
-      this.getAllQues(); 
+  mounted() {
+    this.getclass();
+    this.gettype();
+    this.getquestion();
+    this.getAllQues();
   },
   computed: {
     ...mapState({
@@ -106,25 +104,31 @@ export default {
       this.currentPage = currentPage; //点击第几页
     },
     changeState(ind) {
-      this.defaultIndex =this.defaultIndex==null? ind:null;
-      this.all=false
+      this.defaultIndex = this.defaultIndex == null ? ind : null;
+      this.all = false;
     },
-    allchose(){
-       this.all=!this.all;
-       this.defaultIndex=null
+    allchose() {
+      this.all = !this.all;
+      this.defaultIndex = null;
     },
-    selects() {
-      let obj={
-        subject_id:this.all?this.classType.map(item=>item.subject_id).join(','):(this.defaultIndex!==null?this.classType[this.defaultIndex].subject_id:''),
+   async selects() {
+      let obj = {
+        subject_id: this.all
+          ? this.classType.map(item => item.subject_id).join(",")
+          : this.defaultIndex !== null
+            ? this.classType[this.defaultIndex].subject_id
+            : "",
         exam_id: this.exam,
         questions_type_id: this.ques
       };
-     for(let item of Object.keys(obj)){
-         if(!obj[item]){
-           delete obj[item]
-         }
-     }
-      this.selectQues(obj);
+      for (let item of Object.keys(obj)) {
+        if (!obj[item]) {
+          delete obj[item];
+        }
+      }
+     await this.selectQues(obj);
+     this.allquestions=this.selectQues
+     this.len=this.allquestions.length
     },
     editQuest(exam_id, e) {
       // console.log(e.target.tagName)
@@ -153,10 +157,11 @@ export default {
     return {
       exam: "",
       ques: "",
-      all:false,
+      all: false,
       currentPage: 1, //初始页
       pagesize: 5,
-      defaultIndex: null
+      defaultIndex: null,
+      len:34
     };
   }
 };
@@ -210,10 +215,10 @@ export default {
         }
         .nav {
           flex: 1;
-                  flex-shrink:1;
+          flex-shrink: 1;
           display: flex;
           & > li {
-            flex:1;
+            flex: 1;
             text-align: center;
             font-size: 13px;
             &:nth-of-type(1) {
