@@ -177,8 +177,8 @@ export default {
       apiname: "",
       apiurl: "",
       apitype: "",
-     text:"",
-     msg:""
+      text:"",
+      msg:""
     };
   },
   methods: {
@@ -197,7 +197,7 @@ export default {
      users() {
       this.$store.dispatch("userManager/user");
     },
-    adduser() {
+     adduser() {
       this.name = this.name;
       this.password = this.password;
       this.value = this.value;
@@ -206,7 +206,7 @@ export default {
         user_name: this.name,
         user_pwd: this.password,
         identity_id: this.value
-      });
+      })
        if($store.state.msg==""){
         
       }else{
@@ -245,12 +245,13 @@ export default {
       if(this.apiname==''||this.apiurl==''||this.apitype==''){
         this.$message("参数有误");
       }else{
-        this.$store.dispatch("userManager/addapi",
-        'api_authority_text='+encodeURI(this.apiname)+'&api_authority_url='+this.apiurl+'&api_authority_method='+this.apitype
+        this.$store.dispatch("userManager/addapi",{
+          api_authority_text:this.apiname,api_authority_url:this.apiurl,api_authority_method:this.apitype
+        }
+        
       );
          this.$message($store.state.msg);
       }
-     
     },
     addview() {
       this.value3 = this.value3;
@@ -259,11 +260,11 @@ export default {
           this.text=$store.state.view[i].view_authority_text
         }
       }
-      if(this.value3==""||this.text==""){
-        this.$message("参数有误");
-      }else{
-       
-      }
+       this.$store.dispatch("userManager/addview", {
+        view_authority_text: this.text,
+        view_id: this.value3
+      });
+      this.$message($store.state.msg);
      
     },
     apishenfen() {
@@ -273,12 +274,7 @@ export default {
         identity_id: this.value4,
         api_authority_id: this.value5
       });
-      if($store.state.msg==""){
-
-      }else{
-         this.$message($store.state.msg);
-      }
-     
+       this.$message($store.state.msg);
     },
     shenfenview() {
       this.value6 = this.value6;

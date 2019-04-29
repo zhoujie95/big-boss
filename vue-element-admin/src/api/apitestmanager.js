@@ -19,7 +19,7 @@ export let testclass=()=>{
 
 //试卷列表
 export let testlist=(data)=>{
-
+   console.log(data,{"sss":"111"});
     return request({
         url:"/exam/exam",
         method:"get",

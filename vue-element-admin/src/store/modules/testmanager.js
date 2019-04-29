@@ -65,6 +65,7 @@ const mutations = {
     },
     //4.创建试卷
     addtest:(state,data)=>{
+        console.log(data);
         if(data.code === 1){//创建试题成功 保存数据试题 和试题id
             state.addflag === true;
             Object.assign(state,data.data);
@@ -119,6 +120,7 @@ const actions = {
     async  addtest({commit},payload){
         let result = await addtest(payload);
         commit("addtest",result)
+        console.log(result);
     },
      //5.更新试卷
      async  updatetest({commit}){

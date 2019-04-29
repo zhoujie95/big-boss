@@ -41,12 +41,8 @@ export let identity_view=()=>{
         method:"get"
     })
 } 
-
-
-
-
 //添加用户
-export let adduser=(data)=>{
+export let add_user=(data)=>{
     return request({
         url:"/user",
         method:"post",
@@ -57,8 +53,8 @@ export let adduser=(data)=>{
 export let addshenfen=(data)=>{
     return request({
         url:"/user/identity/edit",
-        method:"post",
-        data
+        method:"get",
+        params:data
     })
 } 
 //添加api
@@ -66,7 +62,7 @@ export let addapi=(data)=>{
     return request({
         url:"/user/authorityApi/edit",
         method:"get",
-        data
+        params:data
     })
 } 
 //添加视图借口
@@ -74,7 +70,7 @@ export let addview=(data)=>{
     return request({
         url:"/user/authorityView/edit",
         method:"get",
-        data
+        params:data
     })
 } 
  //设置api身份接口

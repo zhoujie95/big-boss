@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { identity, view_authority, api_authority, user, identity_api, identity_view, adduse, addshenfen, addapi, addview, apishenfen, shenfenview, newuser } from '@/api/apiuser';
+import { identity, view_authority, api_authority, user, identity_api, identity_view, add_user, addshenfen, addapi, addview, apishenfen, shenfenview, newuser } from '@/api/apiuser';
 import { getToken } from '@/utils/auth';
 
 const state = {
@@ -14,13 +14,12 @@ const state = {
     user: [],
     list: [],
     viewlist: [],
-    msg: ''
+    msg: '1111'
 }
 const mutations = {
     identity(state, data) {
         if (data.code == 1) {
             state.shenfen = data.data
-
         }
     },
     views(state, data) {
@@ -48,11 +47,14 @@ const mutations = {
             state.viewlist = data.data
         }
     },
-    adduser(state, data) {
-        state.msg = data.msg
+
+
+
+    adduser:(state, data)=> {
+        state.msg=data.msg
     },
-    addshenfen(state, data) {
-        state.msg = data.msg
+    addshenfen:(state, data)=>{
+         state.msg = data.msg
     },
     addapi(state, data) {
         state.msg = data.msg
@@ -80,7 +82,6 @@ const actions = {
     async views({ commit }) {
         let result = await view_authority()
         commit('views', result);
-
     },
     //api权限
     async api({ commit }) {
@@ -104,20 +105,16 @@ const actions = {
         let result = await identity_view()
         commit('identityview', result);
     },
-
-
-
-
     // //添加用户
     async adduser({ commit }, payload) {
-        let result = await adduser(payload);
+        let result = await add_user(payload);
         commit('adduser', result);
+        // return result
     },
     //添加身份
-    async addshenfen({ commit }, payload) {
+    async addshenfen({commit}, payload) {
         let result = await addshenfen(payload);
         commit('addshenfen', result);
-
     },
     //添加api
     async addapi({ commit }, payload) {
@@ -133,12 +130,12 @@ const actions = {
     async apishenfen({ commit }, payload) {
         let result = await apishenfen(payload);
         commit('apishenfen', result);
+        console.log(result);
     },
     //给身份设置视图
     async shenfenview({ commit }, payload) {
         let result = await shenfenview(payload);
         commit('shenfenview', result);
-
     },
     //更新用户
     async newuser({ commit }, payload) {
