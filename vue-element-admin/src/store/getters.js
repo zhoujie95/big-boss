@@ -20,6 +20,8 @@ const getters = {
         }else{
            item['state']='未阅'
         }
+        item.end_time=new Date(Number(item.end_time)).toLocaleString()
+        item.start_time=new Date(Number(item.start_time)).toLocaleString()
         return item
   })
 }
