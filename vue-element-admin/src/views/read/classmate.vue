@@ -87,6 +87,7 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.details,this.allclass)
     let grade = localStorage.getItem("grade_id");
     let gradename=localStorage.getItem('grade')
     this.gradename=gradename

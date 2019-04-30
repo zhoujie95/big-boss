@@ -9,6 +9,15 @@
     <title><%= webpackConfig.name %></title>
   </head>
   <body>
+    <!-- 加入错误追踪 sentry -->
+    <script src="https://browser.sentry-cdn.com/5.1.1/bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+        Sentry.init({ dsn: 'https://b0ad15a3bea540e696a65e4906406ae8@sentry.io/1449236' });
+      </script>
+    <!-- <script>
+        console.log(a)
+    </script> -->
+    <!-- 加入百度统计 -->
       <script>
           var _hmt = _hmt || [];
           (function() {

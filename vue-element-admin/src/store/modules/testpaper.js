@@ -36,7 +36,7 @@ const actions = {
   async getdetail({ commit }, payload) {
     let result = await getdetail(payload)
     //console.log('result....', result)
-    if(result){
+    if(result.code==1){
       commit('GET_DETAIL',result.exam)
     }else{
       commit('GET_DETAIL',[])
@@ -50,6 +50,7 @@ const actions = {
   //获取学生试卷详情
   async getstudent({commit},payload){
       let result=await getstudent(payload)
+      console.log('result...',result)
       commit('GET_STUDENT',result.data)
   },
   //批改试卷
