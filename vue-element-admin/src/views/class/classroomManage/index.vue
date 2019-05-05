@@ -35,7 +35,12 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
       }).then(async ({ value }) => {
-          await this.patydata(value)
+          let add = await this.patydata(value)
+          //console.log('add...',add)
+          this.$message({
+            message:add.msg,
+            duration:1000
+          });
           await this.getjiaoshi()
         })
     },

@@ -20,6 +20,7 @@ const actions = {
     async addjiaoshi({commit},patydata){
       
         let res = await addjiaoshi({room_text:patydata})
+        return res
     },
     //删除教室
     async deljiaoshi({commit},res){

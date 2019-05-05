@@ -9,6 +9,7 @@
     <title><%= webpackConfig.name %></title>
   </head>
   <body>
+    <!-- 引入百度统计 -->
       <script>
           var _hmt = _hmt || [];
           (function() {
@@ -19,6 +20,11 @@
           })();
       </script>
     <script src="<%= BASE_URL %>static/tinymce4.7.5/tinymce.min.js"></script>
+    <!-- 引入错误追踪 -->
+    <script src="https://browser.sentry-cdn.com/5.1.1/bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+      Sentry.init({ dsn: 'https://302070572dc2415cbee2ebbc8f362aa6@sentry.io/1449253' });
+    </script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

@@ -87,12 +87,12 @@ export default {
       this.roomnum=''
       this.banjiidw=''
       this.$emit('showdislog',this.showdislog);
-       if(res.code ===1 ){
+       //if(res.code ===1 ){
           this.$message({
-            message:"添加成功",
+            message:res.msg,
             duration:1000
           });
-      }
+      //}
     },
     closedialog(){
       this.$emit('showdislog',this.showdislog)

@@ -124,6 +124,7 @@ export default {
            delete obj[item]
          }
      }
+     console.log(obj)
       this.selectQues(obj);
     },
     editQuest(exam_id, e) {
